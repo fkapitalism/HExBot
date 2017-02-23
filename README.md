@@ -1,2 +1,4 @@
 # hexbot
-Origianal Hacker Experience bot
+Original Hacker Experience bot.
+
+Soon ;)
