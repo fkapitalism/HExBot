@@ -1,4 +1,5 @@
 # hexbot
 Original Hacker Experience bot.
 
-Soon ;)
+Bringing team together again.
+We will deploy the code soon.
