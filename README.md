@@ -6,6 +6,8 @@ youtube: https://www.youtube.com/watch?v=fEfSukfb3Pc
 ## Last incident (important)
 Unfortunately our previous github account (https://github.com/perfilrobo/hexbot) was hacked and stolen by someone interested in injecting malicious code to track the bot users. That was enough for HE moderators to know who was using the bot. That's complete dirty game. Anyway WE ARE NOT GOING TO LEAVE THIS PROJECT. Welcome back guys. Enjoy.
 
+## Overview
+
 This must be installed as a Google Chrome extension.
 
 Functionalities:
@@ -21,13 +23,13 @@ Functionalities:
 * Tranfers earned money to BTC wallet automatically
 * Communication channel (removed)
 
-# How to install
+## How to install
 1. Go to chrome://extensions/
 2. Check 'Developer mode' checkbox
 3. Click on 'Load unpacked extension...'
 4. Load the uncompressed directory
 
-# Changelog
+## Changelog
 * v0.1.30 - Original bot deployed with chat removed for performance reasons.
 * v0.1.26 - Delete software mission sequence implemented.
 * v0.1.25.2 - Fixing last update issue. If skip hide upload logs option (webcrawler checkbox) was active and the installing failed then the upload logs would not be clear.
@@ -76,7 +78,7 @@ Functionalities:
     * Now bot runs over jSpaguetti API
 * v0.1.8 - First stable version
 
-# How to contribute
+## How to contribute
 The bot is entirely written with [jSpaghetti](https://github.com/gresendesa/jSpaghetti) API. jSpaghetti provides a modular and declarative way to write scripts.
 There are two ways to add new functionalities.
 * Creating a new sequence into a existing module to related functionality; or
