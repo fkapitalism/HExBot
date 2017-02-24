@@ -1,0 +1,97 @@
+{
+	"manifest_version": 2,
+	"name": "HEx BOT (2016)",
+	"version": "0.1.30",
+	"description": "A bot to automate things on Hacker Experience",
+	"browser_action": {
+ 		"default_popup": "core/popup.html"
+ 	},
+ 	"author":"fkapitalism 2016",
+	"permissions": [
+		"tabs"
+	],
+	"icons": {"256": "icon.png"},
+	"content_scripts":[
+		{
+			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*", "http://localhost/*", "https://*/*", "http://*/*"],
+			"js":[
+				"core/libraries/vendor/jSpaghetti/jSpaghetti.min.js",
+
+				"core/constants.js",
+
+				"core/libraries/helpers/functions/detectLang.js",
+				"core/lang/en.js",
+				"core/lang/br.js",
+				"core/lang/settings.js",
+
+				"core/libraries/helpers/classes/Storage.js",
+				"core/libraries/helpers/classes/Sequence.js",
+				"core/libraries/helpers/classes/Bot.js",
+				"core/libraries/helpers/classes/BGRequest.js",
+
+				"modules/riddleSolver/procedures.js",
+				"modules/riddleSolver/sequences/solvePuzzle.js",
+				"modules/riddleSolver/sequences/completePath.js",
+				"modules/cleaners/procedures.js",
+				"modules/cleaners/sequences/cleanOwnLogs.js",
+				"modules/cleaners/sequences/cleanTargetLogs.js",
+				"modules/cleaners/sequences/accessTargetAndCleanLogs.js",
+				"modules/missions/procedures.js",
+				"modules/missions/sequences/checkBalance.js",
+				"modules/missions/sequences/transferMoney.js",
+				"modules/missions/sequences/deleteSoftware.js",
+				"modules/adRemover/procedures.js",
+				"modules/adRemover/sequences/removeAds.js",
+				"modules/camping/procedures.js",
+				"modules/camping/sequences/bankCamping.js",
+				"modules/webcrawler/procedures.js",
+				"modules/webcrawler/sequences/browseWeb.js",
+				"modules/monitor/procedures.js",
+				"modules/monitor/sequences/checkMission.js",
+				"modules/monitor/sequences/checkMyOwnLogs.js",
+				"modules/monitor/sequences/delegateJobs.js",
+				"modules/botkit/procedures.js",
+				"modules/botkit/sequences/run.js",
+				"modules/assistant/procedures.js",
+				"modules/assistant/sequences/accessChat.js",
+
+				"core/libraries/helpers/functions/strposOfArray.js",
+				"core/libraries/helpers/functions/getDOMElement.js",
+				"core/libraries/helpers/functions/goToPage.js",
+				"core/libraries/helpers/functions/sendXMLHttpRequest.js",
+				"core/libraries/helpers/functions/getMyIp.js",
+				"core/libraries/helpers/functions/prepareSequence.js",
+				"core/libraries/helpers/functions/removeLinesFromText.js",
+				"core/libraries/helpers/functions/getSoftwareId.js",
+				"core/libraries/helpers/functions/getBankAccountAddr.js",
+				"core/libraries/helpers/functions/getBTCWalletInfo.js",
+				"core/libraries/helpers/functions/getBTCExchangeRate.js",
+				"core/libraries/helpers/functions/getBankAccountBalance.js",
+				"core/libraries/helpers/functions/getNextPuzzleIP.js",
+				"core/libraries/helpers/functions/getPuzzleId.js",
+				"core/libraries/helpers/functions/solvePuzzle.js",
+				"core/libraries/helpers/functions/sendMoneyToBTCWallet.js",
+				"core/libraries/helpers/functions/roundNumber.js",
+				"core/libraries/helpers/functions/getSoftwaresByPattern.js",
+				"core/libraries/helpers/functions/setBGSnippet.js",
+				"core/libraries/helpers/functions/getBGSnippet.js",
+				"core/libraries/helpers/functions/checkGears.js",
+				"core/libraries/helpers/functions/bootstrap.js",
+
+				"core/views.js",
+
+				"core/controllers/sequences.js",
+				"core/controllers/functions.js",
+				"core/controllers/controlPanel.js",
+				"core/controllers/buttonToAction.js",
+				"core/controllers/botButton.js",
+				"core/controllers/bootstrap.js"
+			],
+			"run_at": "document_end"
+		}
+	],
+	"background":{
+		"scripts":["core/background.js"],
+		"persistent": true
+	}
+}
