@@ -1,10 +1,12 @@
 # HExBot v0.1.30 - February 24 - 2017 
 Suite of scripts to automate some processes on Hacker Experience game website.
-website: http://hotsitehexbot.blogspot.com.br/p/index.html
-youtube: https://www.youtube.com/watch?v=fEfSukfb3Pc
+
+Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
+
+Youtube video: https://www.youtube.com/watch?v=fEfSukfb3Pc
 
 ## Last incident (important)
-Unfortunately our previous github account (https://github.com/perfilrobo/hexbot) was hacked and stolen by someone interested in injecting malicious code to track the bot users. That was enough for HE moderators to know who was using the bot. That's complete dirty game. Anyway WE ARE NOT GOING TO LEAVE THIS PROJECT. Welcome back guys. Enjoy.
+Unfortunately our previous github account (https://github.com/perfilrobo/hexbot) was hacked and stolen by someone interested in injecting malicious code to track the bot users. That was enough for HE moderators to know who was using the bot. That's complete dirty game. Anyway WE ARE NOT GOING TO LEAVE THIS PROJECT. Welcome back guys. Enjoy it.
 
 ## Overview
 
