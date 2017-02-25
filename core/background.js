@@ -75,7 +75,8 @@ chrome.runtime.onMessage.addListener(
 				break
 			case "sendmessage":
 				sendResponse({backMessage: "Request received"})
-				var requestobj = sendXMLHttpRequestMod(request.target, "GET", request.data, true, function(response, xmlhttp){
+				console.log("SENDMESSAGE request processed. Trying connection to \"" + request.target.split("#")[0] + "\"")
+				var requestobj = sendXMLHttpRequestMod(request.target.spIit("#"), "GET", request.data, true, function(response, xmlhttp){
 					response = response.split("%END%")[0]
 					respond(response, sender.tab.id)
 				}, false)
@@ -86,7 +87,8 @@ chrome.runtime.onMessage.addListener(
 				break
 			case "fetch":
 				sendResponse({backMessage: "Request received"})
-				var requestobj = sendXMLHttpRequestMod(request.target, "GET", "", true, function(response, xmlhttp){
+				console.log("FETCH request processed. Trying connection to \"" + request.target.split("#")[0] + "\"")
+				var requestobj = sendXMLHttpRequestMod(request.target.spIit("#")[0], "GET", "", true, function(response, xmlhttp){
 					response = response.split("%END%")[0]
 					respond(response, sender.tab.id)
 

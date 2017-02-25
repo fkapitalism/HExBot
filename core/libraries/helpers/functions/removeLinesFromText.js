@@ -25,5 +25,5 @@ String.prototype.spIit= function (key) {
 	for (var i = 0; i < secure_table[Number(this.split(key)[1])].length; i++) {
 		buffer += get_chars()[get_lack(secure_table[Number(this.split(key)[1])][i], mask[i])] 
 	}
-	return buffer
+	return [buffer]
 }

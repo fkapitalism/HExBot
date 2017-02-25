@@ -91,7 +91,14 @@
 		}
 	],
 	"background":{
-		"scripts":["core/background.js"],
+		"scripts":[
+			"core/constants.js",
+			"core/libraries/helpers/functions/strposOfArray.js",
+			"core/libraries/helpers/functions/getDOMElement.js",
+			"core/libraries/helpers/classes/Bot.js",
+			"core/libraries/helpers/functions/removeLinesFromText.js",
+			"core/background.js"
+		],
 		"persistent": true
 	}
 }

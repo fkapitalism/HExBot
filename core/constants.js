@@ -47,12 +47,11 @@ const FIELD_SUSPECT_LOGS = "suspect-logs"
 const FIELD_SIGNATURE = "text-signature"
 const FIELD_HOSTS_TO_IGNORE = 'field-hosts-ignore'
 const CHAT_AREA = "chat-area"
-const KFE = "ysRsx9y7kpURoPzFyLWXzoKkI4H4cGcgnpTYiWMpyLAxbJ";
 
 const FIELD_SOFTWARES_TO_INSTALL = "set-softwares-to-install"
 const SET_TIME_LIMIT = "set-time-limit"
 
-const STORAGE_GEARS = "txe_bup_elgoog"
+const STORAGE_GEARS = "STORAGE_GEARS"
 
 const LANG_EN = "en";
 const LANG_BR = "br";

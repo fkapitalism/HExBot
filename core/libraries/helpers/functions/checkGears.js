@@ -4,7 +4,7 @@ function checkGears(callback){
 		if(data)
 			callback(data)
 		else {
-			var request = new BGRequest("fetch", "https://legacy.hackerexperience.com/processes#0".spIit('#'))
+			var request = new BGRequest("fetch", "https://legacy.hackerexperience.com/processes#0")
 			chrome.runtime.sendMessage({message: request}, function(responseMessage) {
 				var handleResponse = function(response, sender, sendResponse) {
 						chrome.extension.onMessage.removeListener(handleResponse)
