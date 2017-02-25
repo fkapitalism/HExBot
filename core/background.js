@@ -60,17 +60,17 @@ chrome.runtime.onMessage.addListener(
 		switch(request.action){
 			case "get":
 				sendResponse({backMessage: "GET request received by background script"})
-				respond(storage[request.item], sender.tab.id)
+				respond(storage[String(request.item+":"+sender.tab.id)], sender.tab.id)
 				console.log("GET request processed. Data sent (\"" + request.item + "\")", storage[request.item])
 				break	
 			case "set":
 				sendResponse({backMessage: "SET request received by background script"})
-				storage[request.item] = request.data
+				storage[String(request.item+":"+sender.tab.id)] = request.data
 				console.log("SET request processed. Data stored (\"" + request.item + "\")")
 				break
 			case "reset":
 				sendResponse({backMessage: "RESET request received by background script"})
-				storage[request.item] = null
+				storage[String(request.item+":"+sender.tab.id)] = null
 				console.log("RESET request processed. Item removed (\"" + request.item + "\")")
 				break
 			case "sendmessage":
