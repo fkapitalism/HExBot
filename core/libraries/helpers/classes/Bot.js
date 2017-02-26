@@ -18,7 +18,6 @@ function Bot(){
 	fieldsContent[REGEX_INPUT_DOM_ID] = ""
 	fieldsContent[FIELD_SOFTWARES_TO_INSTALL] = ""
 	fieldsContent[SET_TIME_LIMIT] = ""
-	fieldsContent[CHAT_NICK_NAME] = ""
 	fieldsContent[FIELD_HOSTS_TO_IGNORE] = ""
 	fieldsContent[FIELD_SIGNATURE] = "░▒███████ You gave me your data\n░██▓▒░░▒▓██ I give you my heart\n██▓▒░__░▒▓██___██████\n██▓▒░____░▓███▓__░▒▓██\n██▓▒░___░▓██▓_____░▒▓██\n██▓▒░_______________░▒▓██\n_██▓▒░______________░▒▓██\n__██▓▒░____________░▒▓██\n___██▓▒░__________░▒▓██\n____██▓▒░________░▒▓██\n_____██▓▒░_____░▒▓██\n______██▓▒░__░▒▓██\n_______█▓▒░░▒▓██\n_________░▒▓██\n_______░▒▓██\n_____░▒▓██\n"
 
@@ -34,6 +33,7 @@ function Bot(){
 	checkBoxes[SET_TRANSFER_TO_BTC] = false
 	checkBoxes[SET_SKIP_AFTER_UPLOAD] = false
 	checkBoxes[SET_HIDE_MODE] = true
+	checkBoxes[SET_POPUP_AFTER_INSTRUCTION] = true
 
 	this.controlPanel.fieldsContent = fieldsContent
 	this.controlPanel.lists = lists

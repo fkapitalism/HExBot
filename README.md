@@ -1,4 +1,4 @@
-# HExBot v0.1.30 - February 24 - 2017 
+# HExBot v0.1.31 - February 25 - 2017 
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
@@ -23,7 +23,6 @@ Functionalities:
 * Collects ips and software information around the network
 * Notifies about new missions and strange log activities
 * Tranfers earned money to BTC wallet automatically
-* Communication channel (removed)
 
 ## How to install
 1. Go to chrome://extensions/
@@ -32,11 +31,14 @@ Functionalities:
 4. Load the uncompressed directory
 
 ## Changelog
+* v0.1.31 - Settings area created and [MentalMushrooms suggestions](https://github.com/fkapitalism/HExBot/issues/2) implemented.
+    * Checkbox to switch the behavior of poping up bot after instructions;
+    * Webcrawler now adds automatically checked ips on "Ignore these ips" fields.
 * v0.1.30 - Original bot deployed with chat removed for performance reasons.
 * v0.1.26 - Delete software mission sequence implemented.
 * v0.1.25.2 - Fixing last update issue. If skip hide upload logs option (webcrawler checkbox) was active and the installing failed then the upload logs would not be clear.
 * v0.1.25.1 - Just some adjustments
-* v0.1.25 - Added two checkboxes relating to the webcrawler and its uploads
+* v0.1.25 - Added two checkboxes relating to the webcrawler and its uploads.
     * A checkbox to skip the log hide after upload (Straight to install after checking that it was uploaded successfully)
     * A checkbox to skip hiding the uploaded software (As well as the log hide since there is nothing to hide) after a successful install
 * v0.1.24.1 - Buttons that desappear problem repaired

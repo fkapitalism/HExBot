@@ -39,7 +39,7 @@ function buttonToAction(){
 		views.switchToMainScreenToCreditsScreen()
 	})
 
-	document.getElementById(SET_CHAT_PANEL).addEventListener("click", function(){
+	document.getElementById(SET_CONFIG_PANEL).addEventListener("click", function(){
 		views.switchToChatPanel()
 	})
 

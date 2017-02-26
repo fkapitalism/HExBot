@@ -6,7 +6,10 @@ function sequences(){
 		var currentSequence = $jSpaghetti.module(moduleName).sequence(sequenceName)
 		currentSequence.run()		
 		currentSequence.events.addEventListener("terminated", function(){
-			controllers.functions.resetBotAndShowPanel()
+			if (controllers.bot.controlPanel.checkBoxes[SET_POPUP_AFTER_INSTRUCTION])
+				controllers.functions.resetBotAndShowPanel()
+			else
+				controllers.bot.controlPanel.isHidden = true
 
 			//-----------------------------------------------------------------------------------------------//
 			//----Put here the sequences that must be started right after the current sequence is terminated-//

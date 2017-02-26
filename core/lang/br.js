@@ -33,6 +33,7 @@ LANG_CONTENT[LANG_BR] = {
 	CREDITS_perfilrobo: "Executador de missões, upload de arquivos e interceptador de bancos (primeiro e principal desenvolvedor)",
 	CREDITS_Quartz101: "Revisão de desempenho",
 	CREDITS_sjs1985: "Melhorias no upload de softwares, dois novos checkboxes adicionados",
+	CREDITS_fkapitalism: "Área de configuração",
 	CREDITS_OTHERS: "e dezenas de pessoas que contribuiram com sugestões e relatórios de bugs.",
 	CREDITS_BACK_BUTTON: "Voltar",
 	REPOSITORY_LINK: '<b>versão ' + VERSION_BOT + '</b> acompanhe as novas versões no <a href="https://github.com/fkapitalism/hexbot" target="_blank">repositório oficial</a>',
@@ -60,5 +61,10 @@ LANG_CONTENT[LANG_BR] = {
 	CHAT_REFRESH: "Atualizar",
 	CHAT_SEND: "Enviar",
 	CHAT_MESSAGE: "Digite sua mensagem",
-	WARNING_REMOVED_CHAT: "Chat removido por motivos de desempenho"
+	WARNING_REMOVED_CHAT: "Chat removido por motivos de desempenho",
+	CONFIG_AREA_TITLE: "Configurações",
+	CONFIG_GENERAL_TITLE: "Geral",
+	CONFIG_NOTIFIERS_TITLE: "Notificações",
+	CONFIG_WEBCRAWL_TITLE: "Webcrawler",
+	CONFIG_POPUP_BOT: "Reexibir janela do bot logo após termino de comando"
 }

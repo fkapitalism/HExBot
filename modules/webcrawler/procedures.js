@@ -213,6 +213,16 @@ webcrawler.procedure("registerAccessible", function(shared){
 		shared.accessibleHostsList[shared.hostLabel] = []
 	shared.accessibleHostsList[shared.hostLabel].push(shared.currentIp)
 	shared.accessCounter++
+	//Add ip to closed list on the bot field
+	var field_ips = controllers.bot.controlPanel.fieldsContent[FIELD_HOSTS_TO_IGNORE].split(',')
+	if (field_ips.indexOf(shared.currentIp) == -1){
+		if(field_ips[0].length)
+			field_ips.push(shared.currentIp)
+		else
+			field_ips[0] = shared.currentIp
+		controllers.bot.controlPanel.checkBoxes[SET_IGNORE_LIST] = true
+		controllers.bot.controlPanel.fieldsContent[FIELD_HOSTS_TO_IGNORE] = field_ips.join(',')
+	}
 })
 
 webcrawler.procedure("registerNPCNamesList", function(shared){
