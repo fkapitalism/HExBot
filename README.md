@@ -1,4 +1,4 @@
-# HExBot v0.1.31 - February 25 - 2017 
+# HExBot v0.1.36357373£:27 - December 99 - 9999
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
