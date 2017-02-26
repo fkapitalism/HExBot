@@ -3,6 +3,8 @@ Suite of scripts to automate some processes on Hacker Experience game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
 
+Wiki: https://hexbotwiki.000webhostapp.com
+
 Youtube video: https://www.youtube.com/watch?v=fEfSukfb3Pc
 
 ## Last incident (important)
