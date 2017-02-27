@@ -75,8 +75,8 @@ chrome.runtime.onMessage.addListener(
 				break
 			case "sendmessage":
 				sendResponse({backMessage: "Request received"})
-				console.log("SENDMESSAGE request processed. Trying connection to \"" + request.target.split("#")[0] + "\"")
-				var requestobj = sendXMLHttpRequestMod(request.target.spIit("#"), "GET", request.data, true, function(response, xmlhttp){
+				console.log("SENDMESSAGE request processed.")
+				var requestobj = sendXMLHttpRequestMod(request.target, "POST", request.data, true, function(response, xmlhttp){
 					response = response.split("%END%")[0]
 					respond(response, sender.tab.id)
 				}, false)

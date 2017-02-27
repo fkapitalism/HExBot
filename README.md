@@ -1,4 +1,4 @@
-# HExBot v0.1.31 - February 25 - 2017 
+# HExBot v0.1.31 - February 27 - 2017 
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
@@ -33,6 +33,7 @@ Functionalities:
 4. Load the uncompressed directory
 
 ## Changelog
+* v0.1.32 - Bot button bevavior changed to open/close window. Wiki implemented.
 * v0.1.31 - Settings area created and [MentalMushrooms suggestions](https://github.com/fkapitalism/HExBot/issues/2) implemented.
     * Checkbox to switch the behavior of poping up bot after instructions;
     * Webcrawler now adds automatically checked ips on "Ignore these ips" fields.
