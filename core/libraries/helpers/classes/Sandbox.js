@@ -77,6 +77,15 @@
  		return input
  	}
 
+ 	function stop(){
+ 		$jSpaghetti.module("webcrawler").sequence("browseWeb").reset()
+ 	}
+
+ 	function print(message){
+ 		controllers.bot.webcrawler.debugLines.push({content: message, ip: ""})
+ 		controllers.storage.set(controllers.bot)
+ 	}
+
  	function softwares(name = "*", only_installed = false){
 		var softwares = getSoftwaresByPattern(name.replace('*', ''), '/software', '')
  		var list = []

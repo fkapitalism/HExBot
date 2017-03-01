@@ -534,7 +534,10 @@ webcrawler.procedure("getUserCommandsResult", function(shared, funcs){
 	controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] = "/* WEBCRAWLER SCRIPT DEBUG */\n\n"
 	
 	for (var i = 0; i < controllers.bot.webcrawler.debugLines.length; i++){
-		controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].ip + ": " + JSON.stringify(controllers.bot.webcrawler.debugLines[i].content) + "\n\n"
+		if (controllers.bot.webcrawler.debugLines[i].ip != "")
+			controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].ip + ": " + JSON.stringify(controllers.bot.webcrawler.debugLines[i].content) + "\n\n"
+		else
+			controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].content + "\n\n"
 	}
 	controllers.storage.set(controllers.bot)
 
