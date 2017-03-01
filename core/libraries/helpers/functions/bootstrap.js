@@ -4,6 +4,4 @@ function bootstrap(callback){
 			eval(data)
 		callback()
 	})	
-}
-
-						
+}						

@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2017)",
-	"version": "0.1.32",
+	"version": "0.1.33",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "core/popup.html"
@@ -16,7 +16,7 @@
 			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*", "http://localhost/*", "https://*/*", "http://*/*"],
 			"js":[
 				"core/libraries/vendor/jSpaghetti/jSpaghetti.min.js",
-
+				
 				"core/constants.js",
 
 				"core/libraries/helpers/functions/detectLang.js",
@@ -28,6 +28,7 @@
 				"core/libraries/helpers/classes/Sequence.js",
 				"core/libraries/helpers/classes/Bot.js",
 				"core/libraries/helpers/classes/BGRequest.js",
+				"core/libraries/helpers/classes/Software.js",
 
 				"modules/riddleSolver/procedures.js",
 				"modules/riddleSolver/sequences/solvePuzzle.js",
@@ -55,6 +56,8 @@
 				"modules/assistant/procedures.js",
 				"modules/assistant/sequences/accessChat.js",
 
+				"core/libraries/helpers/classes/Sandbox.js",
+
 				"core/libraries/helpers/functions/strposOfArray.js",
 				"core/libraries/helpers/functions/getDOMElement.js",
 				"core/libraries/helpers/functions/goToPage.js",
@@ -66,6 +69,8 @@
 				"core/libraries/helpers/functions/getBankAccountAddr.js",
 				"core/libraries/helpers/functions/getBTCWalletInfo.js",
 				"core/libraries/helpers/functions/getBTCExchangeRate.js",
+				"core/libraries/helpers/functions/normalizeDigitalInfoUnit.js",
+				"core/libraries/helpers/functions/getTargetInfo.js",
 				"core/libraries/helpers/functions/getBankAccountBalance.js",
 				"core/libraries/helpers/functions/getNextPuzzleIP.js",
 				"core/libraries/helpers/functions/getPuzzleId.js",
@@ -73,8 +78,10 @@
 				"core/libraries/helpers/functions/sendMoneyToBTCWallet.js",
 				"core/libraries/helpers/functions/roundNumber.js",
 				"core/libraries/helpers/functions/getSoftwaresByPattern.js",
+				"core/libraries/helpers/functions/getSoftwareInfo.js",
 				"core/libraries/helpers/functions/setBGSnippet.js",
 				"core/libraries/helpers/functions/getBGSnippet.js",
+				"core/libraries/helpers/functions/enableTab.js",
 				"core/libraries/helpers/functions/checkGears.js",
 				"core/libraries/helpers/functions/bootstrap.js",
 

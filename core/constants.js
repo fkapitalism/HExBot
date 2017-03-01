@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.1.32"
+const VERSION_BOT = "0.1.33"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -20,16 +20,18 @@ const PERFORM_INSTALL_SOFTWARE = "set-install-software"
 const SET_SEARCH_FOR_IPS = "set-ip-search"
 const SET_MISSIONS_MONITOR = 'set-missions-monitor'
 const SET_LOGS_MONITOR = 'set-logs-monitor'
-const SET_UPLOAD_MODE = 'set-upload-mode'
+//const SET_UPLOAD_MODE = 'set-upload-mode'
 const SET_SIGNATURE = 'set-signature'
 const SET_IGNORE_LIST = 'set-ignore-list'
 const SET_TRANSFER_TO_BTC = 'set-to-btc'
 const SET_SKIP_AFTER_UPLOAD = 'set-skip-after-upload'
-const SET_HIDE_MODE = 'set-hide-mode'
+//const SET_HIDE_MODE = 'set-hide-mode'
 const SET_POPUP_AFTER_INSTRUCTION = 'set-pop-up'
 const PERFORM_UPDATE_CRACKER = 'perform-update-cracker' 
 const SET_CONFIG_PANEL = 'set-config-panel'
 const CONFIG_TO_MAIN = "config-to-main"
+const WEBCRAWLER_SCRIPT = "web-crawl-script"
+const WEBCRAWLER_SCRIPT_DEBUG = "web-crawl-script-debug"
 
 const CREDITS_INFO = 'credits-info'
 const MAIN_SCREEN_DOM_ID = 'control-panel-main'
@@ -45,8 +47,8 @@ const FIELD_SIGNATURE = "text-signature"
 const FIELD_HOSTS_TO_IGNORE = 'field-hosts-ignore'
 const CONFIG_AREA = "config-area"
 
-const FIELD_SOFTWARES_TO_INSTALL = "set-softwares-to-install"
-const SET_TIME_LIMIT = "set-time-limit"
+//const FIELD_SOFTWARES_TO_INSTALL = "set-softwares-to-install"
+//const SET_TIME_LIMIT = "set-time-limit"
 
 const STORAGE_GEARS = "STORAGE_GEARS"
 

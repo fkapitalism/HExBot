@@ -16,11 +16,6 @@ webcrawler.procedure("startSearching", function(shared){
 		} else {
 			shared.skipHideLogs = false;
 		}
-		if (controllers.bot.controlPanel.checkBoxes[SET_HIDE_MODE]){
-			shared.hideUploads = true;
-		} else {
-			shared.hideUploads = false;
-		}
 
 		shared.openList = inputIps
 		shared.openList = inputIps.filter(function(item, pos) {
@@ -30,6 +25,8 @@ webcrawler.procedure("startSearching", function(shared){
 		if (shared.openList.length == 0)
 			return false
 
+		controllers.bot.webcrawler.debugLines = []
+		controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] = ""
 		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = shared.openList.join(", ")
 		controllers.storage.set(controllers.bot)
 		shared.getSoftwareMode = true
@@ -44,46 +41,11 @@ webcrawler.procedure("startSearching", function(shared){
 		shared.BTCAccountList = []
 		shared.shoppingLogList = []
 		shared.softwareList = []
-
-		shared.uploadMode = controllers.bot.controlPanel.checkBoxes[SET_UPLOAD_MODE]
+		shared.currentSoftware = 0
 		
-		if(shared.uploadMode){
-			shared.softwaresToUpload = []
-			shared.currentSoftware = 0
-			shared.isUploadAborted = false
-			shared.uploadRegister = {}
-			var softwaresNotFound = []
-			var softwares = controllers.bot.controlPanel.fieldsContent[FIELD_SOFTWARES_TO_INSTALL].split(",")
-			for (var i = 0; i < softwares.length; i++) {
-				var software = softwares[i].split(":")
-				if (software.length == 2){
-					var pid = getSoftwareId(software[0].trim(), software[1].trim(), "/software", "")
-					if (pid){
-						var softwareObj = {
-							pid: pid,
-							name: software[0].trim(),
-							version: software[1].trim()
-						}
-						shared.softwaresToUpload.push(softwareObj)
-					} else {
-						softwaresNotFound.push(LANG.WEBCRAWLER_SOFTWARE_NOT_FOUND.replace('{CONTENT1}', software[0].trim()).replace('{CONTENT2}', software[1].trim()))
-					}
-				} else {
-					window.alert(LANG.WEBCRAWLER_SINTAX_SOFTWARE_FIELD)
-					return false
-				}
-			}
-			if (softwaresNotFound.length > 0){
-				window.alert(softwaresNotFound.join(",\n") + "\n")
-				return false
-			}
-			var timeLimit = controllers.bot.controlPanel.fieldsContent[SET_TIME_LIMIT]
-			if ((timeLimit.length > 0) && (Number(timeLimit) > 0)){
-				shared.timeLimit = timeLimit
-			} else {
-				shared.timeLimit = 0
-			}
-		}
+		shared.softwaresToUpload = []
+		shared.isUploadAborted = false
+		shared.uploadRegister = {}
 
 		shared.myIp = getMyIp(true)
 		return true
@@ -140,7 +102,7 @@ webcrawler.procedure("registerHidden", function(shared){
 
 webcrawler.procedure("manageUploadCounter", function(shared){
 	if(shared.currentSoftware < shared.softwaresToUpload.length - 1){
-		shared.currentSoftware++
+		shared.currentSoftware += 1
 	} else {
 		shared.currentSoftware = 0
 	}
@@ -172,6 +134,7 @@ webcrawler.procedure("abortUpload", function(shared){
 })
 
 webcrawler.procedure("runUploadSoftware", function(shared){
+	//console.log("currentSoftware", shared.currentSoftware)
 	goToPage("/internet?view=software&cmd=up&id=" + shared.softwaresToUpload[shared.currentSoftware].pid)
 })
 
@@ -182,10 +145,6 @@ webcrawler.procedure("installSoftware", function(shared){
 
 webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
 	return shared.skipHideLogs
-})
-
-webcrawler.procedure("isHidingEnabled", function(shared){
-	return shared.hideUploads
 })
 
 webcrawler.procedure("hideSoftware", function(shared){
@@ -506,6 +465,8 @@ webcrawler.procedure("getHostLabel", function(shared){
 	} else {
 		shared.hostLabel = null
 	}
+	controllers.bot.webcrawler.current_target_label = shared.hostLabel
+	controllers.storage.set(controllers.bot)
 })
 
 webcrawler.procedure("cancelLogProcesses", function(shared){
@@ -551,4 +512,47 @@ webcrawler.procedure("checkProgressBar", function(shared, funcs){
 		}
 	}, 50)
 })
+
+webcrawler.procedure("getUserCommandsResult", function(shared, funcs){
+	sandbox = new Sandbox()
+	result = sandbox.run(controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT])
+
+	if(result.uploads.length)
+		shared.uploadMode = true
+	else
+		shared.uploadMode = false
+
+	//console.log(result.uploads, result.uploads.length, shared.uploadMode)
+
+	shared.timeLimit = result.seconds_limit
+	/*for (var i = 0; i < result.uploads.length; i++) {
+		if(result.uploads[i])
+			shared.softwaresToUpload.push(result.uploads[i])
+	}*/
+	shared.softwaresToUpload = result.uploads
+	controllers.bot.webcrawler.debugLines.push({content: result, ip: shared.currentIp})
+	controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] = "/* WEBCRAWLER SCRIPT DEBUG */\n\n"
+	
+	for (var i = 0; i < controllers.bot.webcrawler.debugLines.length; i++){
+		controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].ip + ": " + JSON.stringify(controllers.bot.webcrawler.debugLines[i].content) + "\n\n"
+	}
+	controllers.storage.set(controllers.bot)
+
+})
+
+webcrawler.procedure("isInstallRequired", function(shared, funcs){
+	if(/install/i.test(shared.softwaresToUpload[shared.currentSoftware].actions))
+		return true
+	else
+		return false
+})
+
+webcrawler.procedure("isHiddingRequired", function(shared, funcs){
+	if(/hide/i.test(shared.softwaresToUpload[shared.currentSoftware].actions))
+		return true
+	else
+		return false
+})
+
+
 

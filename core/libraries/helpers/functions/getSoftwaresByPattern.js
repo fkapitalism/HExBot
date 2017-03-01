@@ -1,4 +1,4 @@
-function getSoftwaresByPattern(pattern, page, parameters){
+function getSoftwaresByPattern(pattern, page, parameters, avoid_installed_viruses = false){
 	var softwarePage = sendXMLHttpRequest(page, "GET", parameters, false)
 	var softwareList = []
 	var parser = new DOMParser()
@@ -18,7 +18,9 @@ function getSoftwaresByPattern(pattern, page, parameters){
 				var id = rows[i].id
 				var name = softwareName
 				var version = rows[i].cells[2].innerText.replace(/[\n\r]/gmi, "")
-				softwareList.push({id: id, name: name, version: version, installed: installed})
+				var size = rows[i].cells[3].innerText.replace(/[\n\r]/gmi, "")
+				if(!(avoid_installed_viruses && name.match(/(\.vspam|\.vwarez|\.vminer|\.vddos)/gmi) && installed))
+					softwareList.push({id: id, name: name, version: version, installed: installed, size: size})
 			} else {
 				//console.log(softwareName)
 			}

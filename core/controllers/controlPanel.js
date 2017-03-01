@@ -1,6 +1,8 @@
 function controlPanel(){
 	views.appendControlPanel()
 
+	enableTab(WEBCRAWLER_SCRIPT)
+
 	if (controllers.bot.controlPanel.isHidden){
 		views.hideControlPanel()
 	} else {
@@ -30,6 +32,12 @@ function controlPanel(){
 		regexFilter.style.display = "none"
 	}
 
+	var customScriptDebug = document.getElementById(WEBCRAWLER_SCRIPT_DEBUG)
+	if(customScriptDebug.value != "")
+		customScriptDebug.style.display = "block"
+	else
+		customScriptDebug.style.display = "none"
+
 	controllers.functions.filterCrawlerOutput(regexFilter.value)
 	regexFilter.addEventListener("change", function(){
 		controllers.functions.filterCrawlerOutput(regexFilter.value)
@@ -43,11 +51,11 @@ function controlPanel(){
 		})
 	}
 
-	var uploadModeCheckbox = document.getElementById(SET_UPLOAD_MODE)
+	/*var uploadModeCheckbox = document.getElementById(SET_UPLOAD_MODE)
 	controllers.functions.checkUploadSoftwareFields()
 	uploadModeCheckbox.addEventListener("click", function(){
 		controllers.functions.checkUploadSoftwareFields()
-	})
+	})*/
 
 	var ignoreListCheckbox = document.getElementById(SET_IGNORE_LIST)
 	controllers.functions.checkIgnoreIPsField()
