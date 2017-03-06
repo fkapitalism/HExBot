@@ -15,7 +15,7 @@ function Bot(){
 		debugLines: []
 	}
 	this.detected_lang = LANG_EN
-	this.security_keys = ["+ðþ#KT`þ!¹ú,ýÂõU^UYú .0õþð*òðZÊ*õRýö(É¶,#($"]
+	this.security_keys = ["+ðþ#KT`þ!¹ú,ýÂõU^UYú .0õþð*òðZÊ*õRýö(É¶,#($", "$÷ì$KX.ûöøöÛ.ù$eUS_ú+Ì% ï¹$òýW&#÷a/ö. òUð ½Z!\"PõùÊÉÇ Sd"]
 	var fieldsContent = {}
 	fieldsContent[FIELD_BANK_IP_TARGET] = ""
 	fieldsContent[FIELD_IPS_START_SEARCHING] = ""
