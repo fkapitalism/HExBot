@@ -36,7 +36,7 @@ Functionalities:
 ## Changelog
 * v0.1.34 - Protection against CloudFlare page.
     * Bot reloads the page every 3 sec if there is a CloudFlare page.
-    * New webcrawler functions added: clean_logs_just_after_upload(), clean_logs_disabled() and leave_signature().
+    * New webcrawler functions added: clean_logs_just_after_installing(), clean_logs_disabled() and leave_signature().
 * v0.1.33 - Webcrawler custom scripts (BETA)
 * v0.1.32 - Bot button bevavior changed to open/close window. Wiki implemented.
 * v0.1.31 - Settings area created and [MentalMushrooms suggestions](https://github.com/fkapitalism/HExBot/issues/2) implemented.
