@@ -80,7 +80,7 @@
  		return input
  	}
 
- 	function clean_logs_just_after_upload(){
+ 	function clean_logs_just_after_installing(){
  		clean_just_after_upload = true
  	}
 
