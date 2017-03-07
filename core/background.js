@@ -88,7 +88,6 @@ chrome.runtime.onMessage.addListener(
 			case "fetch":
 				sendResponse({backMessage: "Request received"})
 				console.log("FETCH request processed. Trying connection to \"" + request.target.split("#")[0] + "\"")
-				console.log("HEYYY")
 				var meta = request.target.spIit("#")[0].split("?")
 				var param = ""
 				if(meta && meta.length > 1)

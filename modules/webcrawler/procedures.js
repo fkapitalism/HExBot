@@ -42,6 +42,7 @@ webcrawler.procedure("startSearching", function(shared){
 		shared.shoppingLogList = []
 		shared.softwareList = []
 		shared.currentSoftware = 0
+		shared.mustLeaveSignature = controllers.bot.controlPanel.checkBoxes[SET_SIGNATURE]
 		
 		shared.softwaresToUpload = []
 		shared.isUploadAborted = false
@@ -313,7 +314,7 @@ webcrawler.procedure("getBTCAccounts", function(shared){
 })
 
 webcrawler.procedure("leaveSignature", function(shared){
-	if (controllers.bot.controlPanel.checkBoxes[SET_SIGNATURE]){
+	if (shared.mustLeaveSignature){
 		var textArea = getDOMElement("textarea", "class", "logarea", 0)
 		if (textArea){
 			var signature = controllers.bot.controlPanel.fieldsContent[FIELD_SIGNATURE]
@@ -522,13 +523,13 @@ webcrawler.procedure("getUserCommandsResult", function(shared, funcs){
 	else
 		shared.uploadMode = false
 
-	//console.log(result.uploads, result.uploads.length, shared.uploadMode)
-
 	shared.timeLimit = result.seconds_limit
-	/*for (var i = 0; i < result.uploads.length; i++) {
-		if(result.uploads[i])
-			shared.softwaresToUpload.push(result.uploads[i])
-	}*/
+
+	shared.cleaningLogsDisabled = result.clean_disabled
+
+	shared.mustLeaveSignature = result.must_leave_signature
+
+	shared.skipHideLogs = result.clean_just_after_upload
 	shared.softwaresToUpload = result.uploads
 	controllers.bot.webcrawler.debugLines.push({content: result, ip: shared.currentIp})
 	controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] = "/* WEBCRAWLER SCRIPT DEBUG */\n\n"

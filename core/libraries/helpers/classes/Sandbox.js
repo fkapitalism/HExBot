@@ -8,6 +8,9 @@
  	var uploads = []
  	var seconds_max = 0
  	var warnings = []
+ 	var clean_just_after_upload = false
+ 	var clean_disabled = false
+ 	var must_leave_signature = controllers.bot.controlPanel.checkBoxes[SET_SIGNATURE]
  	var target = {
  		internet: null,
  		freehd: null,
@@ -51,7 +54,7 @@
  		}
  	}
 
- 	function upload(name, actions = 'install & hide', version = '*'){
+ 	function upload(name, actions, version = '*'){
 		var software = getSoftwareInfo(name.replace('*', ''), version.replace('*', ''), '/software', '')
  		if(software){
  			software.actions = actions
@@ -75,6 +78,22 @@
 
  	function Mbits(input){
  		return input
+ 	}
+
+ 	function clean_logs_just_after_upload(){
+ 		clean_just_after_upload = true
+ 	}
+
+ 	function clean_logs_disabled(){
+ 		clean_disabled = true
+ 	}
+
+ 	function leave_signature(input){
+ 		if(input){
+ 			controllers.bot.controlPanel.fieldsContent[FIELD_SIGNATURE] = input
+ 			controllers.storage.set(controllers.bot)
+ 		}
+ 		must_leave_signature = true
  	}
 
  	function stop(){
@@ -141,7 +160,10 @@
  			errors: evaloutput,
  			warnings: warnings,
  			target: target,
- 			seconds_limit: seconds_max
+ 			seconds_limit: seconds_max,
+ 			clean_just_after_upload: clean_just_after_upload,
+ 			clean_disabled: clean_disabled,
+ 			must_leave_signature: must_leave_signature
  		}
  	}
  }
