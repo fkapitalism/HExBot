@@ -16,4 +16,4 @@ foo.procedure("handle_cf_page", function(){
 			location.reload();
 		}, 3000);
 	}
-})
+})  
