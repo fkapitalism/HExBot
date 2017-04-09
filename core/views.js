@@ -1,5 +1,5 @@
 var views = {
-	appendControlPanel: function(){
+	appendControlPanel: function(){		
 		var divMain = document.createElement("div")
 		divMain.id = COMMAND_PANEL_DOM_ID
 		divMain.className = "modal hide in"
@@ -95,11 +95,15 @@ var views = {
 					//'<hr />' +
 					'<h4>' + LANG.CONFIG_WEBCRAWL_TITLE + '</h4>'+
 					'<div class="divider">'+
-						'<label><input class="checkBoxes" id="' + SET_SKIP_AFTER_UPLOAD + '"type="checkbox"><span>' + LANG.WEBCRAWLER_SKIP_AFTER_UPLOAD + '</span></label>' +
+						'<label><input class="checkBoxes" id="' + SET_SKIP_AFTER_UPLOAD + '" type="checkbox"><span>' + LANG.WEBCRAWLER_SKIP_AFTER_UPLOAD + '</span></label>' +
 						//'<label><input class="checkBoxes" id="' + SET_HIDE_MODE + '"type="checkbox"><span>' + LANG.WEBCRAWLER_HIDE_UPLOAD + '</span></label>' +
 						'<label><input class="checkBoxes" type="checkbox" id=' + SET_SIGNATURE + '>' + LANG.WEBCRAWLER_LEAVE_SIGNATURE + '<a href="http://www.symbols-n-emoticons.com/p/facebook-text-art-ascii.html" target="_blank"> ' + LANG.WEBCRAWLER_FIND_SIGNATURE + '</a><textarea id="' + FIELD_SIGNATURE + '" class="controls fieldsContent" style="width: 95%; resize: vertical;"></textarea></label>' +
 					'</div>'+
-					'<br />' +
+
+					'<h4>' + LANG.CONFIG_LANG_NAME + '</h4>'+
+					'<div class="divider">'+
+						'<label><input class="fieldsContent" id="' + LANGUAGE_FIELD + '" type="text"><span> <b>br</b>, <b>en</b>, <b>de</b></span></label>' +
+					'</div>'+
 					'<button id="' + CONFIG_TO_MAIN + '" class="btn btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
 				'</div>'+
 

@@ -21,6 +21,7 @@ function Bot(){
 	fieldsContent[FIELD_IPS_START_SEARCHING] = ""
 	fieldsContent[FIELD_IP_SEARCH_RESULT] = ""
 	fieldsContent[REGEX_INPUT_DOM_ID] = ""
+	fieldsContent[LANGUAGE_FIELD] = ""
 	//fieldsContent[FIELD_SOFTWARES_TO_INSTALL] = ""
 	//fieldsContent[SET_TIME_LIMIT] = ""
 	fieldsContent[WEBCRAWLER_SCRIPT] = '//upload("Competent Cracker.crc")\nseconds_limit(120)'

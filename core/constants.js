@@ -20,6 +20,7 @@ const PERFORM_INSTALL_SOFTWARE = "set-install-software"
 const SET_SEARCH_FOR_IPS = "set-ip-search"
 const SET_MISSIONS_MONITOR = 'set-missions-monitor'
 const SET_LOGS_MONITOR = 'set-logs-monitor'
+const LANGUAGE_FIELD = 'lang-field'
 //const SET_UPLOAD_MODE = 'set-upload-mode'
 const SET_SIGNATURE = 'set-signature'
 const SET_IGNORE_LIST = 'set-ignore-list'
@@ -54,7 +55,8 @@ const STORAGE_GEARS = "STORAGE_GEARS"
 
 const LANG_EN = "en";
 const LANG_BR = "br";
-const LANGUAGES = [LANG_EN, LANG_BR];
+const LANG_DE = "de";
+const LANGUAGES = [LANG_EN, LANG_BR, LANG_DE];
 
 //Missions type
 const CHECK_BALANCE = "checkBalance"

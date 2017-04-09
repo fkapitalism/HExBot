@@ -34,8 +34,9 @@ Functionalities:
 4. Load the uncompressed directory
 
 ## Changelog
-* v0.1.34.1
-    * Webcrawler freehd error fixed
+* v0.1.35
+    * Webcrawler freehd error fixed (beta)
+    * Translated to German
 * v0.1.34 - Protection against CloudFlare page.
     * Bot reloads the page every 3 sec if there is a CloudFlare page.
     * New webcrawler functions added: clean_logs_just_after_installing(), clean_logs_disabled() and leave_signature().

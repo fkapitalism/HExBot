@@ -67,5 +67,6 @@ LANG_CONTENT[LANG_BR] = {
 	CONFIG_GENERAL_TITLE: "Geral",
 	CONFIG_NOTIFIERS_TITLE: "Notificações",
 	CONFIG_WEBCRAWL_TITLE: "Webcrawler",
-	CONFIG_POPUP_BOT: "Reexibir janela do bot logo após termino de comando"
+	CONFIG_POPUP_BOT: "Reexibir janela do bot logo após termino de comando",
+	CONFIG_LANG_NAME: "Linguagem"
 }

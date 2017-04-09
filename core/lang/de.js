@@ -1,6 +1,6 @@
 if (typeof LANG_CONTENT === 'undefined') LANG_CONTENT = []
 
-LANG_CONTENT[LANG_EN] = {
+LANG_CONTENT[LANG_DE] = {
 	NOT_REGULAR_PAGE: "HExBot: es läuft nix. Dies ist keine normale Gameseite",
 	CONTROL_PANEL_TITLE: "Hacker Experience Bot",
 	PERFORM_MEDIUM_MISSIONS: "Mittlere Missionen",
@@ -67,5 +67,6 @@ LANG_CONTENT[LANG_EN] = {
 	CONFIG_GENERAL_TITLE: "Allgemein",
 	CONFIG_NOTIFIERS_TITLE: "Benachrichtigung",
 	CONFIG_WEBCRAWL_TITLE: "Webcrawler",
-	CONFIG_POPUP_BOT: "Öffne das Bot Fenster nach den Instruktionen"
+	CONFIG_POPUP_BOT: "Öffne das Bot Fenster nach den Instruktionen",
+	CONFIG_LANG_NAME: "Sprache"
 }

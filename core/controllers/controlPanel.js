@@ -1,4 +1,15 @@
 function controlPanel(){
+
+	if (!controllers.bot.controlPanel.fieldsContent[LANGUAGE_FIELD].length){
+		controllers.bot.controlPanel.fieldsContent[LANGUAGE_FIELD] = detectLang()
+		controllers.storage.set(controllers.bot)
+		DETECTED_LANG = detectLang();
+		if (!DETECTED_LANG) DETECTED_LANG = LANG_EN;
+	} else {
+		DETECTED_LANG = controllers.bot.controlPanel.fieldsContent[LANGUAGE_FIELD]
+	}
+	LANG = LANG_CONTENT[DETECTED_LANG];
+
 	views.appendControlPanel()
 
 	enableTab(WEBCRAWLER_SCRIPT)

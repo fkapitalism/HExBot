@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2017)",
-	"version": "0.1.34.1",
+	"version": "0.1.35",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "core/popup.html"
