@@ -1,4 +1,4 @@
-# HExBot v0.1.34 - March 6 - 2017 
+# HExBot v0.1.34.1 - April 3 - 2017 
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
@@ -34,6 +34,8 @@ Functionalities:
 4. Load the uncompressed directory
 
 ## Changelog
+* v0.1.34.1
+    * Webcrawler freehd error fixed
 * v0.1.34 - Protection against CloudFlare page.
     * Bot reloads the page every 3 sec if there is a CloudFlare page.
     * New webcrawler functions added: clean_logs_just_after_installing(), clean_logs_disabled() and leave_signature().

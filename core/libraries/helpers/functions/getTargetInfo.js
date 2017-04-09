@@ -10,7 +10,8 @@ function getTargetInfo(){
 		if ((softwarebar.getElementsByClassName("hd-usage")) && 
 			(softwarebar.getElementsByClassName("hd-usage")[0].getElementsByClassName("small"))){
 			var hddetails = softwarebar.getElementsByClassName("hd-usage")[0].getElementsByClassName("small")[0]
-			var regex = /[0-9]+,?[0-9]* (GB|MB)/g
+			//var regex = /[0-9]+,?[0-9]* (GB|MB)/g
+			var regex = /[+-]?\d+(\.\d+)? (GB|MB)/g
 			var match = regex.exec(hddetails.innerHTML)
 			var matches = []
 			while(match != null){
