@@ -28,7 +28,7 @@ LANG_CONTENT[LANG_EN] = {
 	CREDITS_TITLE: "Credits",
 	CREDITS_cmathiswausau: "Domain repairs on manifest.json file",
 	CREDITS_dominicusdev: "Massive code reorganization and bugs repairs",
-	CREDITS_gresendesa: "Framework implementation, riddle solver, webcrawler, notifiers and translation to Portuguese",
+	CREDITS_gresendesa: "Framework implementation, riddle solver, webcrawler, notifiers and translation to Portuguese & German",
 	CREDITS_Klorker: "Code revision, new visual features and log cleaners",
 	CREDITS_perfilrobo: "Missions performer, uploader and bank camping (first and main developer)",
 	CREDITS_Quartz101: "Performance revision",
