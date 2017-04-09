@@ -34,6 +34,7 @@ LANG_CONTENT[LANG_BR] = {
 	CREDITS_Quartz101: "Revisão de desempenho",
 	CREDITS_sjs1985: "Melhorias no upload de softwares, dois novos checkboxes adicionados",
 	CREDITS_fkapitalism: "Área de configuração e sandbox para os scripts do webcrawler",
+	CREDITS_AssHole12: "Tradução para o Alemão",
 	CREDITS_OTHERS: "e dezenas de pessoas que contribuiram com sugestões e relatórios de bugs.",
 	CREDITS_BACK_BUTTON: "Voltar",
 	REPOSITORY_LINK: '<b>versão ' + VERSION_BOT + '</b> acompanhe as novas versões no <a href="https://github.com/fkapitalism/hexbot" target="_blank">repositório oficial</a> ou na <a href="https://hexbotwiki.000webhostapp.com/" target="_blank">wiki</a>',
