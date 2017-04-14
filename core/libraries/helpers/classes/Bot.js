@@ -24,7 +24,7 @@ function Bot(){
 	fieldsContent[LANGUAGE_FIELD] = ""
 	//fieldsContent[FIELD_SOFTWARES_TO_INSTALL] = ""
 	//fieldsContent[SET_TIME_LIMIT] = ""
-	fieldsContent[WEBCRAWLER_SCRIPT] = '//upload("Competent Cracker.crc")\nseconds_limit(120)'
+	fieldsContent[WEBCRAWLER_SCRIPT] = '//upload("soft_name.vddos", "install & hide", "1.1")\n//seconds_limit(120)'
 	fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] = ""
 	fieldsContent[FIELD_HOSTS_TO_IGNORE] = ""
 	fieldsContent[FIELD_SIGNATURE] = "░▒███████ You gave me your data\n░██▓▒░░▒▓██ I give you my heart\n██▓▒░__░▒▓██___██████\n██▓▒░____░▓███▓__░▒▓██\n██▓▒░___░▓██▓_____░▒▓██\n██▓▒░_______________░▒▓██\n_██▓▒░______________░▒▓██\n__██▓▒░____________░▒▓██\n___██▓▒░__________░▒▓██\n____██▓▒░________░▒▓██\n_____██▓▒░_____░▒▓██\n______██▓▒░__░▒▓██\n_______█▓▒░░▒▓██\n_________░▒▓██\n_______░▒▓██\n_____░▒▓██\n"

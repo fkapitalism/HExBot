@@ -1,4 +1,4 @@
-# HExBot v0.1.35 - April 9 - 2017 
+# HExBot v0.1.35.1 - April 14 - 2017 
 Suite of scripts to automate some processes on Hacker Experience game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
@@ -34,6 +34,8 @@ Functionalities:
 4. Load the uncompressed directory
 
 ## Changelog
+* v0.1.35.1
+    * Webcrawler freehd error fixed
 * v0.1.35
     * Webcrawler freehd error fixed (beta)
     * Translated to German
