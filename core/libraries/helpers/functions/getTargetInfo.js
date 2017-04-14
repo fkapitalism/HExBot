@@ -11,7 +11,7 @@ function getTargetInfo(){
 			(softwarebar.getElementsByClassName("hd-usage")[0].getElementsByClassName("small"))){
 			var hddetails = softwarebar.getElementsByClassName("hd-usage")[0].getElementsByClassName("small")[0]
 			//var regex = /[0-9]+,?[0-9]* (GB|MB)/g
-			var regex = /[+-]?\d+(\.\d+)? (GB|MB)/g
+			var regex = /[+-]?\d+([\.,]\d+)? (GB|MB)/g
 			var match = regex.exec(hddetails.innerHTML)
 			var matches = []
 			while(match != null){
@@ -19,9 +19,10 @@ function getTargetInfo(){
 				match = regex.exec(hddetails.innerHTML)
 			}
 			obj.freehd = normalizeDigitalInfoUnit(matches[1]) - normalizeDigitalInfoUnit(matches[0])
+			//obj.match0 = matches[0]
+			//obj.match1 = matches[1]
 			obj.ok = true
 		}
 	}
 	return obj
 }
-
