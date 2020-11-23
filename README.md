@@ -1,5 +1,6 @@
-# HExBot v0.1.35.1 - April 14 - 2017 
-Suite of scripts to automate some processes on Hacker Experience game website.
+# HExBot v0.2 - June 18 - 2021
+
+Suite of scripts to automate some processes on Hacker Wars game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
 

@@ -1,19 +1,21 @@
 {
 	"manifest_version": 2,
-	"name": "HEx BOT (2017)",
-	"version": "0.1.35.1",
+	"name": "HEx BOT (2016-2020)",
+	"version": "0.2",
 	"description": "A bot to automate things on Hacker Experience",
 	"browser_action": {
  		"default_popup": "core/popup.html"
  	},
- 	"author":"fkapitalism 2017",
+ 	"author":"fkapitalism 2020",
 	"permissions": [
-		"tabs"
+		"https://hackerwars.io/*"
 	],
 	"icons": {"256": "icon.png"},
 	"content_scripts":[
 		{
-			"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
+			//"matches": ["https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
+			"matches": ["https://hackerwars.io/*"],
+
 			"js":[
 				"core/libraries/vendor/jSpaghetti/jSpaghetti.min.js",
 				
