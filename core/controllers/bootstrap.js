@@ -9,7 +9,7 @@ var storageContent = controllers.storage.get(function(storageContent){
 	}
 	//It checks if the current page is a regular page game
 	var regularPageId = document.getElementById("header")
-	var isRegularPage = (regularPageId) && (regularPageId.innerHTML.indexOf('<a href="#">Hacker Experience</a>') >= 0)
+	var isRegularPage = (regularPageId) && ((regularPageId.innerHTML.indexOf('<a href="#">Hacker Experience</a>') >= 0) || (regularPageId.innerHTML.indexOf('<a href="#">Hacker Wars</a>') >= 0))
 	controllers.isRegularGamePage = false
 	if (isRegularPage){ 
 		controllers.isRegularGamePage = true
@@ -19,6 +19,8 @@ var storageContent = controllers.storage.get(function(storageContent){
 		buttonToAction()
 		botButton()
 
+	} else {
+		console.log("That's not a regular page!");
 	}
 
 	bootstrap(function(data){

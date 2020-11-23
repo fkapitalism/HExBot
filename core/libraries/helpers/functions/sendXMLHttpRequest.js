@@ -26,7 +26,8 @@ function sendXMLHttpRequest(script_target, method, parameters, isAsynchronous, f
 	}
 	switch(method){
 		case "POST":
-			xmlhttp.open("POST", script_target, isAsynchronous)
+			//xmlhttp.open("POST", script_target, isAsynchronous)
+			xmlhttp.open("POST", script_target)
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8")
 			xmlhttp.setRequestHeader("Accept", "*/*")
 			if (sendXRequestedWithHeader)
@@ -34,7 +35,7 @@ function sendXMLHttpRequest(script_target, method, parameters, isAsynchronous, f
 			xmlhttp.send(parameters)
 			break
 		case "GET":
-			xmlhttp.open("GET", script_target + "?" + parameters, isAsynchronous)
+			xmlhttp.open("GET", script_target + "?" + parameters)
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8")
 			xmlhttp.setRequestHeader("Accept", "*/*")
 			if (sendXRequestedWithHeader)
@@ -44,6 +45,7 @@ function sendXMLHttpRequest(script_target, method, parameters, isAsynchronous, f
 		default: break	
 	}
 	if(!isAsynchronous){
+		while (synchronousResponse==null) {}
 		return synchronousResponse
 	}
 }

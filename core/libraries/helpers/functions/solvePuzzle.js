@@ -114,7 +114,8 @@ function solvePuzzle(puzzle_id){
 			document.getElementsByName("qa-answer")[0].value = text_answer;
 			document.getElementsByClassName("btn btn-success")[0].click();
 		} else if (fake_message){
-			sendXMLHttpRequest("riddle.php", "POST", fake_message, true, function(data){
+			//sendXMLHttpRequest("riddle.php", "POST", fake_message, true, function(data){
+			sendXMLHttpRequest("gotcha.php", "POST", fake_message, true, function(data){
 				var result = JSON.parse(data)
 				if (result.status == "OK"){
 					location.reload()
