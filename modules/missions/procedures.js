@@ -76,46 +76,56 @@ foo.procedure("getURLMission", function(shared, internalFunctions){
 
 foo.procedure("goToMissionsTab", function(){
 	goToPage("/missions")
+	return null
 })
 
 foo.procedure("informBalance", function(shared){
 	getDOMElement("input", "id", "amount-input", 0).value = shared.balance //Fill the balance field with the balance value
 	getDOMElement("span", "class", "btn btn-success mission-complete", 0).click() //Click on the Complete Mission Button
+	return null
 })
 
 foo.procedure("confirmMissionCompleteButton", function(){
 	getDOMElement("input", "id", "modal-submit", 0).click()
+	return null
 })
 
 foo.procedure("goToAcceptMissionPage", function(shared){
 	window.location.href = shared.urlMission
+	return null
 })
 
 foo.procedure("abc", function(shared){
 	console.log(shared)
+	return null
 })
 
 foo.procedure("goToNextIp", function(shared){
 	goToPage("/internet?ip=" + shared.ips[shared.nextIp])
 	shared.nextIp++
+	return null
 })
 
 foo.procedure("goToBankAccountHacker", function(shared){
 	goToPage("/internet?action=hack&type=bank")
+	return null
 })
 
 foo.procedure("goToBankAccountHacker", function(shared){
 	goToPage("/internet?action=hack&type=bank")
+	return null
 })
 
 foo.procedure("hackAccount", function(shared){
 	goToPage("/internet?action=hack&acc=" + shared.accounts[0])
+	return null
 })
 
 foo.procedure("transferMoneyToTarget", function(shared){
 	getDOMElement("input", "name", "acc", 0).value = shared.accounts[1]; //Fill the To field
 	getDOMElement("input", "name", "ip", 1).value = shared.ips[1]; //Fill the Bank IP field
 	getDOMElement("button", "class", "btn btn-success", 0).click(); //Click on the Transfer Money button
+	return null
 })
 
 foo.procedure("signInAccount", function(shared){
@@ -124,26 +134,32 @@ foo.procedure("signInAccount", function(shared){
 		getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue; //Fill the password field with the password on screen
 	}
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
+	return null
 })
 
 foo.procedure("getAccountBalance", function(shared){
 	shared.balance = getDOMElement("strong", null, null, 0).childNodes[0].nodeValue; //Get the account balance
+	return null
 })
 
 foo.procedure("getOutFromAccount", function(shared){
 	goToPage("/internet?bAction=logout")
+	return null
 })
 
 foo.procedure("logout", function(){
 	goToPage("/internet?view=logout")
+	return null
 })
 
 foo.procedure("clickOnAcceptMissionButton", function(shared){
 	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click()
+	return null
 })
 
 foo.procedure("clickOnAbortMissionButton", function(shared){
 	getDOMElement("span", "class", "btn btn-danger mission-abort", 0).click()
+	return null
 })
 
 foo.procedure("showMessage", function(shared){
@@ -152,15 +168,18 @@ foo.procedure("showMessage", function(shared){
 			window.alert(LANG.WEBCRAWLER_SOFTWARE_NOT_FOUND.replace('{CONTENT1}', shared.softwareInfo.name).replace('{CONTENT2}', shared.softwareInfo.version))
 		}
 	}
+	return null
 })
 
 foo.procedure("clickOnConfirmAbortMissionButton", function(shared){
-	getDOMElement("input", "type", "submit", 0).click();
+	getDOMElement("input", "type", "submit", 0).click()
+	return null
 })
 
 //Click on the div float Accept mission button
 foo.procedure("clickOnConfirmAcceptMissionButton", function(shared){
-	getDOMElement("input", "type", "submit", 0).click(); 
+	getDOMElement("input", "type", "submit", 0).click()
+	return null 
 })
 
 foo.procedure("isThereMessageError", function(){
@@ -180,6 +199,7 @@ foo.procedure("isCrackerStrongEnough", function(){
 
 foo.procedure("askPermissionToAbort", function(shared){
 	shared.abortMissionAllowed = window.confirm(LANG.MISSIONS_PERMISSION_TO_ABORT)
+	return null
 })
 
 foo.procedure("getMissionInfo", function(shared){
@@ -202,6 +222,7 @@ foo.procedure("getMissionInfo", function(shared){
 			}   
 		}
 	}
+	return null
 })
 
 foo.procedure("getDeleteSoftwareMissionInfo", function(shared){
@@ -212,18 +233,22 @@ foo.procedure("getDeleteSoftwareMissionInfo", function(shared){
 	var softwareName = softwareData.innerText.replace(softwareVersion, "")
 	shared.ips = [targetIp]
 	shared.softwareInfo = {name: softwareName, version: softwareVersion}
+	return null
 })
 
 foo.procedure("forceToAccessTarget", function(){
 	goToPage("/internet?action=hack")
+	return null
 })
 
 foo.procedure("signInKnownTarget", function(){
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
+	return null
 })
 
 foo.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
+	return null
 })
 
 foo.procedure("cleanMyIpClues", function(data, hooks){
@@ -253,14 +278,17 @@ foo.procedure("cleanTextAreaContent", function(data){
 		data.isEmpty = true
 	}
 	if(data.cleanerCount != undefined) data.cleanerCount++
+	return null
 })
 
 foo.procedure("informBadCracker", function(){
 	window.alert(LANG.MISSIONS_WEAK_CRACKER)
+	return null
 })
 
 foo.procedure("goToOwnLogTab", function(){
 	goToPage("/log")
+	return null
 })
 
 foo.procedure("checkSameTypeAcceptedMission", function(shared){
@@ -274,7 +302,8 @@ foo.procedure("checkSameTypeAcceptedMission", function(shared){
 	console.log(missionDescription)
 	if ((missionDescription) && (strposOfArray(missionDescription.innerHTML, labels[shared.missionType]) >= 0)){
 		return true
-	}
+	} 
+	return null
 })
 
 foo.procedure("isAvailableMissionsPage", function(){
@@ -285,14 +314,17 @@ foo.procedure("isAvailableMissionsPage", function(){
 			return true
 		}
 	}
+	return null
 })
 
 foo.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
 	window.alert(LANG.MISSION_ANOTHER_MISSION_KIND_ALREADY_ACCEPTED)
+	return null
 })
 
 foo.procedure("clickOnFinishButton", function(){
 	 getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
+	 return null
 })
 
 foo.procedure("checkProgressBar", function(shared, funcs){
@@ -327,6 +359,7 @@ foo.procedure("transferRandomValueToTarget", function(shared){
 	getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
 	getDOMElement("input", "name", "money", 0).value = "$" + shared.transferredValue
 	getDOMElement("button", "class", "btn btn-success", 0).click()
+	return null
 })
 
 foo.procedure("transferToMe", function(shared){
@@ -337,6 +370,7 @@ foo.procedure("transferToMe", function(shared){
 		getDOMElement("input", "name", "ip", 1).value = shared.ips[0]
 		getDOMElement("button", "class", "btn btn-success", 0).click()
 	}
+	return null
 })
 
 foo.procedure("transferTheRestToMe", function(shared){
@@ -347,16 +381,19 @@ foo.procedure("transferTheRestToMe", function(shared){
 		getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
 		getDOMElement("button", "class", "btn btn-success", 0).click()
 	}
+	return null
 })
 
 foo.procedure("goToLoginPage", function(){
 	if (location.href.indexOf("/internet?action=login") == -1)
 	goToPage("/internet?action=login")
+	return null
 })
 
 foo.procedure("goToPageAccountLoginPage", function(shared){
 	if (location.href.indexOf("/internet?action=login&type=bank") == -1)
 	goToPage("/internet?action=hack&acc=" + shared.accounts[0])
+	return null
 })
 
 foo.procedure("waitForSubmitButton", function(shared, funcs){
@@ -398,6 +435,7 @@ foo.procedure("sendMoneyToBTCWallet", function(shared){
 foo.procedure("goToTargetLogs", function(){
 	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
+	return null
 })
 
 foo.procedure("cancelLogProcesses", function(shared, hooks){
@@ -461,6 +499,7 @@ foo.procedure("getSoftwareId", function(shared){
 
 foo.procedure("deleteSoftware", function(shared){
 	goToPage("/internet?view=software&cmd=del&id=" + shared.softwareId)
+	return null
 })
 
 foo.procedure("startCheckBalance", function(shared, hooks){

@@ -33,6 +33,7 @@ foo.procedure("getNewCrackerId", function(shared){
 
 foo.procedure("goToPageRiddle", function(){
 	goToPage("/internet?view=software&cmd=riddle")
+	return null
 })
 
 foo.procedure("isThereLocalCracker", function(shared){
@@ -52,10 +53,12 @@ foo.procedure("isThereLocalCracker", function(shared){
 
 foo.procedure("goToTargetLogs", function(){
 	goToPage("/internet?view=logs")
+	return null
 })
 
 foo.procedure("submitLogs", function(shared){
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	return null
 }) 
 
 foo.procedure("cleanMyIpClues", function(data, hooks){
@@ -65,7 +68,7 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 		if (textArea.value.length > 0){
 			data.isEmpty = false
 			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-			var pattern = new RegExp("^.*" + myip+ ".*$")
+			var pattern = new RegExp("^.*" + myip + ".*$")
 			textArea.value = removeLinesFromText(textArea.value, pattern)
 			getDOMElement("input", "class", "btn btn-inverse", "last").click()
 		} else {
@@ -97,7 +100,8 @@ foo.procedure("isThereTargetCracker", function(shared){
 
 foo.procedure("goToTargetLogs", function(){
 	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
-	goToPage("/internet?view=logs")
+	goToPage("/internet?view=logs")	
+	return null
 })
 
 foo.procedure("isCrackerStrongEnough", function(){
@@ -112,6 +116,7 @@ foo.procedure("isCrackerStrongEnough", function(){
 
 foo.procedure("removeOutdatedCracker", function(shared){
 	goToPage("/software?action=del&id=" + shared.playerCracker.id)
+	return null
 })
 
 foo.procedure("checkProgressBar", function(shared, funcs){
@@ -126,11 +131,13 @@ foo.procedure("checkProgressBar", function(shared, funcs){
 
 foo.procedure("installLocalCracker", function(shared){
 	goToPage("/software?action=install&id=" + shared.crackerToInstall.id)
+	return null
 })
 
 foo.procedure("downloadCracker", function(shared){
 	shared.crackerToInstall = shared.targetCracker
 	goToPage("/internet?view=software&cmd=dl&id=" + shared.targetCracker.id)
+	return null
 })
 
 foo.procedure("isThereMessageError", function(){
@@ -148,15 +155,18 @@ foo.procedure("isRiddleSolved", function(shared){
 
 foo.procedure("forceToAccessTarget", function(){
 	goToPage("/internet?action=hack")
+	return null
 })
 
 foo.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
+	return null
 })
 
 foo.procedure("goToLoginPage", function(){
 	if (location.href.indexOf("/internet?action=login") == -1)
 	goToPage("/internet?action=login")
+	return null
 })
 
 foo.procedure("cancelLogProcesses", function(shared, hooks){
@@ -193,22 +203,27 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 
 foo.procedure("signInKnownTarget", function(){
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
+	return null
 })
 
 foo.procedure("getNextIP", function(shared){
 	shared.nextPuzzleIP = getNextPuzzleIP()
+	return null
 })
 
 foo.procedure("goToNextPuzzle", function(shared){
 	goToPage("/internet?ip=" + shared.nextPuzzleIP)
+	return null
 })
 
 foo.procedure("logout", function(){
 	goToPage("/internet?view=logout")
+	return null
 })
 
 foo.procedure("reload", function(){
 	location.reload();
+	return null
 })
 
 foo.procedure("solvePuzzleAuto", function(){
@@ -257,5 +272,5 @@ foo.procedure("solvePuzzle", function(){
 				solvePuzzle(puzzle_id)
 		})
 	}
-
+	return null
 })

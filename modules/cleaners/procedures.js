@@ -37,7 +37,7 @@ cleanersMod.procedure("cleanMyIpClues", function(shared, hooks){
 		var textArea = getDOMElement("textarea", "class", "logarea", 0)
 		if (textArea){
 			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-			var pattern = new RegExp("^.*" myip + ".*$")
+			var pattern = new RegExp("^.*" + myip + ".*$")
 			var textFiltered = removeLinesFromText(textArea.value, pattern)
 			if (textArea.value != textFiltered){
 				shared.myCluesFound = true

@@ -85,6 +85,7 @@ webcrawler.procedure("registerUploaded", function(shared){
 	if(shared.uploadRegister[currentSoftware][shared.currentIp] === undefined)
 		shared.uploadRegister[currentSoftware][shared.currentIp] = ""
 	shared.uploadRegister[currentSoftware][shared.currentIp] += "U"
+	return null
 })
 
 webcrawler.procedure("registerInstalled", function(shared){
@@ -93,7 +94,8 @@ webcrawler.procedure("registerInstalled", function(shared){
 		shared.uploadRegister[currentSoftware] = {}
 	if(shared.uploadRegister[currentSoftware][shared.currentIp] === undefined)
 		shared.uploadRegister[currentSoftware][shared.currentIp] = ""
-	shared.uploadRegister[currentSoftware][shared.currentIp] += "I" 
+	shared.uploadRegister[currentSoftware][shared.currentIp] += "I"
+	return null
 })
 
 webcrawler.procedure("registerHidden", function(shared){
@@ -103,6 +105,7 @@ webcrawler.procedure("registerHidden", function(shared){
 	if(shared.uploadRegister[currentSoftware][shared.currentIp] === undefined)
 		shared.uploadRegister[currentSoftware][shared.currentIp] = ""
 	shared.uploadRegister[currentSoftware][shared.currentIp] += "H"
+	return null
 })
 
 webcrawler.procedure("manageUploadCounter", function(shared){
@@ -111,6 +114,7 @@ webcrawler.procedure("manageUploadCounter", function(shared){
 	} else {
 		shared.currentSoftware = 0
 	}
+	return null
 })
 
 webcrawler.procedure("isSoftwareAlreadyThere", function(){
@@ -136,16 +140,19 @@ webcrawler.procedure("abortUpload", function(shared){
 	} else {
 		shared.isUploadAborted = false
 	}
+	return null
 })
 
 webcrawler.procedure("runUploadSoftware", function(shared){
 	//console.log("currentSoftware", shared.currentSoftware)
 	goToPage("/internet?view=software&cmd=up&id=" + shared.softwaresToUpload[shared.currentSoftware].pid)
+	return null
 })
 
 webcrawler.procedure("installSoftware", function(shared){
 	var softwareId = getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software")
 	goToPage("/internet?view=software&cmd=install&id=" + softwareId)
+	return null
 })
 
 webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
@@ -155,6 +162,7 @@ webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
 webcrawler.procedure("hideSoftware", function(shared){
 	var softwareId = getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software")
 	goToPage("/internet?view=software&cmd=hide&id=" + softwareId)
+	return null
 })
 
 webcrawler.procedure("isIpInvalid", function(){
@@ -164,12 +172,14 @@ webcrawler.procedure("isIpInvalid", function(){
 		if (strposOfArray(errorContainer.innerHTML, labels) >= 0)
 		return true
 	}
+	return null
 })
 
 webcrawler.procedure("registerInaccessible", function(shared){
 	if (shared.inaccessibleHostsList[shared.hostLabel] === undefined)
 		shared.inaccessibleHostsList[shared.hostLabel] = []
-	shared.inaccessibleHostsList[shared.hostLabel].push(shared.currentIp)	
+	shared.inaccessibleHostsList[shared.hostLabel].push(shared.currentIp)
+	return null	
 })
 
 webcrawler.procedure("registerAccessible", function(shared){
@@ -187,6 +197,7 @@ webcrawler.procedure("registerAccessible", function(shared){
 		controllers.bot.controlPanel.checkBoxes[SET_IGNORE_LIST] = true
 		controllers.bot.controlPanel.fieldsContent[FIELD_HOSTS_TO_IGNORE] = field_ips.join(',')
 	}
+	return null
 })
 
 webcrawler.procedure("registerNPCNamesList", function(shared){
@@ -215,10 +226,12 @@ webcrawler.procedure("registerNPCNamesList", function(shared){
 		}
 		shared.NPCList.push(NPCObject)
 	}
+	return null
 })
 
 webcrawler.procedure("signInTarget", function(shared){
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
+	return null
 })
 
 webcrawler.procedure("getIpsFromLogs", function(shared){
@@ -237,6 +250,7 @@ webcrawler.procedure("getIpsFromLogs", function(shared){
 			}
 		}
 	}
+	return null
 })
 
 webcrawler.procedure("updateCrawlerLogs", function(data){
@@ -307,6 +321,7 @@ webcrawler.procedure("updateCrawlerLogs", function(data){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IP_SEARCH_RESULT] += data.softwareList.join("\n")	
 	}
 	controllers.storage.set(controllers.bot)
+	return null
 })
 
 webcrawler.procedure("getBTCAccounts", function(shared){
@@ -315,6 +330,7 @@ webcrawler.procedure("getBTCAccounts", function(shared){
 		var BTCAccounts = textArea.value.match(/^.*\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\] on account .* using key .*$/gm)
 		if ((BTCAccounts) && (BTCAccounts.length > 0)) shared.BTCAccountList = shared.BTCAccountList.concat(BTCAccounts)
 	}
+	return null
 })
 
 webcrawler.procedure("leaveSignature", function(shared){
@@ -325,6 +341,7 @@ webcrawler.procedure("leaveSignature", function(shared){
 			if (textArea.value.indexOf(signature) == -1) textArea.value = signature + textArea.value
 		}
 	}
+	return null
 })
 
 webcrawler.procedure("getShoppingLogs", function(shared){
@@ -333,24 +350,29 @@ webcrawler.procedure("getShoppingLogs", function(shared){
 		var shoppingLogs = textArea.value.match(/^.*were transferred.*$/gm)
 		if ((shoppingLogs) && (shoppingLogs.length > 0)) shared.shoppingLogList = shared.shoppingLogList.concat(shoppingLogs)
 	}
+	return null
 })
 
 webcrawler.procedure("goToNextIp", function(shared){
 	shared.currentIp = shared.openList.shift()
 	shared.closedList.push(shared.currentIp)
 	goToPage("/internet?ip=" + shared.currentIp)
+	return null
 })
 
 webcrawler.procedure("submitLogs", function(shared){
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	return null
 }) 
 
 webcrawler.procedure("goToSoftwarePage", function(shared){
 	goToPage("/software")
+	return null
 })
 
 webcrawler.procedure("logout", function(){
 	goToPage("/internet?view=logout")
+	return null
 })
 
 webcrawler.procedure("isThereMessageError", function(shared){
@@ -364,15 +386,18 @@ webcrawler.procedure("isThereMessageError", function(shared){
 
 webcrawler.procedure("forceToAccessTarget", function(){
 	goToPage("/internet?action=hack")
+	return null
 })
 
 webcrawler.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
+	return null
 })
 
 webcrawler.procedure("goToTargetLogs", function(){
 	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
+	return null
 })
 
 webcrawler.procedure("cleanMyIpClues", function(shared){
@@ -382,6 +407,7 @@ webcrawler.procedure("cleanMyIpClues", function(shared){
 		var textFiltered = removeLinesFromText(textArea.value, pattern)
 		if (textArea.value != textFiltered) textArea.value = textFiltered
 	}
+	return null
 })
 
 webcrawler.procedure("isThereLogs", function(){
@@ -396,25 +422,30 @@ webcrawler.procedure("isThereLogs", function(){
 webcrawler.procedure("goToTargetSoftwares", function(){
 	if (location.href.indexOf("/internet?view=software") == -1)
 	goToPage("/internet?view=software")
+	return null
 })
 
 webcrawler.procedure("goToOwnSoftwareArea", function(){
 	goToPage("/software")
+	return null
 })
 
 webcrawler.procedure("goToOwnLogTab", function(){
 	goToPage("/log")
+	return null
 })
 
 webcrawler.procedure("goToLoginPage", function(){
 	if (location.href.indexOf("/internet?action=login") == -1)
 	goToPage("/internet?action=login")
+	return null
 })
 
 webcrawler.procedure("cleanTextAreaContent", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	textArea.value = ""
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	return null
 })
 
 webcrawler.procedure("isThereProgressBar", function(){
@@ -428,6 +459,7 @@ webcrawler.procedure("isThereProgressBar", function(){
 
 webcrawler.procedure("resetAccessCounter", function(shared){
 	shared.accessCounter = 0
+	return null
 })
 
 webcrawler.procedure("ipDoesNotExist", function(){
@@ -460,7 +492,8 @@ webcrawler.procedure("getSoftwares", function(shared){
 				}
 			}
 		}
-	}	
+	}
+	return null	
 })
 
 webcrawler.procedure("getHostLabel", function(shared){
@@ -472,6 +505,7 @@ webcrawler.procedure("getHostLabel", function(shared){
 	}
 	controllers.bot.webcrawler.current_target_label = shared.hostLabel
 	controllers.storage.set(controllers.bot)
+	return null
 })
 
 webcrawler.procedure("cancelLogProcesses", function(shared, hooks){
@@ -551,6 +585,7 @@ webcrawler.procedure("getUserCommandsResult", function(shared, funcs){
 			controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].content + "\n\n"
 	}
 	controllers.storage.set(controllers.bot)
+	return null
 
 })
 
