@@ -48,30 +48,33 @@ monitor.procedure("checkMyOwnLogs", function(shared){
 	}, 1000)	
 })
 
-monitor.procedure("queryMissionPage", function(shared){
+monitor.procedure("queryMissionPage", function(shared, hooks){
 	shared.isMissionPageGot = false
-	var requestContent = sendXMLHttpRequest("/missions", "GET", "", false)
-	var parser = new DOMParser()
-	var requestContentDOM = parser.parseFromString(requestContent, "text/html")
-	var container = requestContentDOM.getElementsByClassName("span3")
-	if ((container) && (container.length > 0)) {
-		var secondsWidget = container[0].getElementsByClassName("widget-content padding")[0]
-		if (secondsWidget){
-			var secondsToNextMissions = secondsWidget.innerHTML.match(/[0-9]+/gm)
-			if ((secondsToNextMissions) && (secondsToNextMissions.length > 0)){
-				shared.secondsToNextMissions = secondsToNextMissions[0]
-				shared.timeTarget = (Date.now() / 1000 + shared.secondsToNextMissions * 60) - 50
-				shared.alertNewMissions = false
-				shared.isMissionPageGot = true
+	/*var requestContent = */
+	sendXMLHttpRequest("/missions", "GET", "", false, (requestContent) => {
+		var parser = new DOMParser()
+		var requestContentDOM = parser.parseFromString(requestContent, "text/html")
+		var container = requestContentDOM.getElementsByClassName("span3")
+		if ((container) && (container.length > 0)) {
+			var secondsWidget = container[0].getElementsByClassName("widget-content padding")[0]
+			if (secondsWidget){
+				var secondsToNextMissions = secondsWidget.innerHTML.match(/[0-9]+/gm)
+				if ((secondsToNextMissions) && (secondsToNextMissions.length > 0)){
+					shared.secondsToNextMissions = secondsToNextMissions[0]
+					shared.timeTarget = (Date.now() / 1000 + shared.secondsToNextMissions * 60) - 50
+					shared.alertNewMissions = false
+					shared.isMissionPageGot = true
+				} else {
+					shared.secondsToNextMissions = null
+				}
 			} else {
 				shared.secondsToNextMissions = null
 			}
 		} else {
 			shared.secondsToNextMissions = null
 		}
-	} else {
-		shared.secondsToNextMissions = null
-	}
+		hooks.next()
+	})
 })
 
 monitor.procedure("checkTime", function(shared, func){

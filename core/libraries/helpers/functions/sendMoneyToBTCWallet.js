@@ -1,4 +1,6 @@
-function sendMoneyToBTCWallet(account, amount){
+function sendMoneyToBTCWallet(account, amount, callback){
 	//console.log("func=btcBuy&amount=" + amount + "&acc=" + account)
-	sendXMLHttpRequest("bitcoin.php", "POST", "func=btcBuy&amount=" + amount + "&acc=" + account, false, null, true)
+	sendXMLHttpRequest("bitcoin.php", "POST", "func=btcBuy&amount=" + amount + "&acc=" + account, false, () => {
+		callback()
+	}, true)
 }

@@ -149,29 +149,36 @@ foo.procedure("goToLoginPage", function(){
 	goToPage("/internet?action=login")
 })
 
-foo.procedure("cancelLogProcesses", function(){
-	var processesPage = sendXMLHttpRequest("/processes", "GET", "", false)
-	var parser = new DOMParser()
-	var requestContentDOM = parser.parseFromString(processesPage, "text/html")
-	var container = requestContentDOM.getElementsByClassName("widget-content padding noborder")
-	var processesId = []
-	if((container) && (container.length > 0)){
-		var processes = container[0].getElementsByTagName("LI")
-		if ((processes) && (processes.length > 0)){
-			var labels = ["Edit log at", "Editar log at"]
-			for (var i = 0; i < processes.length; i++) {
-				if(strposOfArray(processes[i].innerHTML, labels) >= 0){
-					var pidContainer = processes[i].innerHTML.match(/processBlock[0-9]+/)
-					var pid = pidContainer[0].match(/[0-9]+/)
-					processesId.push(pid[0])
+foo.procedure("cancelLogProcesses", function(shared, hooks){
+	/*var processesPage = */
+	sendXMLHttpRequest("/processes", "GET", "", false, (processesPage) => {
+		var parser = new DOMParser()
+		var requestContentDOM = parser.parseFromString(processesPage, "text/html")
+		var container = requestContentDOM.getElementsByClassName("widget-content padding noborder")
+		var processesId = []
+		if((container) && (container.length > 0)){
+			var processes = container[0].getElementsByTagName("LI")
+			if ((processes) && (processes.length > 0)){
+				var labels = ["Edit log at", "Editar log at"]
+				for (var i = 0; i < processes.length; i++) {
+					if(strposOfArray(processes[i].innerHTML, labels) >= 0){
+						var pidContainer = processes[i].innerHTML.match(/processBlock[0-9]+/)
+						var pid = pidContainer[0].match(/[0-9]+/)
+						processesId.push(pid[0])
+					}
 				}
 			}
 		}
-	}
-	for (var i = 0; i < processesId.length; i++) {
-		sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false)
-		console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
-	}
+		for (var i = 0; i < processesId.length; i++) {
+			sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false, () => {
+				console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
+				if(i == (processesId.length - 1)){
+					hooks.next()
+				}
+			})
+		}
+	})
+		
 })
 
 foo.procedure("signInKnownTarget", function(){
