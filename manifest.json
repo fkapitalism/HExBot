@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "HEx BOT (2016-2021)",
 	"version": "0.2",
-	"description": "A bot to automate things on Hacker Experience",
+	"description": "A bot to automate things on Hacker Wars",
 	"browser_action": {
  		"default_popup": "core/popup.html"
  	},
@@ -13,7 +13,7 @@
 	"icons": {"256": "icon.png"},
 	"content_scripts":[
 		{
-			"matches": ["https://hackerwars.io/*","https://br.hackerexperience.com/*", "https://legacy.hackerexperience.com/*", "https://en.hackerexperience.com/*"],
+			"matches": ["https://hackerwars.io/*"],
 
 			"js":[
 				"core/libraries/vendor/jSpaghetti/jSpaghetti.min.js",

@@ -2,7 +2,7 @@ if (typeof LANG_CONTENT === 'undefined') LANG_CONTENT = []
 
 LANG_CONTENT[LANG_DE] = {
 	NOT_REGULAR_PAGE: "HExBot: es läuft nix. Dies ist keine normale Gameseite",
-	CONTROL_PANEL_TITLE: "Hacker Experience Bot",
+	CONTROL_PANEL_TITLE: "Hacker Wars HExBot",
 	PERFORM_MEDIUM_MISSIONS: "Mittlere Missionen",
 	PERFORM_HARD_MISSIONS: "Harte Missionen",
 	PERFORM_DELETE_SOFTWARE: "Sehr einfache Missionen",
