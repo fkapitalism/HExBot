@@ -27,8 +27,9 @@ function getBTCWalletInfo(callback){
 								btcInfo.publicKey = publicKey[0]
 								btcInfo.ip = bitcoinMarketIp
 								callback(btcInfo)
-								break
 							})
+
+							break
 								
 						} else {
 							callback(btcInfo)

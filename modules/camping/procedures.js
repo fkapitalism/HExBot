@@ -1,41 +1,56 @@
 var camping = $jSpaghetti.module("camping")
 camping.config.debugMode = true
 
-camping.procedure("startBankCamping", function(shared){
-	shared.myAccountsInfo = getBankAccountAddr()
-	shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
-	shared.myAccount = shared.myAccountsInfo[shared.ip]
-	shared.transferToBTC = controllers.bot.controlPanel.checkBoxes[SET_TRANSFER_TO_BTC]
+camping.procedure("startBankCamping", function(shared, hooks){
+	/*shared.myAccountsInfo = */
+	getBankAccountAddr((info) => {
+		for (let i = 0; i == 0; i++){
+		
+			shared.myAccountsInfo = info
 
-	if(shared.transferToBTC){
-		shared.BTCInfo = getBTCWalletInfo()
-		//console.log(shared.BTCInfo)
-		if(!shared.BTCInfo.isLogged){
-			shared.isBTCLogged = false
-			window.alert(LANG.DISCONNECTED_BTC_WALLET)
-			return false
-		} else {
-			shared.isBTCLogged = true
-		}
-	}
+			shared.ip = controllers.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET]
+			shared.myAccount = shared.myAccountsInfo[shared.ip]
+			shared.transferToBTC = controllers.bot.controlPanel.checkBoxes[SET_TRANSFER_TO_BTC]
 
-	if (shared.myAccount === undefined){
-		if(shared.ip.length){
-			LANG.CAMPING_WITHOUT_VINCULATED_ACCOUNT
-			window.alert(LANG.CAMPING_WITHOUT_VINCULATED_ACCOUNT.replace('{CONTENT}', ' "' + shared.ip + '"'))
-		} else {
-			window.alert(LANG.CAMPING_CHOOSE_IP)
+			if(shared.transferToBTC){
+				shared.BTCInfo = getBTCWalletInfo()
+				//console.log(shared.BTCInfo)
+				if(!shared.BTCInfo.isLogged){
+					shared.isBTCLogged = false
+					window.alert(LANG.DISCONNECTED_BTC_WALLET)
+					//return false
+					hooks.next(false)
+					break
+				} else {
+					shared.isBTCLogged = true
+				}
+			}
+
+			if (shared.myAccount === undefined){
+				if(shared.ip.length){
+					LANG.CAMPING_WITHOUT_VINCULATED_ACCOUNT
+					window.alert(LANG.CAMPING_WITHOUT_VINCULATED_ACCOUNT.replace('{CONTENT}', ' "' + shared.ip + '"'))
+				} else {
+					window.alert(LANG.CAMPING_CHOOSE_IP)
+				}
+				//return false
+				hooks.next(false)
+				break
+			}
+			shared.accounts = []
+			shared.myCluesFound = false
+			shared.myIp = getMyIp(true)
+			shared.listenForTransferActivities = true
+			shared.listenForAccountAccessActivities = false
+			shared.isLogged = false
+			//return true
+			hooks.next(true)
+			break
 		}
-		return false
-	}
-	shared.accounts = []
-	shared.myCluesFound = false
-	shared.myIp = getMyIp(true)
-	shared.listenForTransferActivities = true
-	shared.listenForAccountAccessActivities = false
-	shared.isLogged = false
-	return true
+	})
+		
 })
+
 
 camping.procedure("goToIp", function(shared){
 	goToPage("/internet?ip=" + shared.ip)

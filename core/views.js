@@ -7,7 +7,8 @@ var views = {
 		divMain['aria-hidden'] = false
 		divMain.style.display = "none"
 
-		var bankInfo = getBankAccountAddr()
+		var bankInfo = []
+		//var bankInfo = getBankAccountAddr()
 		var selectIpList = '<select id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent">'
 		for(ip in bankInfo){
 			selectIpList += '<option value="' + ip + '">' + ip + '</option>'

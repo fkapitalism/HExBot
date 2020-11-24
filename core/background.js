@@ -17,16 +17,17 @@ function sendXMLHttpRequestMod(script_target, method, parameters, isAsynchronous
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			var result = xmlhttp.responseText
-			if (isAsynchronous){
+			//if (isAsynchronous){
 				function_callback(result)
-			} else {
-				synchronousResponse = result
-			}
+			//} else {
+			//	synchronousResponse = result
+			//}
 		}
 	}
 	switch(method){
 		case "POST":
-			xmlhttp.open("POST", script_target, isAsynchronous)
+			//xmlhttp.open("POST", script_target, isAsynchronous)
+			xmlhttp.open("POST", script_target)
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8")
 			xmlhttp.setRequestHeader("Accept", "*/*")
 			if (sendXRequestedWithHeader)
@@ -34,7 +35,8 @@ function sendXMLHttpRequestMod(script_target, method, parameters, isAsynchronous
 			xmlhttp.send(parameters)
 			break
 		case "GET":
-			xmlhttp.open("GET", script_target + "?" + parameters, isAsynchronous)
+			//xmlhttp.open("GET", script_target + "?" + parameters, isAsynchronous)
+			xmlhttp.open("GET", script_target + "?" + parameters)
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8")
 			xmlhttp.setRequestHeader("Accept", "*/*")
 			if (sendXRequestedWithHeader)

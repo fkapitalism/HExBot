@@ -459,30 +459,42 @@ foo.procedure("deleteSoftware", function(shared){
 	goToPage("/internet?view=software&cmd=del&id=" + shared.softwareId)
 })
 
-foo.procedure("startCheckBalance", function(shared){
-	shared.myAccountsInfo = getBankAccountAddr()
-	shared.missionType = CHECK_BALANCE
-	shared.ips = []
-	shared.accounts = []
-	shared.nextIp = 0
-	return true
+foo.procedure("startCheckBalance", function(shared, hooks){
+	/*shared.myAccountsInfo = */
+	getBankAccountAddr((info) => {
+		shared.myAccountsInfo = info
+		shared.missionType = CHECK_BALANCE
+		shared.ips = []
+		shared.accounts = []
+		shared.nextIp = 0
+		//return true
+		hooks.next(true)
+	})	
 })
 
-foo.procedure("startDeleteSoftware", function(shared){
-	shared.myAccountsInfo = getBankAccountAddr()
-	shared.missionType = DELETE_SOFTWARE
-	shared.ips = []
-	shared.nextIp = 0
-	shared.softwareInfo = {}
-	return true
+foo.procedure("startDeleteSoftware", function(shared, hooks){
+	/*shared.myAccountsInfo = */
+	getBankAccountAddr((info) => {
+		shared.myAccountsInfo = info
+		shared.missionType = DELETE_SOFTWARE
+		shared.ips = []
+		shared.nextIp = 0
+		shared.softwareInfo = {}
+		//return true
+		hooks.next(true)
+	})		
 })
 
-foo.procedure("startTransferMoney", function(shared){
-	shared.myAccountsInfo = getBankAccountAddr()
-	shared.missionType = TRANSFER_MONEY
-	shared.ips = []
-	shared.accounts = []
-	shared.cleanerCount = 0
-	shared.nextIp = 0
-	return true
+foo.procedure("startTransferMoney", function(shared, hooks){
+	/*shared.myAccountsInfo = */
+	getBankAccountAddr((info) => {
+		shared.myAccountsInfo = info
+		shared.missionType = TRANSFER_MONEY
+		shared.ips = []
+		shared.accounts = []
+		shared.cleanerCount = 0
+		shared.nextIp = 0
+		//return true
+		hooks.next(true)
+	})
 })
