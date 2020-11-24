@@ -1,10 +1,14 @@
 var foo = $jSpaghetti.module("riddleSolver")
 foo.config.debugMode = true
 
-foo.procedure("init", function(shared){
-	shared.myIp = getMyIp()
-	shared.isCrackerOutdated = false
-	shared.crackerToInstall = null
+foo.procedure("init", function(shared, hooks){
+	getMyIp(false, (myip) => {
+		//shared.myIp = getMyIp()
+		shared.myIp = myip
+		shared.isCrackerOutdated = false
+		shared.crackerToInstall = null
+		hooks.next()
+	})
 })
 
 foo.procedure("isThereRiddle", function(shared){
@@ -54,17 +58,23 @@ foo.procedure("submitLogs", function(shared){
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 }) 
 
-foo.procedure("cleanMyIpClues", function(data){
-	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	if (textArea.value.length > 0){
-		data.isEmpty = false
-		var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-		textArea.value = removeLinesFromText(textArea.value, pattern)
-		getDOMElement("input", "class", "btn btn-inverse", "last").click()
-	} else {
-		data.isEmpty = true
-	}
-	if(data.cleanerCount != undefined) data.cleanerCount++
+foo.procedure("cleanMyIpClues", function(data, hooks){
+
+	getMyIp(true, (myip) => {
+		var textArea = getDOMElement("textarea", "class", "logarea", 0)
+		if (textArea.value.length > 0){
+			data.isEmpty = false
+			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+			var pattern = new RegExp("^.*" + myip+ ".*$")
+			textArea.value = removeLinesFromText(textArea.value, pattern)
+			getDOMElement("input", "class", "btn btn-inverse", "last").click()
+		} else {
+			data.isEmpty = true
+		}
+		if(data.cleanerCount != undefined) data.cleanerCount++
+		hooks.next()
+	})
+		
 })
 
 foo.procedure("isThereTargetCracker", function(shared){

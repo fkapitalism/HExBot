@@ -30,20 +30,27 @@ cleanersMod.procedure("goToTargetLogs", function(){
 })
 
 
-cleanersMod.procedure("cleanMyIpClues", function(shared){
-	shared.myCluesFound = false
-	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	if (textArea){
-		var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-		var textFiltered = removeLinesFromText(textArea.value, pattern)
-		if (textArea.value != textFiltered){
-			shared.myCluesFound = true
-			textArea.value = textFiltered
+cleanersMod.procedure("cleanMyIpClues", function(shared, hooks){
+
+	getMyIp(true, (myip) => {
+		shared.myCluesFound = false
+		var textArea = getDOMElement("textarea", "class", "logarea", 0)
+		if (textArea){
+			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+			var pattern = new RegExp("^.*" myip + ".*$")
+			var textFiltered = removeLinesFromText(textArea.value, pattern)
+			if (textArea.value != textFiltered){
+				shared.myCluesFound = true
+				textArea.value = textFiltered
+			}
+			//return true
+			hooks.next(true)
+		} else {
+			//return false
+			hooks.next(false)
 		}
-		return true
-	} else {
-		return false
-	}
+	})
+
 })
 
 cleanersMod.procedure("isThereProgressBar", function(){

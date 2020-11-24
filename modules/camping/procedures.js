@@ -39,12 +39,15 @@ camping.procedure("startBankCamping", function(shared, hooks){
 			}
 			shared.accounts = []
 			shared.myCluesFound = false
-			shared.myIp = getMyIp(true)
-			shared.listenForTransferActivities = true
-			shared.listenForAccountAccessActivities = false
-			shared.isLogged = false
-			//return true
-			hooks.next(true)
+			/*shared.myIp = */
+			getMyIp(true, (myip) => {
+				shared.myIp = myip
+				shared.listenForTransferActivities = true
+				shared.listenForAccountAccessActivities = false
+				shared.isLogged = false
+				//return true
+				hooks.next(true)
+			})
 			break
 		}
 	})

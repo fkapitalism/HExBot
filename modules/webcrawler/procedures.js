@@ -1,7 +1,7 @@
 var webcrawler = $jSpaghetti.module("webcrawler")
 webcrawler.config.debugMode = true
 
-webcrawler.procedure("startSearching", function(shared){
+webcrawler.procedure("startSearching", function(shared, hooks){
 	var inputIps = controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING].match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/gm)
 	if ((inputIps) && (inputIps.length > 0)){
 		if (controllers.bot.controlPanel.checkBoxes[SET_IGNORE_LIST]){
@@ -48,8 +48,12 @@ webcrawler.procedure("startSearching", function(shared){
 		shared.isUploadAborted = false
 		shared.uploadRegister = {}
 
-		shared.myIp = getMyIp(true)
-		return true
+		//shared.myIp = getMyIp(true)
+		getMyIp(true, (myip) => {
+			shared.myIp = myip
+			hooks.next()
+		})
+		//return true
 	} else {
 		return false
 	}	

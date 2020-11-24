@@ -226,17 +226,21 @@ foo.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
 })
 
-foo.procedure("cleanMyIpClues", function(data){
-	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	if (textArea.value.length > 0){
-		data.isEmpty = false
-		var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-		textArea.value = removeLinesFromText(textArea.value, pattern)
-		getDOMElement("input", "class", "btn btn-inverse", "last").click()
-	} else {
-		data.isEmpty = true
-	}
-	if(data.cleanerCount != undefined) data.cleanerCount++
+foo.procedure("cleanMyIpClues", function(data, hooks){
+	getMyIp(true, (myip) => {
+		var textArea = getDOMElement("textarea", "class", "logarea", 0)
+		if (textArea.value.length > 0){
+			data.isEmpty = false
+			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+			var pattern = new RegExp("^.*" + myip + ".*$")
+			textArea.value = removeLinesFromText(textArea.value, pattern)
+			getDOMElement("input", "class", "btn btn-inverse", "last").click()
+		} else {
+			data.isEmpty = true
+		}
+		if(data.cleanerCount != undefined) data.cleanerCount++
+		hooks.next()
+	})
 })
 
 foo.procedure("cleanTextAreaContent", function(data){
@@ -469,7 +473,7 @@ foo.procedure("startCheckBalance", function(shared, hooks){
 		shared.nextIp = 0
 		//return true
 		hooks.next(true)
-	})
+	})	
 })
 
 foo.procedure("startDeleteSoftware", function(shared, hooks){
@@ -485,7 +489,7 @@ foo.procedure("startDeleteSoftware", function(shared, hooks){
 	})		
 })
 
-foo.procedure("startTransferMoney", function(shared, hooks){
+foo.procedure("startTransferMoney", function(shared){
 	/*shared.myAccountsInfo = */
 	getBankAccountAddr((info) => {
 		shared.myAccountsInfo = info
