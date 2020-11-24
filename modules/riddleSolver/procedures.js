@@ -142,7 +142,8 @@ foo.procedure("downloadCracker", function(shared){
 
 foo.procedure("isThereMessageError", function(){
 	if (getDOMElement("div", "class", "alert alert-error", 0))
-	return true
+		return true
+	return null
 })
 
 foo.procedure("isRiddleSolved", function(shared){

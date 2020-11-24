@@ -70,7 +70,8 @@ camping.procedure("logoutAccount", function(){
 
 camping.procedure("isThereMessageError", function(){
 	if (getDOMElement("div", "class", "alert alert-error", 0))
-	return true
+		return true
+	return null
 })
 
 camping.procedure("forceToAccessTarget", function(){

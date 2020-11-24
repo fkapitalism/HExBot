@@ -79,7 +79,8 @@ cleanersMod.procedure("hackTargetBruteForce", function(){
 
 cleanersMod.procedure("isThereMessageError", function(){
 	if (getDOMElement("div", "class", "alert alert-error", 0))
-	return true
+		return true
+	return null
 })
 
 cleanersMod.procedure("isAccessForbidden", function(){
