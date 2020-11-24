@@ -3,6 +3,7 @@ cleanersMod.config.debugMode = true
 
 cleanersMod.procedure("goToOwnLogTab", function(){
 	goToPage("/log")
+	return null
 })
 
 cleanersMod.procedure("cleanTextAreaContent", function(data){
@@ -14,15 +15,18 @@ cleanersMod.procedure("cleanTextAreaContent", function(data){
 	} else {
 		data.isEmpty = true
 	}
+	return null
 })
 
 cleanersMod.procedure("goToSoftwareTab", function(){
 	goToPage("/software")
+	return null
 })
 
 cleanersMod.procedure("goToTargetLogs", function(){
 	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
+	return null
 })
 
 
@@ -53,14 +57,17 @@ cleanersMod.procedure("isThereProgressBar", function(){
 
 cleanersMod.procedure("submitLogs", function(shared){
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	return null
 }) 
 
 cleanersMod.procedure("goToLoginPage", function(){
 	goToPage("/internet?action=login")
+	return null
 })
 
 cleanersMod.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
+	return null
 })
 
 cleanersMod.procedure("isThereMessageError", function(){
@@ -80,6 +87,7 @@ cleanersMod.procedure("isAccessForbidden", function(){
 
 cleanersMod.procedure("signInTarget", function(){
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
+	return null
 })
 
 cleanersMod.procedure("checkProgressBar", function(shared, funcs){
@@ -95,6 +103,7 @@ cleanersMod.procedure("checkProgressBar", function(shared, funcs){
 cleanersMod.procedure("goToLoginPage", function(){
 	if (location.href.indexOf("/internet?action=login") == -1)
 	goToPage("/internet?action=login")
+	return null
 })
 
 

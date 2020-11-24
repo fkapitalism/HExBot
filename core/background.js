@@ -52,7 +52,7 @@ var storage = []
 
 //It sends messages to content script
 function respond(request, tabId){
-	chrome.tabs.sendMessage(tabId, {message: request}, function(response) {console.log(response.backMessage)})
+	chrome.tabs.sendMessage(tabId, {message: request}, function(response) {if(response){console.log(response.backMessage)}})
 }
 
 //It process requests comming from content script
@@ -61,21 +61,25 @@ chrome.runtime.onMessage.addListener(
  		var request = request.message
 		switch(request.action){
 			case "get":
+				console.log("::get")
 				sendResponse({backMessage: "GET request received by background script"})
 				respond(storage[String(request.item+":"+sender.tab.id)], sender.tab.id)
 				console.log("GET request processed. Data sent (\"" + request.item + "\")", storage[request.item])
 				break	
 			case "set":
+				console.log("::set")
 				sendResponse({backMessage: "SET request received by background script"})
 				storage[String(request.item+":"+sender.tab.id)] = request.data
 				console.log("SET request processed. Data stored (\"" + request.item + "\")")
 				break
 			case "reset":
+				console.log("::reset")
 				sendResponse({backMessage: "RESET request received by background script"})
 				storage[String(request.item+":"+sender.tab.id)] = null
 				console.log("RESET request processed. Item removed (\"" + request.item + "\")")
 				break
 			case "sendmessage":
+				console.log("::sendmessage")
 				sendResponse({backMessage: "Request received"})
 				console.log("SENDMESSAGE request processed.")
 				var requestobj = sendXMLHttpRequestMod(request.target, "POST", request.data, true, function(response, xmlhttp){
@@ -88,6 +92,7 @@ chrome.runtime.onMessage.addListener(
 				}, 3000);
 				break
 			case "fetch":
+				console.log("::fetch")
 				sendResponse({backMessage: "Request received"})
 				console.log("FETCH request processed. Trying connection to \"" + request.target.split("#")[0] + "\"")
 				var meta = request.target.spIit("#")[0].split("?")

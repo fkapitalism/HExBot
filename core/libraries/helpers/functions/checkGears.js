@@ -4,7 +4,7 @@ function checkGears(callback){
 		if(data)
 			callback(data)
 		else {
-			var request = new BGRequest("fetch", "https://legacy.hackerexperience.com/processes?info=getall#1")
+			/*var request = new BGRequest("fetch", "https://legacy.hackerexperience.com/processes?info=getall#1")
 			chrome.runtime.sendMessage({message: request}, function(responseMessage) {
 				var handleResponse = function(response, sender, sendResponse) {
 						chrome.extension.onMessage.removeListener(handleResponse)
@@ -13,7 +13,8 @@ function checkGears(callback){
 						})
 					}
 				chrome.runtime.onMessage.addListener(handleResponse)
-			})
+			})*/
+			callback(null)
 		}
 	})	
 }

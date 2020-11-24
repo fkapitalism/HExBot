@@ -469,7 +469,7 @@ foo.procedure("startCheckBalance", function(shared, hooks){
 		shared.nextIp = 0
 		//return true
 		hooks.next(true)
-	})	
+	})
 })
 
 foo.procedure("startDeleteSoftware", function(shared, hooks){
