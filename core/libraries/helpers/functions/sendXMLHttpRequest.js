@@ -17,11 +17,11 @@ function sendXMLHttpRequest(script_target, method, parameters, isAsynchronous, f
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			var result = xmlhttp.responseText
-			if (isAsynchronous){
+			//if (isAsynchronous){
 				function_callback(result)
-			} else {
-				synchronousResponse = result
-			}
+			//} else {
+			//	synchronousResponse = result
+			//}
 		}
 	}
 	switch(method){
@@ -43,7 +43,7 @@ function sendXMLHttpRequest(script_target, method, parameters, isAsynchronous, f
 			break
 		default: break	
 	}
-	if(!isAsynchronous){
-		return synchronousResponse
-	}
+	//if(!isAsynchronous){
+	//	return synchronousResponse
+	//}
 }
