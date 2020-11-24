@@ -37,7 +37,7 @@ function sequences(){
 	//----Put here the sequences that must be running every time-------------------------- -----//
 	//------------------------------------------------------------------------------------------//
 
-	var botkit = $jSpaghetti.module("botkit").sequence("run")
+	/*var botkit = $jSpaghetti.module("botkit").sequence("run")
 	botkit.reset(function(sequence){
 		botkit.run()
 	})
@@ -45,7 +45,7 @@ function sequences(){
 	var adRemover = $jSpaghetti.module("adRemover").sequence("removeAds")
 	adRemover.reset(function(sequence){
 		sequence.run()
-	})
+	})*/
 	
 	if(controllers.bot.controlPanel.checkBoxes[SET_MISSIONS_MONITOR]){
 		var missionMonitor = $jSpaghetti.module("monitor").sequence("checkMission")

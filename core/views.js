@@ -9,10 +9,17 @@ var views = {
 
 		var bankInfo = []
 		//var bankInfo = getBankAccountAddr()
+
+		getBankAccountAddr((info) => {
+			var options = ""
+			for(ip in info){
+				options += '<option value="' + ip + '">' + ip + '</option>'
+			}
+			document.getElementById(FIELD_BANK_IP_TARGET).innerHTML = options
+		})
+
 		var selectIpList = '<select id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent">'
-		for(ip in bankInfo){
-			selectIpList += '<option value="' + ip + '">' + ip + '</option>'
-		}
+		
 		selectIpList += '</select>'
 		divMain.innerHTML =
 			'<div class="widget-title">' +

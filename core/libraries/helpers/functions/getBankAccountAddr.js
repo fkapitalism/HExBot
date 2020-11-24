@@ -6,7 +6,7 @@ function getBankAccountAddr(callback){
 		var requestContentDOM = parser.parseFromString(financesPage, "text/html")
 		var accountWidgets = requestContentDOM.getElementsByClassName("widget-box collapsible")
 		var infoList = {}
-		if ((accountWidgets) && (accountWidgets.length > 1)){
+		if ((accountWidgets) && (accountWidgets.length > 0)){
 			for (var i = 0; i < accountWidgets.length; i++) {
 				var bankip = accountWidgets[i].innerHTML.match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/m)[0]
 				if(bankip){

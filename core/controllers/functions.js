@@ -112,4 +112,5 @@ function functions(){
 			buttons[i].disabled = !state;
 		};
 	}
+
 }
