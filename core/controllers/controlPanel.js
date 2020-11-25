@@ -10,7 +10,7 @@ function controlPanel(){
 	}
 	LANG = LANG_CONTENT[DETECTED_LANG];
 
-	views.appendControlPanel()
+	views.appendControlPanel(controllers)
 
 	//Ativa o editor
 	var editor = ace.edit(WEBCRAWLER_SCRIPT);

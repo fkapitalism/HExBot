@@ -1,5 +1,5 @@
 var views = {
-	appendControlPanel: function(){		
+	appendControlPanel: function(controller){		
 		var divMain = document.createElement("div")
 		divMain.id = COMMAND_PANEL_DOM_ID
 		divMain.className = "modal hide in"
@@ -15,10 +15,24 @@ var views = {
 			for(ip in info){
 				options += '<option value="' + ip + '">' + ip + '</option>'
 			}
-			document.getElementById(FIELD_BANK_IP_TARGET).innerHTML = options
+
+			const select = document.getElementById(FIELD_BANK_IP_TARGET)
+
+			select.addEventListener("change", () => {
+				controller.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET] = this.value
+				controller.storage.set(controller.bot)
+			})
+
+			select.innerHTML = options
+
+			const option_tags = select.getElementsByTagName("option")
+			if(option_tags.length > 0){
+				controller.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET] = option_tags[0].value
+				controller.storage.set(controller.bot)
+			}
 		})
 
-		var selectIpList = '<select id="' + FIELD_BANK_IP_TARGET + '" class="controls fieldsContent">'
+		var selectIpList = '<select id="' + FIELD_BANK_IP_TARGET + '">'
 		
 		selectIpList += '</select>'
 		divMain.innerHTML =
