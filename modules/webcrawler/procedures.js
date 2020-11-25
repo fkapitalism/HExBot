@@ -528,13 +528,17 @@ webcrawler.procedure("cancelLogProcesses", function(shared, hooks){
 				}
 			}
 		}
-		for (var i = 0; i < processesId.length; i++) {
-			sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false, () => {
-				console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
-				if(i == (processesId.length - 1)){
-					hooks.next()
-				}
-			})
+		if(processesId.length){
+			for (var i = 0; i < processesId.length; i++) {
+				sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false, () => {
+					console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
+					if(i === processesId.length - 1){
+						hooks.next()
+					}
+				})
+			}
+		} else {
+			hooks.next()
 		}
 	})
 })

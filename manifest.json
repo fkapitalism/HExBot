@@ -35,6 +35,7 @@
 				"modules/riddleSolver/procedures.js",
 				"modules/riddleSolver/sequences/solvePuzzle.js",
 				"modules/riddleSolver/sequences/completePath.js",
+				"modules/riddleSolver/sequences/tester.js",
 				"modules/cleaners/procedures.js",
 				"modules/cleaners/sequences/cleanOwnLogs.js",
 				"modules/cleaners/sequences/cleanTargetLogs.js",

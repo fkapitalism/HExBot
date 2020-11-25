@@ -46,7 +46,8 @@ foo.procedure("goToPageRiddle", function(){
 
 foo.procedure("isThereLocalCracker", function(shared, hooks){
 	/*var playerCrackers = */
-	getSoftwaresByPattern("\.crc", "/software", "", false, (playerCrackers) => {
+	getSoftwaresByPattern("\.crc$", "/software", "", false, (playerCrackers) => {
+		//console.log("player", playerCrackers)
 		if(playerCrackers.length > 0){
 			shared.playerCracker = playerCrackers[0]
 			if(!shared.playerCracker.installed){
@@ -94,7 +95,8 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 
 foo.procedure("isThereTargetCracker", function(shared, hooks){
 	/*var targetCrackers = */
-	getSoftwaresByPattern("\.crc", "/internet", "view=software", false, (targetCrackers) => {
+	getSoftwaresByPattern("\.crc$", "/internet", "view=software", false, (targetCrackers) => {
+		//console.log("target", targetCrackers)
 		if(targetCrackers.length > 0){
 			shared.targetCracker = targetCrackers[0]
 			if(parseFloat(shared.targetCracker.version) > parseFloat(shared.playerCracker.version)){
@@ -152,6 +154,7 @@ foo.procedure("installLocalCracker", function(shared){
 
 foo.procedure("downloadCracker", function(shared){
 	shared.crackerToInstall = shared.targetCracker
+	//console.log("ata", shared.targetCracker)
 	goToPage("/internet?view=software&cmd=dl&id=" + shared.targetCracker.id)
 	return null
 })
@@ -206,14 +209,19 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 				}
 			}
 		}
-		for (var i = 0; i < processesId.length; i++) {
-			sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false, () => {
-				console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
-				if(i == (processesId.length - 1)){
-					hooks.next()
-				}
-			})
+		if(processesId.length){
+			for (var i = 0; i < processesId.length; i++) {
+				sendXMLHttpRequest("/processes", "GET", "pid=" + processesId[i] + "&del=1", false, () => {
+					console.log("HExBot webcrawler: Process " + processesId[i] + " is terminated")
+					if(i === processesId.length - 1){
+						hooks.next()
+					}
+				})
+			}
+		} else {
+			hooks.next()
 		}
+			
 	})
 		
 })

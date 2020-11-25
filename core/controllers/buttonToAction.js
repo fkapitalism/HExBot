@@ -44,7 +44,8 @@ function buttonToAction(){
 	})
 
 	document.getElementById(PERFORM_UPDATE_CRACKER).addEventListener("click", function(){
-		controllers.functions.executeSequence("riddleSolver", "completePath")
+		//controllers.functions.executeSequence("riddleSolver", "completePath")
+		controllers.functions.executeSequence("riddleSolver", "tester")
 	})
 }
 
