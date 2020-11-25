@@ -11,7 +11,7 @@ function getSoftwaresByPattern(pattern, page, parameters, avoid_installed_viruse
 			for (var i = 0; i < rows.length; i++) {
 				var softwareName = rows[i].cells[1].innerText.replace(/[\n\r]/gmi, "")
 				if(patt.test(softwareName)){
-					console.log(softwareName, "matches", patt)
+					//console.log(softwareName, "matches", patt)
 					if(rows[i].className == "installed"){
 						var installed = true
 					} else {

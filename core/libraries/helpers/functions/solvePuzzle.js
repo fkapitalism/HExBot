@@ -34,7 +34,7 @@ function solvePuzzle(puzzle_id){
 				text_answer = "4";
 				break;
 			case PUZZLE_BINHE: //Binary HE's Name 
-				text_answer = "Hacker Experience";
+				text_answer = "Hacker Wars";
 				break;
 			case PUZZLE_SNEAKERS: //Sneakers Puzzle
 				text_answer = "too many secrets";
