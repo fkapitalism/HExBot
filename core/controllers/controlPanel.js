@@ -12,7 +12,9 @@ function controlPanel(){
 
 	views.appendControlPanel()
 
-	enableTab(WEBCRAWLER_SCRIPT)
+	//Ativa o editor
+	var editor = ace.edit(WEBCRAWLER_SCRIPT);
+	enableEditor(editor, controllers)
 
 	if (controllers.bot.controlPanel.isHidden){
 		views.hideControlPanel()
@@ -121,13 +123,5 @@ function controlPanel(){
 
 	controllers.functions.activeButtons(false)
 
-	var editor = ace.edit(WEBCRAWLER_SCRIPT);
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
-    editor.getSession().setUseWorker(false);
-    editor.resize()
-    editor.setOptions({
-    	fontSize: "12pt"
-	});
 }
 	

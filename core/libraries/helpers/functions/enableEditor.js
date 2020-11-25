@@ -2,9 +2,21 @@
  * Code from https://jsfiddle.net/tovic/2wAzx/
  */
 
-function enableTab(id) {
-    var el = document.getElementById(id);
-    el.onkeydown = function(e) {
+function enableEditor(editor, controllers) {
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    editor.getSession().setUseWorker(false);
+    editor.resize()
+    editor.setOptions({
+        fontSize: "12pt"
+    });
+    editor.setValue(controllers.bot.controlPanel.fieldsContent['web-crawl-script']);
+
+    editor.getSession().on('change', () => {
+        controllers.bot.controlPanel.fieldsContent['web-crawl-script'] = editor.getSession().getValue();
+        controllers.storage.set(controllers.bot)
+    });
+    /*el.onkeydown = function(e) {
         if (e.keyCode === 9) { // tab was pressed
 
             // get caret position/selection
@@ -22,5 +34,5 @@ function enableTab(id) {
             return false;
 
         }
-    };
+    };*/
 }

@@ -105,7 +105,7 @@
 				"core/libraries/helpers/functions/getSoftwareInfo.js",
 				"core/libraries/helpers/functions/setBGSnippet.js",
 				"core/libraries/helpers/functions/getBGSnippet.js",
-				"core/libraries/helpers/functions/enableTab.js",
+				"core/libraries/helpers/functions/enableEditor.js",
 				"core/libraries/helpers/functions/checkGears.js",
 				"core/libraries/helpers/functions/bootstrap.js",
 

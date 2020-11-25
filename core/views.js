@@ -57,7 +57,7 @@ var views = {
 				
 				'<center><b>' + LANG.WEBCRAWLER_SCRIPT_TITLE + '</b> <a href="https://hexbotwiki.000webhostapp.com/doku.php?id=custom_rules" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i></a></center>' +
 				//'<center><textarea id="' + WEBCRAWLER_SCRIPT + '" class="controls fieldsContent" style="width: 95%; resize: vertical; color:#80f980; background-color:black; font-family:monospace"></textarea>' + 
-				'<center><div id="' + WEBCRAWLER_SCRIPT + '" class="controls fieldsContent" style=" width: 510px; height: 70px;">console.log()</div>' + 
+				'<center><div id="' + WEBCRAWLER_SCRIPT + '" style=" width: 510px; height: 70px;">console.log()</div>' + 
 
 
 				'<center><textarea id="' + WEBCRAWLER_SCRIPT_DEBUG + '" class="controls fieldsContent" style="width: 95%; resize: vertical; color:white; background-color:red; font-family:monospace"></textarea>' +
