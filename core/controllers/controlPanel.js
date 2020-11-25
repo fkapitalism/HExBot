@@ -120,5 +120,14 @@ function controlPanel(){
 	})
 
 	controllers.functions.activeButtons(false)
+
+	var editor = ace.edit(WEBCRAWLER_SCRIPT);
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    editor.getSession().setUseWorker(false);
+    editor.resize()
+    editor.setOptions({
+    	fontSize: "12pt"
+	});
 }
 	

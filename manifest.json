@@ -16,6 +16,10 @@
 			"matches": ["https://hackerwars.io/*"],
 
 			"js":[
+				"core/libraries/vendor/RequireJS/requirejs.min.js",
+				"core/libraries/vendor/Ace/ace.min.js",
+				"core/libraries/vendor/Ace/mode/javascript.min.js",
+				"core/libraries/vendor/Ace/theme/theme-monokai.min.js",
 				"core/libraries/vendor/jSpaghetti/jSpaghetti.min.js",
 				
 				"core/constants.js",

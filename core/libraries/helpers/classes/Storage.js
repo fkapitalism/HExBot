@@ -24,28 +24,30 @@ Storage = function(storageName){
 	this.set = function(data, callback){
 		const request = new Request("set", this.storageName, data)
 		chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
-			//console.log(response.backMessage)
-			const runCallback = function(getResponse, sender, sendResponse) {
+
+			const runResponse = function(getResponse, sender, sendResponse) {
 				sendResponse({backMessage: "SET response received by content script"})
-				if(callback) callback()
-				chrome.extension.onMessage.removeListener(runCallback)
+				chrome.extension.onMessage.removeListener(runResponse)
 				return true;
 			}
-			chrome.runtime.onMessage.addListener(runCallback)
+			chrome.runtime.onMessage.addListener(runResponse)
+
+			if(callback) callback()
 			return true;
 		});
 	}
 	this.reset = function(callback){
 		const request = new Request("reset", this.storageName)
 		chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
-			//console.log(response.backMessage)
-			const runCallback = function(getResponse, sender, sendResponse) {
+
+			const runResponse = function(getResponse, sender, sendResponse) {
 				sendResponse({backMessage: "RESET response received by content script"})
-				if(callback) callback()
-				chrome.extension.onMessage.removeListener(runCallback)
+				chrome.extension.onMessage.removeListener(runResponse)
 				return true;
 			}
-			chrome.runtime.onMessage.addListener(runCallback)
+			chrome.runtime.onMessage.addListener(runResponse)
+
+			if(callback) callback()
 			return true;
 		});
 	}
