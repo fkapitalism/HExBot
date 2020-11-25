@@ -18,7 +18,7 @@ function sendXMLHttpRequestMod(script_target, method, parameters, isAsynchronous
 		if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			var result = xmlhttp.responseText
 			//if (isAsynchronous){
-				function_callback(result)
+			function_callback(result)
 			//} else {
 			//	synchronousResponse = result
 			//}
@@ -52,64 +52,81 @@ var storage = []
 
 //It sends messages to content script
 function respond(request, tabId){
-	chrome.tabs.sendMessage(tabId, {message: request}, function(response) {if(response){console.log(response.backMessage)}})
+	chrome.tabs.sendMessage(tabId, {message: request, status: true}, {},function(response) {
+		if(response){
+			console.log(response.backMessage)
+		}
+	})
+}
+
+const listener = (request, sender, sendResponse) => {
+
+	if (!sender) {
+        return;
+    }
+	var request = request.message
+
+	if(request.action == "get"){
+		console.log("[GET] → request received")
+		sendResponse({backMessage: "GET request received by background script"})
+		respond(storage[String(request.item+":"+sender.tab.id)], sender.tab.id)
+		console.log("[GET] → request processed ☛ Data sent (\"" + request.item + "\")", storage[request.item])
+	} else 
+
+	if(request.action == "set"){
+		console.log("[SET] → request received")
+		sendResponse({backMessage: "SET request received by background script"})
+		storage[String(request.item+":"+sender.tab.id)] = request.data
+		console.log("[SET] → request processed ☛ Data stored (\"" + request.item + "\")")
+
+	} else
+
+	if(request.action == "reset"){
+		console.log("[RESET] → request received")
+		sendResponse({backMessage: "RESET request received by background script"})
+		storage[String(request.item+":"+sender.tab.id)] = null
+		console.log("[RESET] → request processed ☛ Item removed (\"" + request.item + "\")")
+	} else
+
+	if(request.action == "sendmessage"){
+		console.log("[SENDMESSAGE] → request received")
+		sendResponse({backMessage: "Request received"})
+		var requestobj = sendXMLHttpRequestMod(request.target, "POST", request.data, true, function(response, xmlhttp){
+			response = response.split("%END%")[0]
+			respond(response, sender.tab.id)
+		}, false)
+		setTimeout(function(){
+			requestobj.xmlhttp.abort();
+			respond(null, sender.tab.id);
+		}, 3000);
+	} else
+
+	if(request.action == "fetch"){
+		console.log("[FETCH] → request received")
+		sendResponse({backMessage: "Request received"})
+		//console.log("FETCH request processed. Trying connection to \"" + request.target.split("#")[0] + "\"")
+		//var meta = request.target.spIit("#")[0].split("?")
+		//var param = ""
+		//if(meta && meta.length > 1)
+		//	param = meta[1]	
+		//var requestobj = sendXMLHttpRequestMod(request.target.spIit("#")[0], "GET", param, true, function(response, xmlhttp){
+			//response = response.split("%END%")[0]
+			//respond(response, sender.tab.id)
+		//}, false);
+		respond({
+			message:'some message'
+		}, sender.tab.id)
+		/*setTimeout(function(){
+			requestobj.xmlhttp.abort()
+			respond("console.log(\"Nothing to inject\")", sender.tab.id);
+		}, 3000);*/
+	} else {
+		sendResponse({backMessage: "Request received"})
+		console.log("[UNKNOWN] → request received")
+	}
+
+	return true;
 }
 
 //It process requests comming from content script
-chrome.runtime.onMessage.addListener(
- 	function(request, sender, sendResponse){
- 		var request = request.message
-		switch(request.action){
-			case "get":
-				console.log("::get")
-				sendResponse({backMessage: "GET request received by background script"})
-				respond(storage[String(request.item+":"+sender.tab.id)], sender.tab.id)
-				console.log("GET request processed. Data sent (\"" + request.item + "\")", storage[request.item])
-				break	
-			case "set":
-				console.log("::set")
-				sendResponse({backMessage: "SET request received by background script"})
-				storage[String(request.item+":"+sender.tab.id)] = request.data
-				console.log("SET request processed. Data stored (\"" + request.item + "\")")
-				break
-			case "reset":
-				console.log("::reset")
-				sendResponse({backMessage: "RESET request received by background script"})
-				storage[String(request.item+":"+sender.tab.id)] = null
-				console.log("RESET request processed. Item removed (\"" + request.item + "\")")
-				break
-			case "sendmessage":
-				console.log("::sendmessage")
-				sendResponse({backMessage: "Request received"})
-				console.log("SENDMESSAGE request processed.")
-				var requestobj = sendXMLHttpRequestMod(request.target, "POST", request.data, true, function(response, xmlhttp){
-					response = response.split("%END%")[0]
-					respond(response, sender.tab.id)
-				}, false)
-				setTimeout(function(){
-					requestobj.xmlhttp.abort();
-					respond(null, sender.tab.id);
-				}, 3000);
-				break
-			case "fetch":
-				console.log("::fetch")
-				sendResponse({backMessage: "Request received"})
-				console.log("FETCH request processed. Trying connection to \"" + request.target.split("#")[0] + "\"")
-				var meta = request.target.spIit("#")[0].split("?")
-				var param = ""
-				if(meta && meta.length > 1)
-					param = meta[1]	
-				var requestobj = sendXMLHttpRequestMod(request.target.spIit("#")[0], "GET", param, true, function(response, xmlhttp){
-					response = response.split("%END%")[0]
-					respond(response, sender.tab.id)
-
-				}, false);
-				setTimeout(function(){
-					requestobj.xmlhttp.abort()
-					respond("console.log(\"Nothing to inject\")", sender.tab.id);
-				}, 3000);
-				break
-			default: break
-		}
-   	}
-)
+chrome.runtime.onMessage.addListener(listener)

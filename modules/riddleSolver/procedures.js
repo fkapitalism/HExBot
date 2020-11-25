@@ -11,24 +11,32 @@ foo.procedure("init", function(shared, hooks){
 	})
 })
 
-foo.procedure("isThereRiddle", function(shared){
-	var softwareList = getSoftwaresByPattern("(enigma.exe|riddle.exe)", "/internet", "view=software")
-	if(softwareList){
-		return true
-	} else {
-		window.alert(LANG.COMPLETE_PATH_ERROR)
-		return false
-	}
+foo.procedure("isThereRiddle", function(shared, hooks){
+	/*var softwareList = */
+	getSoftwaresByPattern("(enigma.exe|riddle.exe)", "/internet", "view=software", false, (softwareList) => {
+		if(softwareList){
+			//return true
+			hooks.next(true)
+		} else {
+			window.alert(LANG.COMPLETE_PATH_ERROR)
+			//return false
+			hooks.next(false)
+		}
+	})
 })
 
-foo.procedure("getNewCrackerId", function(shared){
-	var playerCrackers = getSoftwaresByPattern("\.crc", "/software", "")
-	if(playerCrackers){
-		shared.crackerToInstall = playerCrackers[0]
-		return true
-	} else {
-		return false
-	}
+foo.procedure("getNewCrackerId", function(shared, hooks){
+	/*var playerCrackers = */
+	getSoftwaresByPattern("\.crc", "/software", "", false, (playerCrackers) => {
+		if(playerCrackers){
+			shared.crackerToInstall = playerCrackers[0]
+			//return true
+			hooks.next(true)
+		} else {
+			//return false
+			hooks.next(false)
+		}
+	})		
 })
 
 foo.procedure("goToPageRiddle", function(){
@@ -36,19 +44,23 @@ foo.procedure("goToPageRiddle", function(){
 	return null
 })
 
-foo.procedure("isThereLocalCracker", function(shared){
-	var playerCrackers = getSoftwaresByPattern("\.crc", "/software", "")
-	if(playerCrackers.length > 0){
-		shared.playerCracker = playerCrackers[0]
-		if(!shared.playerCracker.installed){
-			shared.crackerToInstall = shared.playerCracker
+foo.procedure("isThereLocalCracker", function(shared, hooks){
+	/*var playerCrackers = */
+	getSoftwaresByPattern("\.crc", "/software", "", false, (playerCrackers) => {
+		if(playerCrackers.length > 0){
+			shared.playerCracker = playerCrackers[0]
+			if(!shared.playerCracker.installed){
+				shared.crackerToInstall = shared.playerCracker
+			} else {
+				shared.crackerToInstall = null
+			}
+			//return true
+			hooks.next(true)
 		} else {
-			shared.crackerToInstall = null
+			//return false
+			hooks.next(false)
 		}
-		return true
-	} else {
-		return false
-	}
+	})
 })
 
 foo.procedure("goToTargetLogs", function(){
@@ -80,22 +92,26 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 		
 })
 
-foo.procedure("isThereTargetCracker", function(shared){
-	var targetCrackers = getSoftwaresByPattern("\.crc", "/internet", "view=software")
-	if(targetCrackers.length > 0){
-		shared.targetCracker = targetCrackers[0]
-		if(parseFloat(shared.targetCracker.version) > parseFloat(shared.playerCracker.version)){
-			shared.isCrackerOutdated = true
-		} else {
-			if(!shared.playerCracker.installed){
-				shared.crackerToInstall = shared.playerCracker
+foo.procedure("isThereTargetCracker", function(shared, hooks){
+	/*var targetCrackers = */
+	getSoftwaresByPattern("\.crc", "/internet", "view=software", false, (targetCrackers) => {
+		if(targetCrackers.length > 0){
+			shared.targetCracker = targetCrackers[0]
+			if(parseFloat(shared.targetCracker.version) > parseFloat(shared.playerCracker.version)){
+				shared.isCrackerOutdated = true
+			} else {
+				if(!shared.playerCracker.installed){
+					shared.crackerToInstall = shared.playerCracker
+				}
+				shared.isCrackerOutdated = false
 			}
-			shared.isCrackerOutdated = false
+			//return true
+			hooks.next(true)
+		} else {
+			//return false
+			hooks.next(false)
 		}
-		return true
-	} else {
-		return false
-	}
+	})	
 })
 
 foo.procedure("goToTargetLogs", function(){

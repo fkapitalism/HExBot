@@ -1,4 +1,4 @@
-function getSoftwaresByPattern(pattern, page, parameters, avoid_installed_viruses = false, callback){
+function getSoftwaresByPattern(pattern, page, parameters, avoid_installed_viruses = false, callback = () => {throw "callback missing"}){
 	/*var softwarePage = */
 	sendXMLHttpRequest(page, "GET", parameters, false, (softwarePage) => {
 		var softwareList = []

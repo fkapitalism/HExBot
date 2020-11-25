@@ -529,7 +529,7 @@ foo.procedure("startDeleteSoftware", function(shared, hooks){
 	})		
 })
 
-foo.procedure("startTransferMoney", function(shared){
+foo.procedure("startTransferMoney", function(shared, hooks){
 	/*shared.myAccountsInfo = */
 	getBankAccountAddr((info) => {
 		shared.myAccountsInfo = info
