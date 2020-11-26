@@ -11,6 +11,7 @@ function enableEditor(editor, controllers) {
         fontSize: "12pt"
     });
     editor.setValue(controllers.bot.controlPanel.fieldsContent['web-crawl-script']);
+    editor.getSession().selection.moveCursorFileStart();
 
     editor.getSession().on('change', () => {
         controllers.bot.controlPanel.fieldsContent['web-crawl-script'] = editor.getSession().getValue();
