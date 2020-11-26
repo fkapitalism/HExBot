@@ -562,35 +562,38 @@ webcrawler.procedure("checkProgressBar", function(shared, funcs){
 	}, 50)
 })
 
-webcrawler.procedure("getUserCommandsResult", function(shared, funcs){
+webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 	sandbox = new Sandbox()
-	result = sandbox.run(controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT])
+	sandbox.run(controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT], (result) => {
 
-	if(result.uploads.length)
-		shared.uploadMode = true
-	else
-		shared.uploadMode = false
-
-	shared.timeLimit = result.seconds_limit
-
-	shared.cleaningLogsDisabled = result.clean_disabled
-
-	shared.mustLeaveSignature = result.must_leave_signature
-
-	shared.skipHideLogs = result.clean_just_after_upload
-	shared.softwaresToUpload = result.uploads
-	controllers.bot.webcrawler.debugLines.push({content: result, ip: shared.currentIp})
-	controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] = "/* WEBCRAWLER SCRIPT DEBUG */\n\n"
-	
-	for (var i = 0; i < controllers.bot.webcrawler.debugLines.length; i++){
-		if (controllers.bot.webcrawler.debugLines[i].ip != "")
-			controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].ip + ": " + JSON.stringify(controllers.bot.webcrawler.debugLines[i].content) + "\n\n"
+		if(result.uploads.length)
+			shared.uploadMode = true
 		else
-			controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].content + "\n\n"
-	}
-	controllers.storage.set(controllers.bot)
-	return null
+			shared.uploadMode = false
 
+		shared.timeLimit = result.seconds_limit
+
+		shared.cleaningLogsDisabled = result.clean_disabled
+
+		shared.mustLeaveSignature = result.must_leave_signature
+
+		shared.skipHideLogs = result.clean_just_after_upload
+		shared.softwaresToUpload = result.uploads
+		controllers.bot.webcrawler.debugLines.push({content: result, ip: shared.currentIp})
+		controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] = "/* WEBCRAWLER SCRIPT DEBUG */\n\n"
+		
+		for (var i = 0; i < controllers.bot.webcrawler.debugLines.length; i++){
+			if (controllers.bot.webcrawler.debugLines[i].ip != "")
+				controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].ip + ": " + JSON.stringify(controllers.bot.webcrawler.debugLines[i].content) + "\n\n"
+			else
+				controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT_DEBUG] += controllers.bot.webcrawler.debugLines[i].content + "\n\n"
+		}
+		controllers.storage.set(controllers.bot)
+
+		hooks.next()
+		//return null
+
+	})
 })
 
 webcrawler.procedure("isInstallRequired", function(shared, funcs){
