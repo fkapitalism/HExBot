@@ -87,6 +87,7 @@
 				"core/libraries/helpers/functions/goToPage.js",
 				"core/libraries/helpers/functions/sendXMLHttpRequest.js",
 				"core/libraries/helpers/functions/getMyIp.js",
+				"core/libraries/helpers/functions/extractIPsFromText.js",
 				"core/libraries/helpers/functions/prepareSequence.js",
 				"core/libraries/helpers/functions/removeLinesFromText.js",
 				"core/libraries/helpers/functions/getSoftwareId.js",

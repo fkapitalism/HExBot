@@ -74,12 +74,24 @@ foo.procedure("submitLogs", function(shared){
 	return null
 }) 
 
+foo.procedure("test", function(){
+	const text = `
+		fdsafd[12.3.45.45 3.4.2.1  3.4.2.1
+		192.368.0.53
+	`;
+	var ips = extractIPsFromText(text, ['3.4.2.1'])
+	console.log(ips)
+})
+
 foo.procedure("cleanMyIpClues", function(data, hooks){
 
 	getMyIp(true, (myip) => {
 		var textArea = getDOMElement("textarea", "class", "logarea", 0)
 		if (textArea.value.length > 0){
 			data.isEmpty = false
+
+			var ips = extractIPsFromText(textArea.value, [myip])
+
 			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
 			var pattern = new RegExp("^.*" + myip + ".*$")
 			textArea.value = removeLinesFromText(textArea.value, pattern)
