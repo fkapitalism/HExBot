@@ -57,15 +57,18 @@ camping.procedure("startBankCamping", function(shared, hooks){
 
 camping.procedure("goToIp", function(shared){
 	goToPage("/internet?ip=" + shared.ip)
+	return null
 })
 
 camping.procedure("logout", function(shared){
 	shared.isLogged = false
 	goToPage("/internet?view=logout")
+	return null
 })
 
 camping.procedure("logoutAccount", function(){
 	goToPage("/internet?bAction=logout")
+	return null
 })
 
 camping.procedure("isThereMessageError", function(){
@@ -76,19 +79,23 @@ camping.procedure("isThereMessageError", function(){
 
 camping.procedure("forceToAccessTarget", function(){
 	goToPage("/internet?action=hack")
+	return null
 })
 
 camping.procedure("signInTarget", function(shared){
 	shared.isLogged = true
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
+	return null
 })
 
 camping.procedure("hackTargetBruteForce", function(){
 	goToPage("/internet?action=hack&method=bf")
+	return null
 })
 
 camping.procedure("hackAccount", function(shared){
 	goToPage("/internet?action=hack&acc=" + shared.accounts.shift())
+	return null
 })
 
 camping.procedure("accessKnownAccount", function(shared){
@@ -99,14 +106,17 @@ camping.procedure("accessKnownAccount", function(shared){
 		getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue //Fill the password field with the password on screen
 		getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
 	}
+	return null
 })
 
 camping.procedure("accessUnknownAccount", function(shared){
 	getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
+	return null
 })
 
 camping.procedure("goToOwnLogTab", function(){
 	goToPage("/log")
+	return null
 })
 
 camping.procedure("cleanMyIpClues", function(shared){
@@ -119,16 +129,19 @@ camping.procedure("cleanMyIpClues", function(shared){
 	} else {
 		shared.myCluesFound = false
 	}
+	return null
 })
 
 camping.procedure("cleanTextAreaContent", function(shared){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	textArea.value = ""
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	return null
 })
 
 camping.procedure("submitLogs", function(shared){
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	return null
 }) 
 
 camping.procedure("extractDataFromLog", function(shared){
@@ -160,17 +173,20 @@ camping.procedure("extractDataFromLog", function(shared){
 		return accounts.indexOf(value) == pos
 	})
 	textArea.value = outputLines.join("\n")
+	return null
 })
 
 camping.procedure("goToTargetLogs", function(){
 	//if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
 	goToPage("/internet?view=logs")
+	return null
 })
 
 camping.procedure("transferMoneyToTarget", function(shared){
 	getDOMElement("input", "name", "acc", 0).value = shared.myAccount //Fill the To field
 	getDOMElement("input", "name", "ip", 1).value = shared.ip //Fill the Bank IP field
 	getDOMElement("button", "class", "btn btn-success", 0).click() //Click on the Transfer Money button
+	return null
 })
 
 camping.procedure("checkProgressBar", function(shared, funcs){
@@ -186,6 +202,7 @@ camping.procedure("checkProgressBar", function(shared, funcs){
 camping.procedure("goToLoginPage", function(){
 	if (location.href.indexOf("/internet?action=login") == -1)
 	goToPage("/internet?action=login")
+	return null
 })
 
 camping.procedure("checkFunds", function(shared){
@@ -212,6 +229,7 @@ camping.procedure("sendMoneyToBTCWallet", function(shared){
 	} else {
 		console.log("BTC wallet unavailable")
 	}
+	return null
 })
 
 camping.procedure("cancelLogProcesses", function(shared, hooks){
