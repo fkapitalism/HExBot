@@ -13,8 +13,10 @@ function controlPanel(){
 	views.appendControlPanel(controllers)
 
 	//Ativa o editor
-	var editor = ace.edit(WEBCRAWLER_SCRIPT);
-	enableEditor(editor, controllers)
+	if(typeof ace !== 'undefined'){
+		var editor = ace.edit(WEBCRAWLER_SCRIPT);
+		enableEditor(editor, controllers)
+	}
 
 	if (controllers.bot.controlPanel.isHidden){
 		views.hideControlPanel()

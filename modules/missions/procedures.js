@@ -454,8 +454,10 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 				for (var i = 0; i < processes.length; i++) {
 					if(strposOfArray(processes[i].innerHTML, labels) >= 0){
 						var pidContainer = processes[i].innerHTML.match(/processBlock[0-9]+/)
-						var pid = pidContainer[0].match(/[0-9]+/)
-						processesId.push(pid[0])
+						if(pidContainer){
+							var pid = pidContainer[0].match(/[0-9]+/)
+							processesId.push(pid[0])
+						}
 					}
 				}
 			}

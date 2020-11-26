@@ -77,20 +77,24 @@ foo.procedure("submitLogs", function(shared){
 foo.procedure("test", function(){
 	const text = `
 		fdsafd[12.3.45.45 3.4.2.1  3.4.2.1
-		192.368.0.53
-	`;
-	var ips = extractIPsFromText(text, ['3.4.2.1'])
-	console.log(ips)
-})
-
-foo.procedure("cleanMyIpClues", function(data, hooks){
-
-	getMyIp(true, (myip) => {
-		var textArea = getDOMElement("textarea", "class", "logarea", 0)
-		if (textArea.value.length > 0){
-			data.isEmpty = false
-
-			var ips = extractIPsFromText(textArea.value, [myip])
+		192.368.0.53(
+			`;
+			var ips = extractIPsFromText(text, ['3.4.2.1'])
+			console.log(ips)
+		})
+		
+		foo.procedure("cleanMyIpClues", function(data, hooks){
+		
+			getMyIp(true, (myip) => {
+				var textArea = getDOMElement("textarea", "class", "logarea", 0)
+				if (textArea.value.length > 0){
+					data.isEmpty = false
+		
+					const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
+					var ips = extractIPsFromText(ipsSource, [myip])
+					console.log("ips found", ips)
+					controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
+					controllers.storage.set(controllers.bot)
 
 			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
 			var pattern = new RegExp("^.*" + myip + ".*$")
@@ -215,8 +219,10 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 				for (var i = 0; i < processes.length; i++) {
 					if(strposOfArray(processes[i].innerHTML, labels) >= 0){
 						var pidContainer = processes[i].innerHTML.match(/processBlock[0-9]+/)
-						var pid = pidContainer[0].match(/[0-9]+/)
-						processesId.push(pid[0])
+						if(pidContainer){
+							var pid = pidContainer[0].match(/[0-9]+/)
+							processesId.push(pid[0])
+						}
 					}
 				}
 			}
@@ -245,6 +251,11 @@ foo.procedure("signInKnownTarget", function(){
 
 foo.procedure("getNextIP", function(shared){
 	shared.nextPuzzleIP = getNextPuzzleIP()
+	return null
+})
+
+foo.procedure("getNextIPFake", function(shared){
+	shared.nextPuzzleIP = '208.55.14.95'
 	return null
 })
 
@@ -310,4 +321,24 @@ foo.procedure("solvePuzzle", function(){
 		})
 	}
 	return null
+})
+
+
+foo.procedure("isTooManySecretsNow", function(shared){
+	var isTooManySecretsNow = false
+	const container = document.getElementsByClassName('whois')
+	if (container && container.length > 0 && container[0].nodeName == 'UL'){
+		const members = document.querySelectorAll('span.whois-member')
+		members.forEach((item) => {
+			if(item.innerHTML == 'Too Many Secrets'){
+				if(item.previousSibling && item.previousSibling.previousSibling){
+					shared.nextPuzzleIP = item.previousSibling.previousSibling.innerHTML
+					item.style.color = "red"
+					item.previousSibling.previousSibling.style.color = "red"
+					isTooManySecretsNow = true
+				}
+			}
+		})
+	}
+	return isTooManySecretsNow
 })

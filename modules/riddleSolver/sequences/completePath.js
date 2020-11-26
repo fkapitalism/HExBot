@@ -9,7 +9,7 @@ foo.instructions = [
 	{"@decideInstalling": 		[{"gotoif": ["*.crackerToInstall", "@suitup", "@solvePuzzle"]}]},
 	{"@suitup" :   				["getNewCrackerId", {"gotoif": ["!*.$", "@getout"]}, "installLocalCracker", "isThereMessageError", {"gotoif":["*.$", "@solvePuzzle"]}, {"wait": {"_forTheSignal": "checkProgressBar"}}, {"gotoif": ["!*.isCrackerOutdated", "@solvePuzzle"]}, "removeOutdatedCracker", "isThereMessageError", {"gotoif":["*.$", "@solvePuzzle"]}, {"wait": {"_forTheSignal": "checkProgressBar"}}]},
 	{"@solvePuzzle": 			["goToPageRiddle", "isRiddleSolved", {"gotoif": ["*.$", "@goToNextPuzzle"]}, "solvePuzzleAuto", {"gotoif":["!*.$", "@getout"]}, "reload"]},
-	{"@goToNextPuzzle": 		["getNextIP", "logout", "goToNextPuzzle"]},
+	{"@goToNextPuzzle": 		["getNextIP", "logout", "goToNextPuzzle", "isTooManySecretsNow", {"gotoif": ["!*.$","@tryHostConnection"]}, "goToNextPuzzle"]},
 	{"@tryHostConnection": 		["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@getout"]}, {"wait": {"_forTheSignal": "checkProgressBar"}}]},
 	{"@accessTarget": 			["goToLoginPage", "cancelLogProcesses", "signInKnownTarget", "isCrackerStrongEnough", {"gotoif":["!*.$", "@getout"]}]},
 	{"@cleanTargetLogs": 		["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["*.isEmpty", "@repeat"]}, {"wait": {"_forTheSignal": "checkProgressBar"}}]},
