@@ -61,7 +61,10 @@
  	}
 
  	function upload(name, actions, version = '*'){
-		var software = getSoftwareInfo(name.replace('*', ''), version.replace('*', ''), '/software', '')
+		//var software = getSoftwareInfo(name.replace('*', ''), version.replace('*', ''), '/software', '')
+		const software = environment.softwares.yours.find((softw) => {
+			return ((softw.name == name) && ((version == '*') || (version.length == 0) || (softw.version == version)))
+		})
  		if(software){
  			software.actions = actions
  			uploads.push(software)
@@ -175,7 +178,8 @@
 			 			seconds_limit: seconds_max,
 			 			clean_just_after_upload: clean_just_after_upload,
 			 			clean_disabled: clean_disabled,
-			 			must_leave_signature: must_leave_signature
+			 			must_leave_signature: must_leave_signature,
+			 			softwares: environment.softwares
 			 		});
  				})
  			})

@@ -22,7 +22,9 @@ function getSoftwaresByPattern(pattern, page, parameters, avoid_installed_viruse
 					var version = rows[i].cells[2].innerText.replace(/[\n\r]/gmi, "")
 					var size = rows[i].cells[3].innerText.replace(/[\n\r]/gmi, "")
 					if(!(avoid_installed_viruses && name.match(/(\.vspam|\.vwarez|\.vminer|\.vddos)/gmi) && installed)){
-						softwareList.push({id: id, name: name, version: version, installed: installed, size: size})
+						if(rows[i].id && rows[i].id.length > 0){
+							softwareList.push({id: id, name: name, version: version, installed: installed, size: size})
+						}
 					}
 				} else {
 					//console.log("discarted", softwareName)

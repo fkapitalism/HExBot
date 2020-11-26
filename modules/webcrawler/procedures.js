@@ -565,7 +565,6 @@ webcrawler.procedure("checkProgressBar", function(shared, funcs){
 webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 	sandbox = new Sandbox()
 	sandbox.run(controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT], (result) => {
-
 		if(result.uploads.length)
 			shared.uploadMode = true
 		else
