@@ -1,7 +1,8 @@
 /*This function gets the accounts list vinculated to their respective ip*/
 function getBTCWalletInfo(callback){
 	
-	/*var financesPage = */
+	/*
+	//var financesPage =
 	sendXMLHttpRequest("/finances", "GET", "", false, (financesPage) => {
 
 		var parser = new DOMParser()
@@ -15,10 +16,10 @@ function getBTCWalletInfo(callback){
 					if(accountWidgets[i].innerHTML.match(/(BTC Wallet|Carteira Bitcoin)/m)){
 						publicKey = accountWidgets[i].innerHTML.match(/[13][a-zA-Z0-9]{26,}/m)
 						if(publicKey){
-							/*var financesPage = */
-							sendXMLHttpRequest("/internet", "GET", "ip=" + bitcoinMarketIp, false, () => {
+							//var financesPage = 
+							sendXMLHttpRequest("/internet", "GET", "redirect=btc", false, (bitCoinPage) => {
 								//console.log(bitcoinMarketIp, financesPage)
-								var logOutButton = financesPage.match(/btc\-logout/)
+								var logOutButton = bitCoinPage.match(/btc\-logout/)
 								if (logOutButton){
 									btcInfo.isLogged = true
 								} else {
@@ -42,7 +43,25 @@ function getBTCWalletInfo(callback){
 		}
 		//return btcInfo
 
+	})	*/
+
+	sendXMLHttpRequest("/internet", "GET", "redirect=btc", false, (bitCoinPage) => {
+
+
+		var parser = new DOMParser()
+		var requestContentDOM = parser.parseFromString(bitCoinPage, "text/html")		
+		const bitcoinBadge = requestContentDOM.querySelector("span.label.label-inverse.pull-right");
+		const widgets = requestContentDOM.getElementsByClassName("widget-content padding center");
+		var btcInfo = {}
+		if(bitcoinBadge && widgets.length == 2){
+			const wallet = widgets.item(1);
+			btcInfo.ip = requestContentDOM.getElementsByName("ip").item(0).defaultValue
+			btcInfo.isLogged = Boolean(wallet.innerHTML.match(/btc\-logout/))
+			btcInfo.publicKey = wallet.innerHTML.match(/\b([0-9A-Za-z]{30,})\b/)[0]
+		}
+
+		callback(btcInfo)
 	})
-		
+
 }
 	

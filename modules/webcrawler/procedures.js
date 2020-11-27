@@ -51,7 +51,7 @@ webcrawler.procedure("startSearching", function(shared, hooks){
 		//shared.myIp = getMyIp(true)
 		getMyIp(true, (myip) => {
 			shared.myIp = myip
-			hooks.next()
+			hooks.next(true)
 		})
 		//return true
 	} else {

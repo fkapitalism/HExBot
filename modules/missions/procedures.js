@@ -418,18 +418,28 @@ foo.procedure("waitForSubmitButton", function(shared, funcs){
 	}, 50)
 })
 
-foo.procedure("sendMoneyToBTCWallet", function(shared){
+foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){
 	if(shared.isBTCLogged){
-		var accountBalance = getBankAccountsBalance()[shared.destinationAccount]
-		var bitcoinsToBuy = roundNumber(accountBalance / getBTCExchangeRate())
-		if (bitcoinsToBuy >= 1){
-			sendMoneyToBTCWallet(shared.destinationAccount, bitcoinsToBuy)
-			console.log("Account " + shared.destinationAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
-		} else {
-			console.log("Money is not enough to buy a bitcoin")
-		}
+		/*var accountBalance = */
+		getBankAccountsBalance((result) => {
+
+			var accountBalance = result[shared.destinationAccount]
+
+			var bitcoinsToBuy = roundNumber(accountBalance / getBTCExchangeRate())
+			if (bitcoinsToBuy >= 1){
+				sendMoneyToBTCWallet(shared.destinationAccount, bitcoinsToBuy, () => {
+					console.log("Account " + shared.destinationAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
+					hooks.next()
+				})
+			} else {
+				console.log("Money is not enough to buy a bitcoin")
+			}
+
+		})
+
 	} else {
 		console.log("BTC wallet unavailable")
+		return null
 	}
 })
 
@@ -479,29 +489,47 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 		
 })
 
-foo.procedure("checkBTCWallet", function(shared){
+foo.procedure("checkBTCWallet", function(shared, hooks){
 	shared.transferToBTC = controllers.bot.controlPanel.checkBoxes[SET_TRANSFER_TO_BTC]
 
 	if(shared.transferToBTC){
-		shared.BTCInfo = getBTCWalletInfo()
+		/*shared.BTCInfo = */
+		getBTCWalletInfo((info) => {
+			shared.BTCInfo = info
+
+			if(!shared.BTCInfo.isLogged){
+				shared.isBTCLogged = false
+				window.alert(LANG.DISCONNECTED_BTC_WALLET)
+				//return false
+				hooks.next(false)
+			} else {
+				shared.isBTCLogged = true
+				//return true
+				hooks.next("true")
+			}
+
+		});
 		//console.log(shared.BTCInfo)
-		if(!shared.BTCInfo.isLogged){
-			shared.isBTCLogged = false
-			window.alert(LANG.DISCONNECTED_BTC_WALLET)
-			return false
-		} else {
-			shared.isBTCLogged = true
-			return true
-		}
 	} else {
 		return true
 	}
 
 })
 
-foo.procedure("getSoftwareId", function(shared){
-	shared.softwareId = getSoftwareId(shared.softwareInfo.name, shared.softwareInfo.version, "/internet", "view=software")
-	return shared.softwareId
+foo.procedure("test", function(shared, hooks){
+	getBTCWalletInfo((result) => {
+		console.log(result)
+		hooks.next()
+	});
+})
+
+foo.procedure("getSoftwareId", function(shared, hooks){
+	/*shared.softwareId = */
+	getSoftwareId(shared.softwareInfo.name, shared.softwareInfo.version, "/internet", "view=software", (result) => {
+		shared.softwareId = result
+		hooks.next(result)
+	})
+	//return shared.softwareId
 })
 
 foo.procedure("deleteSoftware", function(shared){
