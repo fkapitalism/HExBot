@@ -4,6 +4,7 @@ ddos.config.debugMode = true
 ddos.procedure("goToSoftwarePage", function () {
     goToPage("/software")
     return null
+})
 
 ddos.procedure("goToDDoSPage", function () {
     goToPage("/list?action=ddos")
