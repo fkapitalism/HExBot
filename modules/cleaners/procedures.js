@@ -98,7 +98,7 @@ cleanersMod.procedure("signInTarget", function(){
 	return null
 })
 
-cleanersMod.procedure("checkProgressBar", function(shared, funcs){
+/*cleanersMod.procedure("checkProgressBar", function(shared, funcs){
 	var loop = setInterval(function(){
 		var progressBar = getDOMElement("div", "role", "progressbar", 0)
 		if(!progressBar){
@@ -107,6 +107,16 @@ cleanersMod.procedure("checkProgressBar", function(shared, funcs){
 		}
 	}, 50)
 	return null
+})*/
+
+cleanersMod.procedure("waitProgressBar", function (shared, hooks) {
+    var loop = setInterval(function () {
+        var progressBar = getDOMElement("div", "role", "progressbar", 0)
+        if (!progressBar) {
+            clearInterval(loop)
+            hooks.next()
+        }
+    }, 100)
 })
 
 cleanersMod.procedure("goToLoginPage", function(){
