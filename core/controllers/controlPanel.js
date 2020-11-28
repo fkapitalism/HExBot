@@ -55,6 +55,11 @@ function controlPanel(){
 	else
 		customScriptDebug.style.display = "none"
 
+	document.getElementById(PERFORM_RESET_WEBCRAWLER).addEventListener("click", () => {
+		customScriptDebug.style.display = "none"
+		regexFilter.style.display = "none"
+	})
+
 	controllers.functions.filterCrawlerOutput(regexFilter.value)
 	regexFilter.addEventListener("change", function(){
 		controllers.functions.filterCrawlerOutput(regexFilter.value)

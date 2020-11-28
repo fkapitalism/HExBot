@@ -29,6 +29,9 @@ function Bot(){
 	fieldsContent[FIELD_HOSTS_TO_IGNORE] = ""
 	fieldsContent[FIELD_SIGNATURE] = "░▒███████ You gave me your data\n░██▓▒░░▒▓██ I give you my heart\n██▓▒░__░▒▓██___██████\n██▓▒░____░▓███▓__░▒▓██\n██▓▒░___░▓██▓_____░▒▓██\n██▓▒░_______________░▒▓██\n_██▓▒░______________░▒▓██\n__██▓▒░____________░▒▓██\n___██▓▒░__________░▒▓██\n____██▓▒░________░▒▓██\n_____██▓▒░_____░▒▓██\n______██▓▒░__░▒▓██\n_______█▓▒░░▒▓██\n_________░▒▓██\n_______░▒▓██\n_____░▒▓██\n"
 
+	fieldsContent[FIELD_DDOS_IP] = ''
+	fieldsContent[FIELD_DDOS_TIMES] = 1
+
 	var lists = {}
 	lists[FIELD_SUSPECT_LOGS] = []
 

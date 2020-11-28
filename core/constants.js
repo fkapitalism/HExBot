@@ -24,6 +24,7 @@ const PERFORM_INSTALL_SOFTWARE = "set-install-software"
 const SET_SEARCH_FOR_IPS = "set-ip-search"
 const SET_START_DDOSES = "set-ddos-start"
 const PERFORM_WEBCRAWLER_SCRIPT_RUNNING = "web-crawl-run"
+const PERFORM_RESET_WEBCRAWLER = "reset-webcrawler"
 
 const SET_PROTECT_IP = "set-ip-protection"
 const USEEXPLOIT = "use-exploit"

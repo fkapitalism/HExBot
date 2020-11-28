@@ -71,7 +71,7 @@ var views = {
 				'<label style="margin:0;"><input type="checkbox" class="checkBoxes" id="' + SET_IGNORE_LIST + '" style="margin:0;"><span style="margin-left:4px;">' + LANG.WEBCRAWLER_IGNORE_HOSTS + '</span><input id="' + FIELD_HOSTS_TO_IGNORE + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:25%"></label>' +
 				//'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span>' + LANG.WEBCRAWLER_UPLOAD_SOFTWARES + '</span><input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="' + LANG.WEBCRAWLER_UPLOAD_SOFTWARE_MODEL + '" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:25%"">' + LANG.WEBCRAWLER_UPLOAD_WAIT + '<input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="' + LANG.SECONDS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:12%"></label>' +
 				
-				'<i>' + LANG.WEBCRAWLER_SCRIPT_TITLE + '</i> <a href="https://hexbotwiki.000webhostapp.com/doku.php?id=custom_rules" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;<a href="#" id="' + PERFORM_WEBCRAWLER_SCRIPT_RUNNING + '"><i class="fa fa-play-circle" aria-hidden="true"></i></a>&nbsp;<small style="visibility: hidden; color:green;" id="' + AREA_WARN_WEBCRAWLER + '">' + LANG.WARN_WEBCRAWLER_RESULT + '</small>' +
+				'<i>' + LANG.WEBCRAWLER_SCRIPT_TITLE + '</i> <a href="https://github.com/HEScriptsPack/BetterHExBot/wiki" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href="#" id="' + PERFORM_RESET_WEBCRAWLER + '"><i class="fa fa-eraser" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href="#" id="' + PERFORM_WEBCRAWLER_SCRIPT_RUNNING + '"><i class="fa fa-play-circle" aria-hidden="true"></i></a>&nbsp;<small style="visibility: hidden; color:green;" id="' + AREA_WARN_WEBCRAWLER + '">' + LANG.WARN_WEBCRAWLER_RESULT + '</small>' +
 				//'<center><textarea id="' + WEBCRAWLER_SCRIPT + '" class="controls fieldsContent" style="width: 95%; resize: vertical; color:#80f980; background-color:black; font-family:monospace"></textarea>' + 
 				'<center><div id="' + WEBCRAWLER_SCRIPT + '" style=" width: 510px; height: 50px;">console.log()</div>' + 
 
@@ -88,7 +88,7 @@ var views = {
 
 
 				'<tr class="info"><td>' +
-					'<button id="' + SET_START_DDOSES + '" class="btn-xs btn-info">' + LANG.RUN_DDOSER + '</button> ' + '<input id="' + FIELD_DDOS_IP + '" class="controls fieldsContent" placeholder="' + LANG.DDOS_IP  + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + LANG.DDOS_TIMES + '<input type="number" min="0" max="50" step="1" value="0" size="6" id="' + FIELD_DDOS_TIMES+ '" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 7%">' +
+					'<button id="' + SET_START_DDOSES + '" class="btn-xs btn-info">' + LANG.RUN_DDOSER + '</button> ' + '<input id="' + FIELD_DDOS_IP + '" class="controls fieldsContent" placeholder="' + LANG.DDOS_IP  + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + LANG.DDOS_TIMES + '<input class="controls fieldsContent" type="number" min="0" max="50" step="1" value="0" size="6" id="' + FIELD_DDOS_TIMES+ '" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 7%">' +
 	            '</td></tr>' +
 
 
