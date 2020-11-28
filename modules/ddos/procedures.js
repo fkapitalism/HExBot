@@ -22,15 +22,19 @@ ddos.procedure("checkProgressBar", function(shared, funcs){
     return null
 })
 
-ddos.procedure("launchDDoS", function () {
+ddos.procedure("launchDDoS", function (shared) {
     var btns = document.getElementsByClassName("controls center")
-    btns[0].getElementsByTagName("input")[0].value = controllers.bot.ddos.target
-    btns[1].getElementsByTagName("input")[0].click()
+    //btns[0].getElementsByTagName("input")[0].value = controllers.bot.ddos.target  
+    if(btns.length > 1){
+        btns[0].getElementsByTagName("input")[0].value = shared.ddosTarget
+        btns[1].getElementsByTagName("input")[0].click()
+    }
     return null
 })
 
-ddos.procedure("goToIp", function () {
-    goToPage("/internet?ip=" + controllers.bot.ddos.target)
+ddos.procedure("goToIp", function (shared) {
+    //goToPage("/internet?ip=" + controllers.bot.ddos.target)
+    goToPage("/internet?ip=" + shared.ddosTarget)
     return null
 })
 
@@ -51,19 +55,22 @@ ddos.procedure("cleanTextAreaContent", function (data) {
     return null
 })
 
-ddos.procedure("getInfos", function () {
-    controllers.bot.ddos.target = document.getElementById(FIELD_DDOS_IP).value
-    controllers.bot.ddos.times = document.getElementById(FIELD_DDOS_TIMES).value
+ddos.procedure("getInfos", function (shared) {
+    //controllers.bot.ddos.target = document.getElementById(FIELD_DDOS_IP).value
+    //controllers.bot.ddos.times = document.getElementById(FIELD_DDOS_TIMES).value
+    shared.ddosTarget = controllers.bot.controlPanel.fieldsContent[FIELD_DDOS_IP]
+    shared.ddosTimes = controllers.bot.controlPanel.fieldsContent[FIELD_DDOS_TIMES]
     return null
 })
 
-ddos.procedure("decreaseTimes", function () {
-    controllers.bot.ddos.times--
+ddos.procedure("decreaseTimes", function (shared) {
+    //controllers.bot.ddos.times--
+    shared.ddosTimes = shared.ddosTimes - 1
     return null
 })
 
-ddos.procedure("checkTimes", function () {
-    if(controllers.bot.ddos.times > 0)
+ddos.procedure("checkTimes", function (shared) {
+    if(shared.ddosTimes > 0)
         return true
     return false
 })

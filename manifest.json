@@ -84,6 +84,7 @@
 				"modules/ddos/procedures.js",
 				"modules/ddos/sequences/deleteRelatory.js",
 				"modules/ddos/sequences/run.js",
+				"modules/ddos/sequences/test.js",
 
 				"core/libraries/helpers/classes/Sandbox.js",
 
