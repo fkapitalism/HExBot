@@ -158,9 +158,28 @@ foo.procedure("clickOnAcceptMissionButton", function(shared){
 	return null
 })
 
-foo.procedure("test", function(shared, hooks){
-	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click()
+foo.procedure("test0", function(shared, hooks){
+	shared.destinationAccount = '794301403'
 	return null
+})
+
+foo.procedure("test", function(shared, hooks){
+	/*var accountBalance = */
+	getBankAccountsBalance((result) => {
+		var accountBalance = result[shared.destinationAccount]
+		getBTCExchangeRate((btcExchangeRate) => {
+			var bitcoinsToBuy = roundNumber(accountBalance / btcExchangeRate)
+			if (bitcoinsToBuy >= 0.1){
+				sendMoneyToBTCWallet(shared.destinationAccount, bitcoinsToBuy, () => {
+					console.log("Account " + shared.destinationAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
+					hooks.next()
+				})
+			} else {
+				console.log("Money is not enough to buy a bitcoin")
+				hooks.next()
+			}
+		})
+	})
 })
 
 foo.procedure("clickOnAbortMissionButton", function(shared){
@@ -429,20 +448,21 @@ foo.procedure("waitForSubmitButton", function(shared, funcs){
 foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){
 	if(shared.isBTCLogged){
 		/*var accountBalance = */
+		/*var accountBalance = */
 		getBankAccountsBalance((result) => {
-
 			var accountBalance = result[shared.destinationAccount]
-
-			var bitcoinsToBuy = roundNumber(accountBalance / getBTCExchangeRate())
-			if (bitcoinsToBuy >= 1){
-				sendMoneyToBTCWallet(shared.destinationAccount, bitcoinsToBuy, () => {
-					console.log("Account " + shared.destinationAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
+			getBTCExchangeRate((btcExchangeRate) => {
+				var bitcoinsToBuy = roundNumber(accountBalance / btcExchangeRate)
+				if (bitcoinsToBuy >= 0.1){
+					sendMoneyToBTCWallet(shared.destinationAccount, bitcoinsToBuy, () => {
+						console.log("Account " + shared.destinationAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
+						hooks.next()
+					})
+				} else {
+					console.log("Money is not enough to buy a bitcoin")
 					hooks.next()
-				})
-			} else {
-				console.log("Money is not enough to buy a bitcoin")
-			}
-
+				}
+			})
 		})
 
 	} else {

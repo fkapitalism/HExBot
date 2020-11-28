@@ -217,20 +217,28 @@ camping.procedure("checkFunds", function(shared){
 	}
 })
 
-camping.procedure("sendMoneyToBTCWallet", function(shared){
+camping.procedure("sendMoneyToBTCWallet", function(shared, hooks){
 	if(shared.isBTCLogged){
-		var accountBalance = getBankAccountsBalance()[shared.myAccount]
-		var bitcoinsToBuy = roundNumber(accountBalance / getBTCExchangeRate())
-		if (bitcoinsToBuy >= 1){
-			sendMoneyToBTCWallet(shared.myAccount, bitcoinsToBuy)
-			console.log("Account " + shared.myAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
-		} else {
-			console.log("Money is not enough to buy a bitcoin")
-		}
+		/*var accountBalance = */
+		getBankAccountsBalance((result) => {
+			var accountBalance = result[shared.destinationAccount]
+			getBTCExchangeRate((btcExchangeRate) => {
+				var bitcoinsToBuy = roundNumber(accountBalance / btcExchangeRate)
+				if (bitcoinsToBuy >= 0.1){
+					sendMoneyToBTCWallet(shared.destinationAccount, bitcoinsToBuy, () => {
+						console.log("Account " + shared.destinationAccount + ": $" + accountBalance + " - " + bitcoinsToBuy + " BTC bought")
+						hooks.next()
+					})
+				} else {
+					console.log("Money is not enough to buy a bitcoin")
+					hooks.next()
+				}
+			})
+		})
 	} else {
 		console.log("BTC wallet unavailable")
+		return null
 	}
-	return null
 })
 
 camping.procedure("cancelLogProcesses", function(shared, hooks){

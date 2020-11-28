@@ -18,8 +18,8 @@ var views = {
 
 			const select = document.getElementById(FIELD_BANK_IP_TARGET)
 
-			select.addEventListener("change", () => {
-				controller.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET] = this.value
+			select.addEventListener("change", (e) => {
+				controller.bot.controlPanel.fieldsContent[FIELD_BANK_IP_TARGET] = e.target.value
 				controller.storage.set(controller.bot)
 			})
 
