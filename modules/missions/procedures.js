@@ -72,6 +72,7 @@ foo.procedure("getURLMission", function(shared, internalFunctions){
 			}, 3000)
 		} 
 	}
+	return null
 })
 
 foo.procedure("goToMissionsTab", function(){
@@ -153,6 +154,11 @@ foo.procedure("logout", function(){
 })
 
 foo.procedure("clickOnAcceptMissionButton", function(shared){
+	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click()
+	return null
+})
+
+foo.procedure("test", function(shared, hooks){
 	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click()
 	return null
 })
@@ -336,6 +342,7 @@ foo.procedure("checkProgressBar", function(shared, funcs){
 			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
 		}
 	}, 50)
+	return null
 })
 
 foo.procedure("checkFunds", function(shared){
@@ -416,6 +423,7 @@ foo.procedure("waitForSubmitButton", function(shared, funcs){
 			}
 		}
 	}, 50)
+	return null
 })
 
 foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){
@@ -514,13 +522,6 @@ foo.procedure("checkBTCWallet", function(shared, hooks){
 		return true
 	}
 
-})
-
-foo.procedure("test", function(shared, hooks){
-	getBTCWalletInfo((result) => {
-		console.log(result)
-		hooks.next()
-	});
 })
 
 foo.procedure("getSoftwareId", function(shared, hooks){

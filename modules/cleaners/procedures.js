@@ -106,6 +106,7 @@ cleanersMod.procedure("checkProgressBar", function(shared, funcs){
 			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
 		}
 	}, 50)
+	return null
 })
 
 cleanersMod.procedure("goToLoginPage", function(){

@@ -127,5 +127,6 @@ monitor.procedure("checkTime", function(shared, func){
 			func.sendSignal("try to get the left seconds again")
 		}, 2000)
 	}
+	return null
 })
 

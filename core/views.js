@@ -3,7 +3,7 @@ var views = {
 		var divMain = document.createElement("div")
 		divMain.id = COMMAND_PANEL_DOM_ID
 		divMain.className = "modal hide in"
-		divMain.tabindex = "0"
+		divMain.tabindex = 7
 		divMain['aria-hidden'] = false
 		divMain.style.display = "none"
 
