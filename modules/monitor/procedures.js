@@ -77,7 +77,7 @@ monitor.procedure("queryMissionPage", function(shared, hooks){
 	})
 })
 
-monitor.procedure("checkTime", function(shared, func){
+monitor.procedure("checkTime", function(shared, hooks){
 	function showAlert(){
 		if (!shared.stopShowAlert){
 			views.colorSideBarMenu("missions")
@@ -101,7 +101,7 @@ monitor.procedure("checkTime", function(shared, func){
 		shared.stopShowAlert = false
 		if(now >= shared.timeTarget){
 			showAlert()
-			func.sendSignal("ok, user is alerted")
+			hooks.next("ok, user is alerted")
 		} else {
 			var leftTime = shared.timeTarget - now
 			var loop = setInterval(function(){
@@ -110,7 +110,7 @@ monitor.procedure("checkTime", function(shared, func){
 					if(leftTime <= 0){
 						clearInterval(loop)
 						showAlert()
-						func.sendSignal("ok, user is alerted")
+						hooks.next("ok, user is alerted")
 					}
 				} else {
 					clearInterval(loop)
@@ -124,9 +124,9 @@ monitor.procedure("checkTime", function(shared, func){
 			hideAlert()
 		}	
 		setTimeout(function(){
-			func.sendSignal("try to get the left seconds again")
+			hooks.next("try to get the left seconds again")
 		}, 2000)
 	}
-	return null
+	//return null
 })
 

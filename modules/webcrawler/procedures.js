@@ -560,7 +560,7 @@ webcrawler.procedure("isThereMessageSuccess", function(){
 	return false
 })
 
-webcrawler.procedure("checkProgressBar", function(shared, funcs){
+/*webcrawler.procedure("checkProgressBar", function(shared, funcs){
 	var loop = setInterval(function(){
 		var progressBar = getDOMElement("div", "role", "progressbar", 0)
 		if(!progressBar){
@@ -569,6 +569,16 @@ webcrawler.procedure("checkProgressBar", function(shared, funcs){
 		}
 	}, 50)
 	return null
+})*/
+
+foo.procedure("waitProgressBar", function (shared, hooks) {
+    var loop = setInterval(function () {
+        var progressBar = getDOMElement("div", "role", "progressbar", 0)
+        if (!progressBar) {
+            clearInterval(loop)
+            hooks.next()
+        }
+    }, 100)
 })
 
 webcrawler.procedure("getUserCommandsResult", function(shared, hooks){

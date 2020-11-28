@@ -189,7 +189,7 @@ camping.procedure("transferMoneyToTarget", function(shared){
 	return null
 })
 
-camping.procedure("checkProgressBar", function(shared, funcs){
+/*camping.procedure("checkProgressBar", function(shared, funcs){
 	var loop = setInterval(function(){
 		var progressBar = getDOMElement("div", "role", "progressbar", 0)
 		if(!progressBar){
@@ -198,6 +198,16 @@ camping.procedure("checkProgressBar", function(shared, funcs){
 		}
 	}, 50)
 	return null
+})*/
+
+foo.procedure("waitProgressBar", function (shared, hooks) {
+    var loop = setInterval(function () {
+        var progressBar = getDOMElement("div", "role", "progressbar", 0)
+        if (!progressBar) {
+            clearInterval(loop)
+            hooks.next()
+        }
+    }, 100)
 })
 
 camping.procedure("goToLoginPage", function(){

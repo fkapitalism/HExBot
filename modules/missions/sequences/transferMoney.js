@@ -3,7 +3,7 @@ var foo = $jSpaghetti.module("missions").sequence("transferMoney")
 foo.instructions = [
 	{"@askForPermission": 			"askPermissionToAbort"},
 	{"@init": 						["checkBTCWallet", {"gotoif":["!*.$", "_exit"]}, "startTransferMoney", {"gotoif":["!*.$", "_exit"]}]},
-	{"@tryToGetMission": 			["goToMissionsTab", "checkSameTypeAcceptedMission", {"gotoif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"gotoif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission", {"gotoif":["*.urlMission == null", "@init"]}]},
+	{"@tryToGetMission": 			["goToMissionsTab", "checkSameTypeAcceptedMission", {"gotoif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"gotoif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission","boo", {"gotoif":["*.urlMission == null", "@init"]}]},
 	{"@tryToAcceptMission": 		["goToAcceptMissionPage", "isThereMessageError", {"gotoif": ["*.$", "@init"]}, "clickOnAcceptMissionButton", "waitForSubmitButton", "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"gotoif":["*.$", "@init"]}]},
 	{"@startMissionExecution": 		["getMissionInfo", "logout", "goToNextIp"]},
 	{"@hackAccountProcess": 		["hackAccount", "isCrackerStrongEnough", {"gotoif":["!*.$", "@abortProcess"]}, "isThereMessageError", {"gotoif":["*.$", "@signInAccountAndTransfer"]}, "waitProgressBar"]},
