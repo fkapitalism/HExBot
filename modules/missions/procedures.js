@@ -363,7 +363,7 @@ foo.procedure("clickOnFinishButton", function(){
 	return null
 })*/
 
-cleanersMod.procedure("waitProgressBar", function (shared, hooks) {
+foo.procedure("waitProgressBar", function (shared, hooks) {
     var loop = setInterval(function () {
         var progressBar = getDOMElement("div", "role", "progressbar", 0)
         if (!progressBar) {
