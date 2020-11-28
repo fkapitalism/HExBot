@@ -1,7 +1,7 @@
 var foo = $jSpaghetti.module("missions")
 foo.config.debugMode = true
 
-foo.procedure("getURLMission", function(shared, internalFunctions){
+foo.procedure("getURLMission", function(shared, hooks){
 
 	var labels = {
 				checkBalance: ["Verificar balanço bancário", "Check bank status"],
@@ -47,7 +47,7 @@ foo.procedure("getURLMission", function(shared, internalFunctions){
 	shared.urlMission = urlMission
 
 	if (urlMission){
-		internalFunctions.sendSignal("Ok. I got a mission.")
+		hooks.next("Ok. I got a mission.")
 	} else {
 		var timeToNextMissions = getDOMElement("b", null, null, 0).childNodes[0].nodeValue; //Get the time missing to next missions package
 		if (timeToNextMissions > 0){
@@ -62,17 +62,16 @@ foo.procedure("getURLMission", function(shared, internalFunctions){
 						counterDelay++;
 						if (counterDelay >= count) {
 							clearInterval(delay);
-							internalFunctions.sendSignal("Ok. Time is over.")
+							hooks.next("Ok. Time is over.")
 						}
 					}, 1000); //Repeat the function every second
 
 		} else {
 			setTimeout(function(){
-				internalFunctions.sendSignal("Ok. I got time 0.")
+				hooks.next("Ok. I got time 0.")
 			}, 3000)
 		} 
 	}
-	return null
 })
 
 foo.procedure("goToMissionsTab", function(){
@@ -353,7 +352,7 @@ foo.procedure("clickOnFinishButton", function(){
 	 return null
 })
 
-foo.procedure("checkProgressBar", function(shared, funcs){
+/*foo.procedure("checkProgressBar", function(shared, funcs){
 	var loop = setInterval(function(){
 		var progressBar = getDOMElement("div", "role", "progressbar", 0)
 		if(!progressBar){
@@ -362,7 +361,18 @@ foo.procedure("checkProgressBar", function(shared, funcs){
 		}
 	}, 50)
 	return null
+})*/
+
+cleanersMod.procedure("waitProgressBar", function (shared, hooks) {
+    var loop = setInterval(function () {
+        var progressBar = getDOMElement("div", "role", "progressbar", 0)
+        if (!progressBar) {
+            clearInterval(loop)
+            hooks.next()
+        }
+    }, 100)
 })
+
 
 foo.procedure("checkFunds", function(shared){
 	var fundsContainer = getDOMElement("ul", "class", "finance-box", 0)
@@ -423,7 +433,7 @@ foo.procedure("goToPageAccountLoginPage", function(shared){
 	return null
 })
 
-foo.procedure("waitForSubmitButton", function(shared, funcs){
+/*foo.procedure("waitForSubmitButton", function(shared, funcs){
 	var loop = setInterval(function(){
 		var button = getDOMElement("input", "type", "submit", 0)
 		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
@@ -443,6 +453,27 @@ foo.procedure("waitForSubmitButton", function(shared, funcs){
 		}
 	}, 50)
 	return null
+})*/
+
+foo.procedure("waitForSubmitButton", function(shared, hooks){
+	var loop = setInterval(function(){
+		var button = getDOMElement("input", "type", "submit", 0)
+		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
+		if (button){
+			if ((!button.disabled) && (strposOfArray(button.value, labels) >= 0)){
+				clearInterval(loop)
+				var destinationAccountContainer = document.getElementById("s2id_select-bank-acc")
+				if(destinationAccountContainer){
+					var account = destinationAccountContainer.innerHTML.match(/#[0-9]+/gm)
+					if ((account) && (account.length > 0))
+					shared.destinationAccount = account[0].replace("#", "")
+				} else {
+					shared.destinationAccount = null
+				}
+				hooks.next("Button is ready!")
+			}
+		}
+	}, 100)
 })
 
 foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){

@@ -11,7 +11,7 @@ ddos.procedure("goToDDoSPage", function () {
     return null
 })
 
-ddos.procedure("checkProgressBar", function(shared, funcs){
+/*ddos.procedure("checkProgressBar", function(shared, funcs){
 	var loop = setInterval(function(){
 		var progressBar = getDOMElement("div", "role", "progressbar", 0)
 		if(!progressBar){
@@ -20,6 +20,16 @@ ddos.procedure("checkProgressBar", function(shared, funcs){
 		}
 	}, 50)
     return null
+})*/
+
+cleanersMod.procedure("waitProgressBar", function (shared, hooks) {
+    var loop = setInterval(function () {
+        var progressBar = getDOMElement("div", "role", "progressbar", 0)
+        if (!progressBar) {
+            clearInterval(loop)
+            hooks.next()
+        }
+    }, 100)
 })
 
 ddos.procedure("launchDDoS", function (shared) {
