@@ -3,10 +3,11 @@ ddos.config.debugMode = true
 
 ddos.procedure("goToSoftwarePage", function () {
     goToPage("/software")
-})
+    return null
 
 ddos.procedure("goToDDoSPage", function () {
     goToPage("/list?action=ddos")
+    return null
 })
 
 ddos.procedure("checkProgressBar", function(shared, funcs){
@@ -17,20 +18,24 @@ ddos.procedure("checkProgressBar", function(shared, funcs){
 			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
 		}
 	}, 50)
+    return null
 })
 
 ddos.procedure("launchDDoS", function () {
     var btns = document.getElementsByClassName("controls center")
     btns[0].getElementsByTagName("input")[0].value = controllers.bot.ddos.target
     btns[1].getElementsByTagName("input")[0].click()
+    return null
 })
 
 ddos.procedure("goToIp", function () {
     goToPage("/internet?ip=" + controllers.bot.ddos.target)
+    return null
 })
 
 ddos.procedure("goToOwnLogTab", function () {
     goToPage("/log")
+    return null
 })
 
 ddos.procedure("cleanTextAreaContent", function (data) {
@@ -42,15 +47,18 @@ ddos.procedure("cleanTextAreaContent", function (data) {
     } else {
         data.isEmpty = true
     }
+    return null
 })
 
 ddos.procedure("getInfos", function () {
     controllers.bot.ddos.target = document.getElementById(FIELD_DDOS_IP).value
     controllers.bot.ddos.times = document.getElementById(FIELD_DDOS_TIMES).value
+    return null
 })
 
 ddos.procedure("decreaseTimes", function () {
     controllers.bot.ddos.times--
+    return null
 })
 
 ddos.procedure("checkTimes", function () {
@@ -68,13 +76,15 @@ ddos.procedure("isThereMessageError", function(shared){
 	return shared.isThereMError
 })
 
-ddos.procedure("deleteRelatory", function () {
-    var elms = $(".link.delete-ddos");
+ddos.procedure("deleteRelatory", function (shared, hooks) {
+    //var elms = $(".link.delete-ddos");
+    const elms =  document.querySelector('.link.delete-ddos');
     if (elms.length > 0) {
         var Rate = elms[0];
         Rate.click();
         setTimeout(function () {
             document.getElementById("modal-form").submit();
+            hooks.next()
         }, 1000);
     }
 })
