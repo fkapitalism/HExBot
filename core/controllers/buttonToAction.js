@@ -81,6 +81,24 @@ function buttonToAction(){
 	})
 
 
+	document.getElementById(PERFORM_WEBCRAWLER_SCRIPT_RUNNING).addEventListener("click", (e) => {
+		const scriptRunner = $jSpaghetti.module("webcrawler")
+		e.target.style.visibility = "hidden"
+		scriptRunner.procedures['getUserCommandsResult']({}, 
+			{
+				next: (result) => {
+					console.warn("WEBCRAWLER SCRIPT RESULT", result)
+					e.target.style.visibility = "visible"
+					const messageElem = document.getElementById(AREA_WARN_WEBCRAWLER).style.visibility = "visible"
+					setTimeout(() => { 
+						document.getElementById(AREA_WARN_WEBCRAWLER).style.visibility = "hidden"
+					}, 3000);
+				}
+			}
+		)
+	});
+
+
 	document.getElementById(INFO_ALERT).addEventListener("click", function(){
 		window.alert(LANG.WARNING_BUTTON)
 	})

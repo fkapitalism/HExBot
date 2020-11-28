@@ -26,6 +26,7 @@
 
 				"core/libraries/helpers/functions/detectLang.js",
 				"core/lang/en.js",
+				"core/lang/el.js",
 				"core/lang/de.js",
 				"core/lang/br.js",
 				"core/lang/settings.js",

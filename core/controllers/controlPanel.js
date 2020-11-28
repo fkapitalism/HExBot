@@ -8,6 +8,8 @@ function controlPanel(){
 	} else {
 		DETECTED_LANG = controllers.bot.controlPanel.fieldsContent[LANGUAGE_FIELD]
 	}
+
+	if(!LANG_CONTENT[DETECTED_LANG]) DETECTED_LANG = LANG_EN;
 	LANG = LANG_CONTENT[DETECTED_LANG];
 
 	views.appendControlPanel(controllers)
@@ -117,6 +119,12 @@ function controlPanel(){
 			controllers.storage.set(controllers.bot)
 		})
 	}
+
+	document.getElementById(LANGUAGE_FIELD).addEventListener("keyup", (e) => {
+		if (event.key === "Enter") {
+			location.reload();
+		}
+	})
 
 	//Hide command panel if close button is pressed
 	document.getElementById(COMMAND_PANEL_CLOSE_BUTTON_DOM_ID).addEventListener("click", function(){

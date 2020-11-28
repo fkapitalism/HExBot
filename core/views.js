@@ -6,6 +6,7 @@ var views = {
 		divMain.tabindex = 7
 		divMain['aria-hidden'] = false
 		divMain.style.display = "none"
+		//divMain.style.fontSize = "70%"
 
 		var bankInfo = []
 		//var bankInfo = getBankAccountAddr()
@@ -32,15 +33,16 @@ var views = {
 			}
 		})
 
-		var selectIpList = '<select id="' + FIELD_BANK_IP_TARGET + '">'
-		
-		selectIpList += '</select>'
+		var selectIpList =  `
+			<select id="${FIELD_BANK_IP_TARGET}" style="margin:0;">
+			</select>
+		`;
 		divMain.innerHTML =
 			'<div class="widget-title">' +
 				'<h5>' + LANG.CONTROL_PANEL_TITLE + '</h5>' +
-				'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger" style="float: right">X</span>' +
-				'<span id="' + INFO_ALERT + '" class="btn btn-warning" style="float: right">!</span>' +
-				'<span id="' + CREDITS_INFO + '" class="btn btn-info" style="float: right">:)</span>' +
+				'<span id="' + COMMAND_PANEL_CLOSE_BUTTON_DOM_ID + '" class="btn btn-danger" style="float: right"><i class="fa fa-times-circle" aria-hidden="true"></i></span>' +
+				'<span id="' + INFO_ALERT + '" class="btn btn-warning" style="float: right"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span>' +
+				'<span id="' + CREDITS_INFO + '" class="btn btn-info" style="float: right"><i class="fa fa-users" aria-hidden="true"></i></span>' +
 				'<span id="' + SET_CONFIG_PANEL + '" class="btn btn-secondary" style="float: right"><i class="fa fa-cog" aria-hidden="true"></i></span>' +
 			'</div>' +
 			'<div id="' + MAIN_SCREEN_DOM_ID + '" class="modal-body" style="max-height:405px">' +
@@ -48,30 +50,30 @@ var views = {
 				'<table class="table">' +
 				'<tbody>' +
 				'<tr class="info"><td>' + 
-				'<button id="' + PERFORM_DELETE_SOFTWARE_ID + '" class="btn btn-success">' + LANG.PERFORM_DELETE_SOFTWARE + '</button> '+
-				'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn btn-warning">' + LANG.PERFORM_MEDIUM_MISSIONS + '</button> ' +
-				'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn btn-danger">' + LANG.PERFORM_HARD_MISSIONS + '</button>'+
+				'<button id="' + PERFORM_DELETE_SOFTWARE_ID + '" class="btn-xs btn-success">' + LANG.PERFORM_DELETE_SOFTWARE + '</button> '+
+				'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn-xs btn-warning">' + LANG.PERFORM_MEDIUM_MISSIONS + '</button> ' +
+				'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn-xs btn-danger">' + LANG.PERFORM_HARD_MISSIONS + '</button>'+
 				'<br /><br />' +
-				'<button id="' + PERFORM_BANK_CAMPING + '" class="btn btn-info">' + LANG.INTERCEPT_TRANSACTIONS + '</button>' +
+				'<button id="' + PERFORM_BANK_CAMPING + '" class="btn-xs btn-info">' + LANG.INTERCEPT_TRANSACTIONS + '</button>' +
 				selectIpList +
 
-				'<label><input class="checkBoxes" id="' + SET_TRANSFER_TO_BTC + '"type="checkbox"><span>' + LANG.TRANSFER_TO_BTC + '</span></label>' +
+				'<label style="margin:0; margin-top: 10px;"><input class="checkBoxes" id="' + SET_TRANSFER_TO_BTC + '"type="checkbox" style="margin:0;"><span style="margin-left:4px;">' + LANG.TRANSFER_TO_BTC + '</span></label>' +
 				'</td></tr>' +
 
-				'<tr class="warning"><td>' + 
-				'<button id="' + SET_CLEAN_OWN_LOGS_DOM_ID + '" class="btn btn-secondary">' + LANG.CLEAN_OWN_LOGS + '</button> ' +
-				'<button id="' + SET_CLEAN_TARGET_LOGS_DOM_ID + '" class="btn btn-secondary">' + LANG.CLEAN_VICTIM_LOGS + '</button> ' +
-				'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn btn-secondary">' + LANG.ACCESS_CLEAR + '</button> ' +
+				'<tr class="warning"><td style="padding-bottom:0;">' + 
+				'<button id="' + SET_CLEAN_OWN_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.CLEAN_OWN_LOGS + '</button> ' +
+				'<button id="' + SET_CLEAN_TARGET_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.CLEAN_VICTIM_LOGS + '</button> ' +
+				'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.ACCESS_CLEAR + '</button> ' +
 				'</td></tr>' +
 
 				'<tr class="info"><td>' + 
-				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn btn-info">' + LANG.RUN_WEBCRAWLER + '</button> ' + LANG.WEBCRAWLER_INITIAL_HOSTS + '<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + 
-				'<label><input type="checkbox" class="checkBoxes" id="' + SET_IGNORE_LIST + '">' + LANG.WEBCRAWLER_IGNORE_HOSTS + '<input id="' + FIELD_HOSTS_TO_IGNORE + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:25%"></label>' +
+				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn-xs btn-info">' + LANG.RUN_WEBCRAWLER + '</button> ' + LANG.WEBCRAWLER_INITIAL_HOSTS + '<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + 
+				'<label style="margin:0;"><input type="checkbox" class="checkBoxes" id="' + SET_IGNORE_LIST + '" style="margin:0;"><span style="margin-left:4px;">' + LANG.WEBCRAWLER_IGNORE_HOSTS + '</span><input id="' + FIELD_HOSTS_TO_IGNORE + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:25%"></label>' +
 				//'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span>' + LANG.WEBCRAWLER_UPLOAD_SOFTWARES + '</span><input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="' + LANG.WEBCRAWLER_UPLOAD_SOFTWARE_MODEL + '" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:25%"">' + LANG.WEBCRAWLER_UPLOAD_WAIT + '<input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="' + LANG.SECONDS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:12%"></label>' +
 				
-				'<center><b>' + LANG.WEBCRAWLER_SCRIPT_TITLE + '</b> <a href="https://hexbotwiki.000webhostapp.com/doku.php?id=custom_rules" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i></a></center>' +
+				'<i>' + LANG.WEBCRAWLER_SCRIPT_TITLE + '</i> <a href="https://hexbotwiki.000webhostapp.com/doku.php?id=custom_rules" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;<a href="#" id="' + PERFORM_WEBCRAWLER_SCRIPT_RUNNING + '"><i class="fa fa-play-circle" aria-hidden="true"></i></a>&nbsp;<small style="visibility: hidden; color:green;" id="' + AREA_WARN_WEBCRAWLER + '">' + LANG.WARN_WEBCRAWLER_RESULT + '</small>' +
 				//'<center><textarea id="' + WEBCRAWLER_SCRIPT + '" class="controls fieldsContent" style="width: 95%; resize: vertical; color:#80f980; background-color:black; font-family:monospace"></textarea>' + 
-				'<center><div id="' + WEBCRAWLER_SCRIPT + '" style=" width: 510px; height: 70px;">console.log()</div>' + 
+				'<center><div id="' + WEBCRAWLER_SCRIPT + '" style=" width: 510px; height: 50px;">console.log()</div>' + 
 
 
 				'<center><textarea id="' + WEBCRAWLER_SCRIPT_DEBUG + '" class="controls fieldsContent" style="width: 95%; resize: vertical; color:white; background-color:red; font-family:monospace"></textarea>' +
@@ -81,8 +83,14 @@ var views = {
 				'</td></tr>' +
 				
 				'<tr class="warning"><td>' + 
-				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn btn-info">' + LANG.UPDATE_CRACKER + '</button> ' +
+				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn-xs btn-info">' + LANG.UPDATE_CRACKER + '</button> ' +
 				'</td></tr>' +
+
+
+				'<tr class="info"><td>' +
+					'<button id="' + SET_START_DDOSES + '" class="btn-xs btn-info">' + LANG.RUN_DDOSER + '</button> ' + '<input id="' + FIELD_DDOS_IP + '" class="controls fieldsContent" placeholder="' + LANG.DDOS_IP  + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + LANG.DDOS_TIMES + '<input type="number" min="0" max="50" step="1" value="0" size="6" id="' + FIELD_DDOS_TIMES+ '" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 7%">' +
+	            '</td></tr>' +
+
 
 				'</tbody>' +
 				'</table>' + 
@@ -94,6 +102,7 @@ var views = {
 				'<a href="https://github.com/dominicusdev">dominicusdev</a> - ' + LANG.CREDITS_dominicusdev + '<br />' +
 				'<a href="https://github.com/gresendesa">gresendesa</a> - ' + LANG.CREDITS_gresendesa + '<br />' +
 				'<a href="https://github.com/Klorker">Klorker</a> - ' + LANG.CREDITS_Klorker + '<br />' +
+				'<a href="https://github.com/Logfro">Logfro</a> - ' + LANG.CREDITS_Logfro + '<br />' +
 				'<a href="https://github.com/perfilrobo">perfilrobo</a> - ' + LANG.CREDITS_perfilrobo + '<br />' +
 				'<a href="https://github.com/Quartz101">Quartz101</a> - ' + LANG.CREDITS_Quartz101 + '<br />' +
 				'<a href="https://github.com/sjs1985">sjs1985</a> - ' + LANG.CREDITS_sjs1985 + '<br />' +
@@ -101,7 +110,7 @@ var views = {
 				'<a href="https://github.com/AssHole12">AssHole12</a> - ' + LANG.CREDITS_AssHole12 + '<br /><br />' +
 				LANG.CREDITS_OTHERS +
 				'</div><br />' +
-				'<button id="back-to-main" class="btn btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
+				'<button id="back-to-main" class="btn-xs btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
 			'</div>' + 
 			'<div id="' + CONFIG_PANEL + '" class="modal-body" style="max-height:405px">' +
 				'<div style="font-size: 15px;" id="' + CONFIG_AREA + '">' +
@@ -127,9 +136,9 @@ var views = {
 
 					'<h4>' + LANG.CONFIG_LANG_NAME + '</h4>'+
 					'<div class="divider">'+
-						'<label><input class="fieldsContent" id="' + LANGUAGE_FIELD + '" type="text"><span> <b>br</b>, <b>en</b>, <b>de</b></span></label>' +
+						'<label><input class="fieldsContent" id="' + LANGUAGE_FIELD + '" type="text"><span> <b>br</b>, <b>de</b>, <b>el</b>, <b>en</b></span></label>' +
 					'</div>'+
-					'<button id="' + CONFIG_TO_MAIN + '" class="btn btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
+					'<button id="' + CONFIG_TO_MAIN + '" class="btn-xs btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
 				'</div>'+
 
 				'</div><br />' +

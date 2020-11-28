@@ -598,7 +598,7 @@ webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 		}
 		controllers.storage.set(controllers.bot)
 
-		hooks.next()
+		hooks.next(result)
 		//return null
 
 	})
