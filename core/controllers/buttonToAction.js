@@ -96,8 +96,15 @@ function buttonToAction(){
 				}
 			}
 		)
-	});
+	})
 
+	document.getElementById(SET_START_DDOSES).addEventListener("click", function(){
+		controllers.functions.executeSequence("ddos", "run")
+	})
+	document.getElementById(SET_START_DDOSES).addEventListener("contextmenu", function(e){
+		e.preventDefault() 
+		controllers.functions.executeSequence("ddos", "test")
+	})
 
 	document.getElementById(INFO_ALERT).addEventListener("click", function(){
 		window.alert(LANG.WARNING_BUTTON)

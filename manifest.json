@@ -81,6 +81,10 @@
 				"modules/assistant/sequences/accessChat.js",
 				"modules/botkit/sequences/test.js",
 
+				"modules/ddos/procedures.js",
+				"modules/ddos/sequences/deleteRelatory.js",
+				"modules/ddos/sequences/run.js",
+
 				"core/libraries/helpers/classes/Sandbox.js",
 
 				"core/libraries/helpers/functions/strposOfArray.js",

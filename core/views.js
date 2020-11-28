@@ -65,8 +65,18 @@ var views = {
 				'<button id="' + SET_CLEAN_TARGET_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.CLEAN_VICTIM_LOGS + '</button> ' +
 				'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.ACCESS_CLEAR + '</button> ' +
 				'</td></tr>' +
-
+				
 				'<tr class="info"><td>' + 
+				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn-xs btn-info">' + LANG.UPDATE_CRACKER + '</button> ' +
+				'</td></tr>' +
+
+
+				'<tr class="warning"><td>' +
+					'<button id="' + SET_START_DDOSES + '" class="btn-xs btn-info">' + LANG.RUN_DDOSER + '</button> ' + '<input id="' + FIELD_DDOS_IP + '" class="controls fieldsContent" placeholder="' + LANG.DDOS_IP  + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + LANG.DDOS_TIMES + '<input class="controls fieldsContent" type="number" min="0" max="50" step="1" value="0" size="6" id="' + FIELD_DDOS_TIMES+ '" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 7%">' +
+	            '</td></tr>' +
+
+
+	            '<tr class="info"><td>' + 
 				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn-xs btn-info">' + LANG.RUN_WEBCRAWLER + '</button> ' + LANG.WEBCRAWLER_INITIAL_HOSTS + '<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + 
 				'<label style="margin:0;"><input type="checkbox" class="checkBoxes" id="' + SET_IGNORE_LIST + '" style="margin:0;"><span style="margin-left:4px;">' + LANG.WEBCRAWLER_IGNORE_HOSTS + '</span><input id="' + FIELD_HOSTS_TO_IGNORE + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:25%"></label>' +
 				//'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span>' + LANG.WEBCRAWLER_UPLOAD_SOFTWARES + '</span><input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="' + LANG.WEBCRAWLER_UPLOAD_SOFTWARE_MODEL + '" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:25%"">' + LANG.WEBCRAWLER_UPLOAD_WAIT + '<input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="' + LANG.SECONDS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:12%"></label>' +
@@ -81,16 +91,6 @@ var views = {
 				'<center><textarea id="' + FIELD_IP_SEARCH_RESULT + '" class="controls fieldsContent" style="width: 95%; resize: vertical; font-family:monospace"></textarea>' + 
 				'<input id="' + REGEX_INPUT_DOM_ID + '" class="controls fieldsContent" type="search" style="width: 95%;" placeholder="' + LANG.WEBCRAWLER_FILTER_WITH + '"></center>' +
 				'</td></tr>' +
-				
-				'<tr class="warning"><td>' + 
-				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn-xs btn-info">' + LANG.UPDATE_CRACKER + '</button> ' +
-				'</td></tr>' +
-
-
-				'<tr class="info"><td>' +
-					'<button id="' + SET_START_DDOSES + '" class="btn-xs btn-info">' + LANG.RUN_DDOSER + '</button> ' + '<input id="' + FIELD_DDOS_IP + '" class="controls fieldsContent" placeholder="' + LANG.DDOS_IP  + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + LANG.DDOS_TIMES + '<input class="controls fieldsContent" type="number" min="0" max="50" step="1" value="0" size="6" id="' + FIELD_DDOS_TIMES+ '" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 7%">' +
-	            '</td></tr>' +
-
 
 				'</tbody>' +
 				'</table>' + 
