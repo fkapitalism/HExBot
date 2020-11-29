@@ -159,8 +159,39 @@ foo.procedure("logout", function(){
 })
 
 foo.procedure("clickOnAcceptMissionButton", function(shared){
-	getDOMElement("span", "class", "btn btn-success mission-accept", 0).click()
+	const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
+	console.log(button)
+	button.click()
 	return null
+})
+
+//Click on the div float Accept mission button
+foo.procedure("clickOnConfirmAcceptMissionButton", function(shared){
+	const button = getDOMElement("input", "type", "submit", 0)
+	console.log(button)
+	button.click()
+	return null
+})
+
+foo.procedure("waitForSubmitButton", function(shared, hooks){
+	var loop = setInterval(function(){
+		var button = getDOMElement("input", "type", "submit", 0)
+		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
+		if (button){
+			if ((!button.disabled) && (strposOfArray(button.value, labels) >= 0)){
+				clearInterval(loop)
+				var destinationAccountContainer = document.getElementById("s2id_select-bank-acc")
+				if(destinationAccountContainer){
+					var account = destinationAccountContainer.innerHTML.match(/#[0-9]+/gm)
+					if ((account) && (account.length > 0))
+					shared.destinationAccount = account[0].replace("#", "")
+				} else {
+					shared.destinationAccount = null
+				}
+				hooks.next("Button is ready!")
+			}
+		}
+	}, 100)
 })
 
 foo.procedure("test0", function(shared, hooks){
@@ -204,12 +235,6 @@ foo.procedure("showMessage", function(shared){
 foo.procedure("clickOnConfirmAbortMissionButton", function(shared){
 	getDOMElement("input", "type", "submit", 0).click()
 	return null
-})
-
-//Click on the div float Accept mission button
-foo.procedure("clickOnConfirmAcceptMissionButton", function(shared){
-	getDOMElement("input", "type", "submit", 0).click()
-	return null 
 })
 
 foo.procedure("isThereMessageError", function(){
@@ -460,27 +485,6 @@ foo.procedure("goToPageAccountLoginPage", function(shared){
 	}, 50)
 	return null
 })*/
-
-foo.procedure("waitForSubmitButton", function(shared, hooks){
-	var loop = setInterval(function(){
-		var button = getDOMElement("input", "type", "submit", 0)
-		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
-		if (button){
-			if ((!button.disabled) && (strposOfArray(button.value, labels) >= 0)){
-				clearInterval(loop)
-				var destinationAccountContainer = document.getElementById("s2id_select-bank-acc")
-				if(destinationAccountContainer){
-					var account = destinationAccountContainer.innerHTML.match(/#[0-9]+/gm)
-					if ((account) && (account.length > 0))
-					shared.destinationAccount = account[0].replace("#", "")
-				} else {
-					shared.destinationAccount = null
-				}
-				hooks.next("Button is ready!")
-			}
-		}
-	}, 100)
-})
 
 foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){
 	if(shared.isBTCLogged){
