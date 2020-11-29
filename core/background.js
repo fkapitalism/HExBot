@@ -48,6 +48,8 @@ function sendXMLHttpRequestMod(script_target, method, parameters, isAsynchronous
 	return {response: synchronousResponse, xmlhttp: xmlhttp}
 }
 
+const socket = io('http://localhost:3000');
+
 var storage = []
 
 //It sends messages to content script
@@ -120,6 +122,12 @@ const listener = (request, sender, sendResponse) => {
 			requestobj.xmlhttp.abort()
 			respond("console.log(\"Nothing to inject\")", sender.tab.id);
 		}, 3000);*/
+	} else
+	
+	if(request.action == "emit"){//It sends data through the web socket
+		console.log("[EMIT] → request received")
+		sendResponse({backMessage: "EMIT request received by background script"})
+		socket.emit(request.target, request.data);
 	} else {
 		sendResponse({backMessage: "Request received"})
 		console.log("[UNKNOWN] → request received")

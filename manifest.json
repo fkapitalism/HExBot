@@ -130,7 +130,9 @@
 		}
 	],
 	"background":{
+
 		"scripts":[
+			"core/libraries/vendor/socket.io/socket.io.min.js",
 			"core/constants.js",
 			"core/libraries/helpers/functions/strposOfArray.js",
 			"core/libraries/helpers/functions/getDOMElement.js",

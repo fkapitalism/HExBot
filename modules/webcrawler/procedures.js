@@ -629,4 +629,12 @@ webcrawler.procedure("isHiddingRequired", function(shared, funcs){
 })
 
 
+webcrawler.procedure("emitData", function(shared, hooks){
+	var request = new BGRequest('emit', 'test', {'message':'go'})
+	chrome.runtime.sendMessage(null, {message: request}, {}, function(responseMessage) {
+		hooks.next();
+		return true;
+	});
+})
+
 
