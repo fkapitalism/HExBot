@@ -200,7 +200,7 @@ camping.procedure("transferMoneyToTarget", function(shared){
 	return null
 })*/
 
-foo.procedure("waitProgressBar", function (shared, hooks) {
+camping.procedure("waitProgressBar", function (shared, hooks) {
     var loop = setInterval(function () {
         var progressBar = getDOMElement("div", "role", "progressbar", 0)
         if (!progressBar) {

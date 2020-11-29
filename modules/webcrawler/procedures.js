@@ -571,7 +571,7 @@ webcrawler.procedure("isThereMessageSuccess", function(){
 	return null
 })*/
 
-foo.procedure("waitProgressBar", function (shared, hooks) {
+webcrawler.procedure("waitProgressBar", function (shared, hooks) {
     var loop = setInterval(function () {
         var progressBar = getDOMElement("div", "role", "progressbar", 0)
         if (!progressBar) {
