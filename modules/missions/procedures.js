@@ -158,19 +158,27 @@ foo.procedure("logout", function(){
 	return null
 })
 
-foo.procedure("clickOnAcceptMissionButton", function(shared){
-	const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
-	console.log(button)
-	button.click()
-	return null
+foo.procedure("clickOnAcceptMissionButton", function(shared, hooks){
+	var loop = setInterval(function(){
+		clearInterval(loop)
+		const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
+		if (button){
+			button.click()
+			hooks.next()
+		}
+	}, 100)
 })
 
 //Click on the div float Accept mission button
-foo.procedure("clickOnConfirmAcceptMissionButton", function(shared){
-	const button = getDOMElement("input", "type", "submit", 0)
-	console.log(button)
-	button.click()
-	return null
+foo.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){	
+	var loop = setInterval(function(){
+		clearInterval(loop)
+		const button = getDOMElement("input", "type", "submit", 0)
+		if (button){
+			button.click()
+			hooks.next()
+		}
+	}, 100)
 })
 
 foo.procedure("waitForSubmitButton", function(shared, hooks){
@@ -178,7 +186,10 @@ foo.procedure("waitForSubmitButton", function(shared, hooks){
 		var button = getDOMElement("input", "type", "submit", 0)
 		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
 		if (button){
-			if ((!button.disabled) && (strposOfArray(button.value, labels) >= 0)){
+			const hasText = labels.find((l) => {
+				return button.value.includes(l)
+			});
+			if ((!button.disabled) && (hasText)){
 				clearInterval(loop)
 				var destinationAccountContainer = document.getElementById("s2id_select-bank-acc")
 				if(destinationAccountContainer){
@@ -307,21 +318,35 @@ foo.procedure("hackTargetBruteForce", function(){
 	return null
 })
 
-foo.procedure("cleanMyIpClues", function(data, hooks){
-	getMyIp(true, (myip) => {
-		var textArea = getDOMElement("textarea", "class", "logarea", 0)
-		if (textArea.value.length > 0){
-			data.isEmpty = false
-			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-			var pattern = new RegExp("^.*" + myip + ".*$")
-			textArea.value = removeLinesFromText(textArea.value, pattern)
-			getDOMElement("input", "class", "btn btn-inverse", "last").click()
-		} else {
-			data.isEmpty = true
-		}
-		if(data.cleanerCount != undefined) data.cleanerCount++
+foo.procedure("init", function(shared, hooks){
+	getMyIp(false, (myip) => {
+		shared.myIp = myip
 		hooks.next()
 	})
+})
+
+foo.procedure("cleanMyIpClues", function(data, hooks){
+	//getMyIp(true, (myip) => {
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	if (textArea.value.length > 0){
+		data.isEmpty = false
+		//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+
+		const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
+		var ips = extractIPsFromText(ipsSource, [data.myIp])
+		console.log("ips found", ips)
+		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
+		controllers.storage.set(controllers.bot)
+
+		var pattern = new RegExp("^.*" + myip + ".*$")
+		textArea.value = removeLinesFromText(textArea.value, pattern)
+		getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	} else {
+		data.isEmpty = true
+	}
+	if(data.cleanerCount != undefined) data.cleanerCount++
+	hooks.next()
+	//})
 })
 
 foo.procedure("cleanTextAreaContent", function(data){

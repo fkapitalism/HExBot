@@ -76,36 +76,36 @@ foo.procedure("submitLogs", function(shared){
 
 foo.procedure("test", function(){
 	const text = `
-		fdsafd[12.3.45.45 3.4.2.1  3.4.2.1
-		192.368.0.53(
-			`;
-			var ips = extractIPsFromText(text, ['3.4.2.1'])
-			console.log(ips)
-		})
+	fdsafd[12.3.45.45 3.4.2.1  3.4.2.1
+	192.368.0.53(
+	`;
+	var ips = extractIPsFromText(text, ['3.4.2.1'])
+	console.log(ips)
+})
 		
-		foo.procedure("cleanMyIpClues", function(data, hooks){
+foo.procedure("cleanMyIpClues", function(data, hooks){
 		
-			getMyIp(true, (myip) => {
-				var textArea = getDOMElement("textarea", "class", "logarea", 0)
-				if (textArea.value.length > 0){
-					data.isEmpty = false
-		
-					const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
-					var ips = extractIPsFromText(ipsSource, [myip])
-					console.log("ips found", ips)
-					controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
-					controllers.storage.set(controllers.bot)
+	//getMyIp(true, (myip) => {
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	if (textArea.value.length > 0){
+		data.isEmpty = false
 
-			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-			var pattern = new RegExp("^.*" + myip + ".*$")
-			textArea.value = removeLinesFromText(textArea.value, pattern)
-			getDOMElement("input", "class", "btn btn-inverse", "last").click()
-		} else {
-			data.isEmpty = true
-		}
-		if(data.cleanerCount != undefined) data.cleanerCount++
+		const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
+		var ips = extractIPsFromText(ipsSource, [data.myIp])
+		console.log("ips found", ips)
+		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
+		controllers.storage.set(controllers.bot)
+
+		//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+		var pattern = new RegExp("^.*" + data.myIp + ".*$")
+		textArea.value = removeLinesFromText(textArea.value, pattern)
+		getDOMElement("input", "class", "btn btn-inverse", "last").click()
+	} else {
+		data.isEmpty = true
+	}
+	if(data.cleanerCount != undefined) data.cleanerCount++
 		hooks.next()
-	})
+	//})
 		
 })
 

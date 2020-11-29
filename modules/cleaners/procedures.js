@@ -37,6 +37,13 @@ cleanersMod.procedure("cleanMyIpClues", function(shared, hooks){
 		var textArea = getDOMElement("textarea", "class", "logarea", 0)
 		if (textArea){
 			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+
+			const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
+			var ips = extractIPsFromText(ipsSource, [myip])
+			console.log("ips found", ips)
+			controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
+			controllers.storage.set(controllers.bot)
+
 			var pattern = new RegExp("^.*" + myip + ".*$")
 			var textFiltered = removeLinesFromText(textArea.value, pattern)
 			if (textArea.value != textFiltered){

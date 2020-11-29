@@ -7,48 +7,54 @@ Storage = function(storageName){
 		this.data = data
 	}
 	this.get = function(callback){
-		const request = new Request("get", this.storageName)
-		chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
-			//console.log(response.backMessage)
-			const runSequence = function(getResponse, sender, sendResponse) {
-				sendResponse({backMessage: "GET response received by content script"})
-				//console.log("GET response", getResponse.message)
-				if(callback) callback(getResponse.message)
-				chrome.extension.onMessage.removeListener(runSequence)
+		if(typeof chrome.runtime !== 'undefined'){
+			const request = new Request("get", this.storageName)
+			chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
+				//console.log(response.backMessage)
+				const runSequence = function(getResponse, sender, sendResponse) {
+					sendResponse({backMessage: "GET response received by content script"})
+					//console.log("GET response", getResponse.message)
+					if(callback) callback(getResponse.message)
+					chrome.extension.onMessage.removeListener(runSequence)
+					return true;
+				}
+				chrome.runtime.onMessage.addListener(runSequence)
 				return true;
-			}
-			chrome.runtime.onMessage.addListener(runSequence)
-			return true;
-		});
+			});
+		}
 	}
 	this.set = function(data, callback){
-		const request = new Request("set", this.storageName, data)
-		chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
+		if(typeof chrome.runtime !== 'undefined'){
+			const request = new Request("set", this.storageName, data)
+			chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
 
-			const runResponse = function(getResponse, sender, sendResponse) {
-				sendResponse({backMessage: "SET response received by content script"})
-				chrome.extension.onMessage.removeListener(runResponse)
+				const runResponse = function(getResponse, sender, sendResponse) {
+					sendResponse({backMessage: "SET response received by content script"})
+					chrome.extension.onMessage.removeListener(runResponse)
+					return true;
+				}
+				chrome.runtime.onMessage.addListener(runResponse)
+
+				if(callback) callback()
 				return true;
-			}
-			chrome.runtime.onMessage.addListener(runResponse)
-
-			if(callback) callback()
-			return true;
-		});
+			});
+		}
 	}
 	this.reset = function(callback){
-		const request = new Request("reset", this.storageName)
-		chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
+		if(typeof chrome.runtime !== 'undefined'){
+			const request = new Request("reset", this.storageName)
+			chrome.runtime.sendMessage(null, {message: request}, {}, function(response) {
 
-			const runResponse = function(getResponse, sender, sendResponse) {
-				sendResponse({backMessage: "RESET response received by content script"})
-				chrome.extension.onMessage.removeListener(runResponse)
+				const runResponse = function(getResponse, sender, sendResponse) {
+					sendResponse({backMessage: "RESET response received by content script"})
+					chrome.extension.onMessage.removeListener(runResponse)
+					return true;
+				}
+				chrome.runtime.onMessage.addListener(runResponse)
+
+				if(callback) callback()
 				return true;
-			}
-			chrome.runtime.onMessage.addListener(runResponse)
-
-			if(callback) callback()
-			return true;
-		});
+			});
+		}
 	}
 }
