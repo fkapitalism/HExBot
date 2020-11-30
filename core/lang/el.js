@@ -66,6 +66,7 @@ LANG_CONTENT[LANG_EL] = {
     WEBCRAWLER_RESULTS_SHOPPING: '## ΑΡΧΕΙΑ ΚΑΤΑΓΡΑΦΗΣ ΑΓΟΡΩΝ ## ',
     WEBCRAWLER_RESULTS_SOFTWARES: '## ΛΟΓΙΣΜΙΚΟ ΠΟΥ ΒΡΕΘΗΚΕ ##',
     WEBCRAWLER_SCRIPT_TITLE: 'Σενάριο αναζητητή ιστού',
+    WEBCRAWLER_SHARE_HOSTS: 'Μοιραστείτε ανιχνευμένους κεντρικούς υπολογιστές με την κοινότητα',
     UPDATE_CRACKER: "Λύστε γρίφους και αναβαθμίστε τον παραβιαστή",
     COMPLETE_PATH_ERROR: "Πρέπει να συνδεθείτε σε έναν διακομιστή γρίφου πριν να χρησιμοποιήσετε αυτήν τη δυνατότητα!",
     CONFIG_AREA_TITLE: "Ρυθμίσεις",

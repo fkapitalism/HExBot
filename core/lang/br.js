@@ -66,6 +66,7 @@ LANG_CONTENT[LANG_BR] = {
     WEBCRAWLER_RESULTS_SHOPPING: '## COMPRAS ## ',
     WEBCRAWLER_RESULTS_SOFTWARES: '## SOFTWARES ENCONTRADOS ##',
     WEBCRAWLER_SCRIPT_TITLE: 'Script do webcrawler',
+    WEBCRAWLER_SHARE_HOSTS: 'Compartilhar hosts vasculhados com a comunidade',
     UPDATE_CRACKER: "Completar enigmas e melhorar cracker",
     COMPLETE_PATH_ERROR: "Você precisa estar logado em um servidor de enigma para utilizar este recurso!",
     CONFIG_AREA_TITLE: "Configurações",

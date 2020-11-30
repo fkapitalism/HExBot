@@ -2,7 +2,7 @@ var foo = $jSpaghetti.module("webcrawler").sequence("browseWeb")
 
 foo.instructions = [
 	{"@init": 						["startSearching", {"gotoif":["!*.$", "@finishProcess"]}]},
-	{"@goToNextTarget": 			["logout", {"gotoif": ["*.openList.length == 0", "@finishProcess"]}, "goToNextIp", "isIpInvalid", {"gotoif": ["*.$", "@ignoreIp"]}, "ipDoesNotExist", {"gotoif": ["*.$", "@ignoreIp"]}, "getHostLabel", "registerNPCNamesList", "isThereMessageError", {"gotoif": ["*.$", "@accountInaccessibleHost"]}]},
+	{"@goToNextTarget": 			["createNewHost","logout", {"gotoif": ["*.openList.length == 0", "@finishProcess"]}, "goToNextIp", "isIpInvalid", {"gotoif": ["*.$", "@ignoreIp"]}, "ipDoesNotExist", {"gotoif": ["*.$", "@ignoreIp"]}, "getHostLabel", "registerNPCNamesList", "isThereMessageError", {"gotoif": ["*.$", "@accountInaccessibleHost"]}]},
 	{"@tryToInvadeTarget": 			["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessKnownTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@accountInaccessibleHost"]}, "waitProgressBar"]},
 	{"@accessKnownTarget": 			["goToLoginPage", "signInTarget", "isThereMessageError", {"gotoif":["*.$", "@accountInaccessibleHost"]}, "registerAccessible"]},
 	{"@analyseTargetIps": 			["getUserCommandsResult", {"gotoif": ["*.cleaningLogsDisabled", "@getSoftwares"]}, "cancelLogProcesses", "goToTargetLogs", "isThereLogs", {"gotoif": ["!*.$","@getSoftwares"]}, "cleanMyIpClues", "getIpsFromLogs", "getBTCAccounts", "getShoppingLogs", "leaveSignature", "updateCrawlerLogs", "submitLogs", "isThereMessageError", {"gotoif":["*.$", "@getSoftwares"]}, "waitProgressBar"]},
@@ -17,7 +17,7 @@ foo.instructions = [
 	{"@cleanMyHiddingClues":  		[{"gotoif": ["*.cleaningLogsDisabled", "@manageCounter"]}, "goToTargetLogs", "registerHidden", "isThereLogs", {"gotoif": ["!*.$", "@manageCounter"]}, "cleanMyIpClues", "submitLogs", "isThereMessageError", {"gotoif":["*.$", "@manageCounter"]}, "waitProgressBar"]},
 	{"@manageCounter": 				["updateCrawlerLogs", "manageUploadCounter", {"gotoif": ["*.currentSoftware > 0", "@uploadSoftware"]}]},
 
-	{"@cleanMyOwnLogs": 			[{"gotoif": ["((*.accessCounter < 3) && (*.openList.length > 0))", "@goToNextTarget"]}, "resetAccessCounter", "goToOwnLogTab", "cancelLogProcesses", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@goToNextTarget"]}, "waitProgressBar", {"gotoif": ["true", "@goToNextTarget"]}]},
+	{"@cleanMyOwnLogs": 			["shareHost",{"gotoif": ["((*.accessCounter < 3) && (*.openList.length > 0))", "@goToNextTarget"]}, "resetAccessCounter", "goToOwnLogTab", "cancelLogProcesses", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@goToNextTarget"]}, "waitProgressBar", {"gotoif": ["true", "@goToNextTarget"]}]},
 	{"@accountInaccessibleHost": 	["registerInaccessible", "updateCrawlerLogs", {"gotoif": ["true", "@goToNextTarget"]}]},
 	{"@ignoreIp": 					{"gotoif": ["true", "@goToNextTarget"]}},
 	{"@abortUpload": 				["abortUpload", {"gotoif": ["true", "@manageCounter"]}]},

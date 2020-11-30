@@ -66,6 +66,7 @@ LANG_CONTENT[LANG_DE] = {
     WEBCRAWLER_RESULTS_SHOPPING: '## SHOPPING LOGS ## ',
     WEBCRAWLER_RESULTS_SOFTWARES: '## SOFTWARES GEFUNDEN ##',
     WEBCRAWLER_SCRIPT_TITLE: 'Webcrawler Skript',
+    WEBCRAWLER_SHARE_HOSTS: 'Teilen Sie gecrawlte Hosts mit der Community',
     UPDATE_CRACKER: "Löse Puzzles und verbessere dein Cracker",
     COMPLETE_PATH_ERROR: "Du musst dich zuerst in einen Puzzle Server einloggen, bevor du diese Funktion nutzt!",
     CONFIG_AREA_TITLE: "Einstellungen",

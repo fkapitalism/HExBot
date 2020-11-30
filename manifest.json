@@ -32,6 +32,7 @@
 				"core/lang/br.js",
 				"core/lang/settings.js",
 
+				"core/libraries/helpers/classes/Host.js",
 				"core/libraries/helpers/classes/Storage.js",
 				"core/libraries/helpers/classes/Sequence.js",
 				"core/libraries/helpers/classes/Bot.js",

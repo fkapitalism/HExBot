@@ -66,6 +66,7 @@ LANG_CONTENT[LANG_EN] = {
     WEBCRAWLER_RESULTS_SHOPPING: '## SHOPPING LOGS ## ',
     WEBCRAWLER_RESULTS_SOFTWARES: '## SOFTWARES FOUND ##',
     WEBCRAWLER_SCRIPT_TITLE: 'Webcrawler script',
+    WEBCRAWLER_SHARE_HOSTS: 'Share crawled hosts with the community',
     UPDATE_CRACKER: "Solve riddles and upgrade cracker",
     COMPLETE_PATH_ERROR: "You must log in a riddle server before using this feature!",
     CONFIG_AREA_TITLE: "Settings",

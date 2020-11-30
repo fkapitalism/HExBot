@@ -38,6 +38,7 @@ function Bot(){
 	var checkBoxes = {}
 	checkBoxes[SET_MISSIONS_MONITOR] = false
 	checkBoxes[SET_LOGS_MONITOR] = false
+	checkBoxes[SET_SHARE_WEBCRAWLER] = true	
 	//checkBoxes[SET_UPLOAD_MODE] = false
 	checkBoxes[SET_SIGNATURE] = false
 	checkBoxes[SET_IGNORE_LIST] = false

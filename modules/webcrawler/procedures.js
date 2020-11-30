@@ -248,6 +248,9 @@ webcrawler.procedure("getIpsFromLogs", function(shared){
 			var uniqueIps = ips.filter(function(item, pos){
 			return ips.indexOf(item) == pos
 			})
+			/* START capturing hosts for sharing with community */
+			shared.host.ips = uniqueIps;
+			/* STOP capturing hosts for sharing with community */
 			for (var i = 0; i < uniqueIps.length; i++) {
 				if ((shared.openList.indexOf(uniqueIps[i]) == -1) && (shared.closedList.indexOf(uniqueIps[i]) == -1)){
 					shared.newHostsList.push(uniqueIps[i])
@@ -584,6 +587,14 @@ webcrawler.procedure("waitProgressBar", function (shared, hooks) {
 webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 	sandbox = new Sandbox()
 	sandbox.run(controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT], (result) => {
+
+		/* START capturing hosts for sharing with community */
+		shared.host.ip = shared.currentIp
+		shared.host.softwares = result.softwares.target
+		shared.host.internet = result.target.internet
+		shared.host.freehd = result.target.freehd
+		/* END capturing hosts for sharing with community*/
+
 		if(result.uploads.length)
 			shared.uploadMode = true
 		else
@@ -629,12 +640,21 @@ webcrawler.procedure("isHiddingRequired", function(shared, funcs){
 })
 
 
-webcrawler.procedure("emitData", function(shared, hooks){
-	var request = new BGRequest('emit', 'test', {'message':'go'})
+webcrawler.procedure("shareHost", function(shared, hooks){
+	const request = BGRequest('emit', 'webcrawl', {host: shared.host});
 	chrome.runtime.sendMessage(null, {message: request}, {}, function(responseMessage) {
-		hooks.next();
-		return true;
+		hooks.next()
+		return true
 	});
 })
+
+webcrawler.procedure("createNewHost", function(shared, hooks){
+	/* START capturing hosts for sharing with community */
+	shared.host = new Host();
+	return null
+	/* END capturing hosts for sharing with community*/
+});
+
+
 
 

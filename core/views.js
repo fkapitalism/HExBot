@@ -118,25 +118,26 @@ var views = {
 				'<div class="section-title">'+
 					'<h4>' + LANG.CONFIG_GENERAL_TITLE + '</h4>'+
 					'<div class="divider">'+
-						'<label><input class="checkBoxes" id="' + SET_POPUP_AFTER_INSTRUCTION + '"type="checkbox"><span>' + LANG.CONFIG_POPUP_BOT + '</span></label>' +
+						'<label><input class="checkBoxes" style="margin:0;" id="' + SET_POPUP_AFTER_INSTRUCTION + '"type="checkbox"><span style="margin-left:4px;">' + LANG.CONFIG_POPUP_BOT + '</span></label>' +
 					'</div>'+
 					//'<hr />' +
 					'<h4>' + LANG.CONFIG_NOTIFIERS_TITLE + '</h4>'+
 					'<div class="divider">'+
-						'<label><input class="checkBoxes" type="checkbox" id=' + SET_MISSIONS_MONITOR + '><span>' + LANG.NOTIFY_MISSIONS + '</span></label>' +
-						'<label><input class="checkBoxes" type="checkbox" id=' + SET_LOGS_MONITOR + '><span>' + LANG.NOTIFY_LOGS + '</span></label>' +
+						'<label><input class="checkBoxes" type="checkbox" style="margin:0;" id=' + SET_MISSIONS_MONITOR + '><span style="margin-left:4px;">' + LANG.NOTIFY_MISSIONS + '</span></label>' +
+						'<label><input class="checkBoxes" type="checkbox" style="margin:0;" id=' + SET_LOGS_MONITOR + '><span style="margin-left:4px;">' + LANG.NOTIFY_LOGS + '</span></label>' +
 					'</div>'+
 					//'<hr />' +
 					'<h4>' + LANG.CONFIG_WEBCRAWL_TITLE + '</h4>'+
 					'<div class="divider">'+
-						'<label><input class="checkBoxes" id="' + SET_SKIP_AFTER_UPLOAD + '" type="checkbox"><span>' + LANG.WEBCRAWLER_SKIP_AFTER_UPLOAD + '</span></label>' +
+						'<label><input class="checkBoxes" style="margin:0;" id="' + SET_SKIP_AFTER_UPLOAD + '" type="checkbox"><span style="margin-left:4px;">' + LANG.WEBCRAWLER_SKIP_AFTER_UPLOAD + '</span></label>' +
 						//'<label><input class="checkBoxes" id="' + SET_HIDE_MODE + '"type="checkbox"><span>' + LANG.WEBCRAWLER_HIDE_UPLOAD + '</span></label>' +
-						'<label><input class="checkBoxes" type="checkbox" id=' + SET_SIGNATURE + '>' + LANG.WEBCRAWLER_LEAVE_SIGNATURE + '<a href="http://www.symbols-n-emoticons.com/p/facebook-text-art-ascii.html" target="_blank"> ' + LANG.WEBCRAWLER_FIND_SIGNATURE + '</a><textarea id="' + FIELD_SIGNATURE + '" class="controls fieldsContent" style="width: 95%; resize: vertical;"></textarea></label>' +
+						'<label><input class="checkBoxes" style="margin:0;" type="checkbox" id=' + SET_SIGNATURE + '><span style="margin-left:4px;">' + LANG.WEBCRAWLER_LEAVE_SIGNATURE + '</span><a href="http://www.symbols-n-emoticons.com/p/facebook-text-art-ascii.html" target="_blank"> ' + LANG.WEBCRAWLER_FIND_SIGNATURE + '</a><textarea id="' + FIELD_SIGNATURE + '" class="controls fieldsContent" style="width: 95%; resize: vertical;"></textarea></label>' +
+						'<label><input class="checkBoxes" style="margin:0;" id="' + SET_SHARE_WEBCRAWLER + '" type="checkbox"><span style="margin-left:4px;">' + LANG.WEBCRAWLER_SHARE_HOSTS + '</span>&nbsp;<span style="color: red">💖</span></label>' +
 					'</div>'+
 
 					'<h4>' + LANG.CONFIG_LANG_NAME + '</h4>'+
 					'<div class="divider">'+
-						'<label><input class="fieldsContent" id="' + LANGUAGE_FIELD + '" type="text"><span> <b>br</b>, <b>de</b>, <b>el</b>, <b>en</b></span></label>' +
+						'<label><input class="fieldsContent" style="margin:0;" id="' + LANGUAGE_FIELD + '" type="text"><span style="margin-left:4px;"> <b>br</b>, <b>de</b>, <b>el</b>, <b>en</b></span></label>' +
 					'</div>'+
 					'<button id="' + CONFIG_TO_MAIN + '" class="btn-xs btn-success">' + LANG.CREDITS_BACK_BUTTON + '</button>'+
 				'</div>'+
