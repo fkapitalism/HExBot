@@ -641,7 +641,8 @@ webcrawler.procedure("isHiddingRequired", function(shared, funcs){
 
 
 webcrawler.procedure("shareHost", function(shared, hooks){
-	const request = BGRequest('emit', 'webcrawl', {host: shared.host});
+	//const request = BGRequest('emit', 'webcrawl', {host: shared.host});
+	const request = BGRequest('emit', 'webcrawl', {host: shared});
 	chrome.runtime.sendMessage(null, {message: request}, {}, function(responseMessage) {
 		hooks.next()
 		return true
