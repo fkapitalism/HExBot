@@ -127,6 +127,7 @@ const listener = (request, sender, sendResponse) => {
 	if(request.action == "emit"){//It sends data through the web socket
 		console.log("[EMIT] → request received")
 		sendResponse({backMessage: "EMIT request received by background script"})
+		console.log(request.data)
 		socket.emit(request.target, request.data);
 	} else {
 		sendResponse({backMessage: "Request received"})
