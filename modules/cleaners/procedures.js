@@ -1,9 +1,9 @@
 var cleanersMod = $jSpaghetti.module("cleaners")
 cleanersMod.config.debugMode = true
 
-cleanersMod.procedure("goToOwnLogTab", function(){
+cleanersMod.procedure("goToOwnLogTab", function(shared, hooks){
+	hooks.next()
 	goToPage("/log")
-	return null
 })
 
 cleanersMod.procedure("cleanTextAreaContent", function(data){
@@ -18,14 +18,16 @@ cleanersMod.procedure("cleanTextAreaContent", function(data){
 	return null
 })
 
-cleanersMod.procedure("goToSoftwareTab", function(){
+cleanersMod.procedure("goToSoftwareTab", function(shared, hooks){
+	hooks.next()
 	goToPage("/software")
-	return null
 })
 
-cleanersMod.procedure("goToTargetLogs", function(){
-	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
-	goToPage("/internet?view=logs")
+cleanersMod.procedure("goToTargetLogs", function(shared, hooks){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1)){
+		hooks.next()
+		goToPage("/internet?view=logs")
+	}
 	return null
 })
 
@@ -74,14 +76,14 @@ cleanersMod.procedure("submitLogs", function(shared){
 	return null
 }) 
 
-cleanersMod.procedure("goToLoginPage", function(){
+cleanersMod.procedure("goToLoginPage", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=login")
-	return null
 })
 
-cleanersMod.procedure("hackTargetBruteForce", function(){
+cleanersMod.procedure("hackTargetBruteForce", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
-	return null
 })
 
 cleanersMod.procedure("isThereMessageError", function(){
@@ -126,9 +128,11 @@ cleanersMod.procedure("waitProgressBar", function (shared, hooks) {
     }, 100)
 })
 
-cleanersMod.procedure("goToLoginPage", function(){
-	if (location.href.indexOf("/internet?action=login") == -1)
-	goToPage("/internet?action=login")
+cleanersMod.procedure("goToLoginPage", function(shared, hooks){
+	if (location.href.indexOf("/internet?action=login") == -1){
+		hooks.next()
+		goToPage("/internet?action=login")
+	}
 	return null
 })
 

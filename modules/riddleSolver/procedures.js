@@ -39,9 +39,9 @@ foo.procedure("getNewCrackerId", function(shared, hooks){
 	})		
 })
 
-foo.procedure("goToPageRiddle", function(){
+foo.procedure("goToPageRiddle", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?view=software&cmd=riddle")
-	return null
 })
 
 foo.procedure("isThereLocalCracker", function(shared, hooks){
@@ -64,14 +64,23 @@ foo.procedure("isThereLocalCracker", function(shared, hooks){
 	})
 })
 
-foo.procedure("goToTargetLogs", function(){
+foo.procedure("goToTargetLogs", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?view=logs")
-	return null
 })
 
-foo.procedure("submitLogs", function(shared){
-	getDOMElement("input", "class", "btn btn-inverse", "last").click()
-	return null
+foo.procedure("submitLogs", function(shared, hooks){
+	const interval = setInterval(() => {
+		const button = getDOMElement("input", "class", "btn btn-inverse", "last")
+		if(button){
+			hooks.next()
+			button.click()
+		} else {
+			console.warn('BUTTON NOT FOUND!')
+		}
+	}, 100);
+	
+	//return null
 }) 
 
 foo.procedure("test", function(){
@@ -87,24 +96,33 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 		
 	//getMyIp(true, (myip) => {
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
-	if (textArea.value.length > 0){
+	if (textArea && textArea.value.length > 0){
 		data.isEmpty = false
 
 		const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
 		var ips = extractIPsFromText(ipsSource, [data.myIp])
-		console.log("ips found", ips)
+		//console.log("ips found", ips)
 		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
 		controllers.storage.set(controllers.bot)
 
 		//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
 		var pattern = new RegExp("^.*" + data.myIp + ".*$")
 		textArea.value = removeLinesFromText(textArea.value, pattern)
-		getDOMElement("input", "class", "btn btn-inverse", "last").click()
+		const button = getDOMElement("input", "class", "btn btn-inverse", "last")
+		hooks.next()
+		if(button){
+			button.click()
+		} else {
+			console.warn('BUTTON NOT FOUND!')
+		}
 	} else {
+		if(!textArea){
+			console.warn('TEXT AREA NOT FOUND!')
+		}
 		data.isEmpty = true
+		hooks.next()
 	}
 	if(data.cleanerCount != undefined) data.cleanerCount++
-		hooks.next()
 	//})
 		
 })
@@ -132,9 +150,11 @@ foo.procedure("isThereTargetCracker", function(shared, hooks){
 	})	
 })
 
-foo.procedure("goToTargetLogs", function(){
-	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
-	goToPage("/internet?view=logs")	
+foo.procedure("goToTargetLogs", function(shared, hooks){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1)){
+		hooks.next()
+		goToPage("/internet?view=logs")
+	}	
 	return null
 })
 
@@ -148,9 +168,9 @@ foo.procedure("isCrackerStrongEnough", function(){
 	return true
 })
 
-foo.procedure("removeOutdatedCracker", function(shared){
+foo.procedure("removeOutdatedCracker", function(shared, hooks){
+	hooks.next()
 	goToPage("/software?action=del&id=" + shared.playerCracker.id)
-	return null
 })
 
 /*foo.procedure("checkProgressBar", function(shared, funcs){
@@ -174,16 +194,16 @@ foo.procedure("waitProgressBar", function (shared, hooks) {
     }, 100)
 })
 
-foo.procedure("installLocalCracker", function(shared){
+foo.procedure("installLocalCracker", function(shared, hooks){
+	hooks.next()
 	goToPage("/software?action=install&id=" + shared.crackerToInstall.id)
-	return null
 })
 
-foo.procedure("downloadCracker", function(shared){
+foo.procedure("downloadCracker", function(shared, hooks){
 	shared.crackerToInstall = shared.targetCracker
 	//console.log("ata", shared.targetCracker)
+	hooks.next()
 	goToPage("/internet?view=software&cmd=dl&id=" + shared.targetCracker.id)
-	return null
 })
 
 foo.procedure("isThereMessageError", function(){
@@ -200,19 +220,21 @@ foo.procedure("isRiddleSolved", function(shared){
 	}
 })
 
-foo.procedure("forceToAccessTarget", function(){
+foo.procedure("forceToAccessTarget", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack")
-	return null
 })
 
-foo.procedure("hackTargetBruteForce", function(){
+foo.procedure("hackTargetBruteForce", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
-	return null
 })
 
-foo.procedure("goToLoginPage", function(){
-	if (location.href.indexOf("/internet?action=login") == -1)
-	goToPage("/internet?action=login")
+foo.procedure("goToLoginPage", function(shared, hooks){
+	if (location.href.indexOf("/internet?action=login") == -1){
+		hooks.next()
+		goToPage("/internet?action=login")
+	}
 	return null
 })
 
@@ -255,7 +277,8 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 		
 })
 
-foo.procedure("signInKnownTarget", function(){
+foo.procedure("signInKnownTarget", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 	return null
 })
@@ -270,19 +293,19 @@ foo.procedure("getNextIPFake", function(shared){
 	return null
 })
 
-foo.procedure("goToNextPuzzle", function(shared){
+foo.procedure("goToNextPuzzle", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?ip=" + shared.nextPuzzleIP)
-	return null
 })
 
-foo.procedure("logout", function(){
+foo.procedure("logout", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?view=logout")
-	return null
 })
 
-foo.procedure("reload", function(){
-	location.reload();
-	return null
+foo.procedure("reload", function(shared, hooks){
+	hooks.next()
+	location.reload()
 })
 
 foo.procedure("solvePuzzleAuto", function(){
