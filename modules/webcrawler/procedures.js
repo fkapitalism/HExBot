@@ -128,12 +128,13 @@ webcrawler.procedure("isSoftwareAlreadyThere", function(){
 	return false
 })
 
-webcrawler.procedure("abortUpload", function(shared){
+webcrawler.procedure("abortUpload", function(shared, hooks){
 	pidContainer = document.getElementsByClassName("span4")[0]
 	if (pidContainer){
 		var pid = pidContainer.className.match(/[0-9]+/g)[1]
 		if (pid){
 			shared.isUploadAborted = true
+			hooks.next()
 			goToPage("/processes?pid=" + pid + "&del=1")
 		} else {
 			shared.isUploadAborted = false
@@ -144,8 +145,9 @@ webcrawler.procedure("abortUpload", function(shared){
 	return null
 })
 
-webcrawler.procedure("runUploadSoftware", function(shared){
+webcrawler.procedure("runUploadSoftware", function(shared, hooks){
 	//console.log("currentSoftware", shared.currentSoftware)
+	hooks.next()
 	goToPage("/internet?view=software&cmd=up&id=" + shared.softwaresToUpload[shared.currentSoftware].pid)
 	return null
 })
@@ -153,8 +155,8 @@ webcrawler.procedure("runUploadSoftware", function(shared){
 webcrawler.procedure("installSoftware", function(shared, hooks){
 	/*var softwareId = */
 	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
-		goToPage("/internet?view=software&cmd=install&id=" + softwareId)
 		hooks.next()
+		goToPage("/internet?view=software&cmd=install&id=" + softwareId)
 		//return null
 	})
 })
@@ -166,9 +168,9 @@ webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
 webcrawler.procedure("hideSoftware", function(shared, hooks){
 	/*var softwareId = */
 	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
+		hooks.next()
 		goToPage("/internet?view=software&cmd=hide&id=" + softwareId)
 		//return null
-		hooks.netx()
 	})
 })
 
@@ -236,7 +238,8 @@ webcrawler.procedure("registerNPCNamesList", function(shared){
 	return null
 })
 
-webcrawler.procedure("signInTarget", function(shared){
+webcrawler.procedure("signInTarget", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 	return null
 })
@@ -363,24 +366,28 @@ webcrawler.procedure("getShoppingLogs", function(shared){
 	return null
 })
 
-webcrawler.procedure("goToNextIp", function(shared){
+webcrawler.procedure("goToNextIp", function(shared, hooks){
 	shared.currentIp = shared.openList.shift()
 	shared.closedList.push(shared.currentIp)
+	hooks.next()
 	goToPage("/internet?ip=" + shared.currentIp)
 	return null
 })
 
-webcrawler.procedure("submitLogs", function(shared){
+webcrawler.procedure("submitLogs", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 	return null
 }) 
 
-webcrawler.procedure("goToSoftwarePage", function(shared){
+webcrawler.procedure("goToSoftwarePage", function(shared, hooks){
+	hooks.next()
 	goToPage("/software")
 	return null
 })
 
-webcrawler.procedure("logout", function(){
+webcrawler.procedure("logout", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?view=logout")
 	return null
 })
@@ -394,19 +401,23 @@ webcrawler.procedure("isThereMessageError", function(shared){
 	return shared.isThereMError
 })
 
-webcrawler.procedure("forceToAccessTarget", function(){
+webcrawler.procedure("forceToAccessTarget", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack")
 	return null
 })
 
-webcrawler.procedure("hackTargetBruteForce", function(){
+webcrawler.procedure("hackTargetBruteForce", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
 	return null
 })
 
-webcrawler.procedure("goToTargetLogs", function(){
-	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
-	goToPage("/internet?view=logs")
+webcrawler.procedure("goToTargetLogs", function(shared, hooks){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1)){
+		hooks.next()
+		goToPage("/internet?view=logs")
+	}
 	return null
 })
 
@@ -429,29 +440,36 @@ webcrawler.procedure("isThereLogs", function(){
 	}
 })
 
-webcrawler.procedure("goToTargetSoftwares", function(){
-	if (location.href.indexOf("/internet?view=software") == -1)
-	goToPage("/internet?view=software")
+webcrawler.procedure("goToTargetSoftwares", function(shared, hooks){
+	if (location.href.indexOf("/internet?view=software") == -1){
+		hooks.next()
+		goToPage("/internet?view=logs")
+	}
 	return null
 })
 
-webcrawler.procedure("goToOwnSoftwareArea", function(){
+webcrawler.procedure("goToOwnSoftwareArea", function(shared, hooks){
+	hooks.next()
 	goToPage("/software")
 	return null
 })
 
-webcrawler.procedure("goToOwnLogTab", function(){
+webcrawler.procedure("goToOwnLogTab", function(shared, hooks){
+	hooks.next()
 	goToPage("/log")
 	return null
 })
 
-webcrawler.procedure("goToLoginPage", function(){
-	if (location.href.indexOf("/internet?action=login") == -1)
-	goToPage("/internet?action=login")
+webcrawler.procedure("goToLoginPage", function(shared, hooks){
+	if (location.href.indexOf("/internet?action=login") == -1){
+		hooks.next()
+		goToPage("/internet?action=login")
+	}
 	return null
 })
 
-webcrawler.procedure("cleanTextAreaContent", function(shared){
+webcrawler.procedure("cleanTextAreaContent", function(shared, hooks){
+	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	textArea.value = ""
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
@@ -794,12 +812,13 @@ webcrawler.procedure("isSoftwareAlreadyThere", function(){
 	return false
 })
 
-webcrawler.procedure("abortUpload", function(shared){
+webcrawler.procedure("abortUpload", function(shared, hooks){
 	pidContainer = document.getElementsByClassName("span4")[0]
 	if (pidContainer){
 		var pid = pidContainer.className.match(/[0-9]+/g)[1]
 		if (pid){
 			shared.isUploadAborted = true
+			hooks.next()
 			goToPage("/processes?pid=" + pid + "&del=1")
 		} else {
 			shared.isUploadAborted = false
@@ -810,8 +829,9 @@ webcrawler.procedure("abortUpload", function(shared){
 	return null
 })
 
-webcrawler.procedure("runUploadSoftware", function(shared){
+webcrawler.procedure("runUploadSoftware", function(shared, hooks){
 	//console.log("currentSoftware", shared.currentSoftware)
+	hooks.next()
 	goToPage("/internet?view=software&cmd=up&id=" + shared.softwaresToUpload[shared.currentSoftware].pid)
 	return null
 })
@@ -819,8 +839,8 @@ webcrawler.procedure("runUploadSoftware", function(shared){
 webcrawler.procedure("installSoftware", function(shared, hooks){
 	/*var softwareId = */
 	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
-		goToPage("/internet?view=software&cmd=install&id=" + softwareId)
 		hooks.next()
+		goToPage("/internet?view=software&cmd=install&id=" + softwareId)
 		//return null
 	})
 })
@@ -832,9 +852,9 @@ webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
 webcrawler.procedure("hideSoftware", function(shared, hooks){
 	/*var softwareId = */
 	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
+		hooks.next()
 		goToPage("/internet?view=software&cmd=hide&id=" + softwareId)
 		//return null
-		hooks.netx()
 	})
 })
 
@@ -902,7 +922,8 @@ webcrawler.procedure("registerNPCNamesList", function(shared){
 	return null
 })
 
-webcrawler.procedure("signInTarget", function(shared){
+webcrawler.procedure("signInTarget", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 	return null
 })
@@ -1029,24 +1050,28 @@ webcrawler.procedure("getShoppingLogs", function(shared){
 	return null
 })
 
-webcrawler.procedure("goToNextIp", function(shared){
+webcrawler.procedure("goToNextIp", function(shared, hooks){
 	shared.currentIp = shared.openList.shift()
 	shared.closedList.push(shared.currentIp)
+	hooks.next()
 	goToPage("/internet?ip=" + shared.currentIp)
 	return null
 })
 
-webcrawler.procedure("submitLogs", function(shared){
+webcrawler.procedure("submitLogs", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 	return null
 }) 
 
-webcrawler.procedure("goToSoftwarePage", function(shared){
+webcrawler.procedure("goToSoftwarePage", function(shared, hooks){
+	hooks.next()
 	goToPage("/software")
 	return null
 })
 
-webcrawler.procedure("logout", function(){
+webcrawler.procedure("logout", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?view=logout")
 	return null
 })
@@ -1060,19 +1085,23 @@ webcrawler.procedure("isThereMessageError", function(shared){
 	return shared.isThereMError
 })
 
-webcrawler.procedure("forceToAccessTarget", function(){
+webcrawler.procedure("forceToAccessTarget", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack")
 	return null
 })
 
-webcrawler.procedure("hackTargetBruteForce", function(){
+webcrawler.procedure("hackTargetBruteForce", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
 	return null
 })
 
-webcrawler.procedure("goToTargetLogs", function(){
-	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
-	goToPage("/internet?view=logs")
+webcrawler.procedure("goToTargetLogs", function(shared, hooks){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1)){
+		hooks.next()
+		goToPage("/internet?view=logs")
+	}
 	return null
 })
 
@@ -1095,18 +1124,22 @@ webcrawler.procedure("isThereLogs", function(){
 	}
 })
 
-webcrawler.procedure("goToTargetSoftwares", function(){
-	if (location.href.indexOf("/internet?view=software") == -1)
-	goToPage("/internet?view=software")
+webcrawler.procedure("goToTargetSoftwares", function(shared, hooks){
+	if (location.href.indexOf("/internet?view=software") == -1){
+		hooks.next()
+		goToPage("/internet?view=software")
+	}
 	return null
 })
 
-webcrawler.procedure("goToOwnSoftwareArea", function(){
+webcrawler.procedure("goToOwnSoftwareArea", function(shared, hooks){
+	hooks.next()
 	goToPage("/software")
 	return null
 })
 
-webcrawler.procedure("goToOwnLogTab", function(){
+webcrawler.procedure("goToOwnLogTab", function(shared, hooks){
+	hooks.next()
 	goToPage("/log")
 	return null
 })
@@ -1117,7 +1150,8 @@ webcrawler.procedure("goToLoginPage", function(){
 	return null
 })
 
-webcrawler.procedure("cleanTextAreaContent", function(shared){
+webcrawler.procedure("cleanTextAreaContent", function(shared, hooks){
+	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	textArea.value = ""
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()

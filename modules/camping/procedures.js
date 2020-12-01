@@ -86,6 +86,7 @@ camping.procedure("signInTarget", function(shared, hooks){
 	shared.isLogged = true
 	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
+	return null
 })
 
 camping.procedure("hackTargetBruteForce", function(shared, hooks){

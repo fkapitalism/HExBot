@@ -1,12 +1,14 @@
 var ddos = $jSpaghetti.module("ddos")
 ddos.config.debugMode = true
 
-ddos.procedure("goToSoftwarePage", function () {
+ddos.procedure("goToSoftwarePage", function (shared, hooks) {
+    hooks.next()
     goToPage("/software")
     return null
 })
 
-ddos.procedure("goToDDoSPage", function () {
+ddos.procedure("goToDDoSPage", function (shared, hooks) {
+    hooks.next()
     goToPage("/list?action=ddos")
     return null
 })
@@ -32,32 +34,36 @@ cleanersMod.procedure("waitProgressBar", function (shared, hooks) {
     }, 100)
 })
 
-ddos.procedure("launchDDoS", function (shared) {
+ddos.procedure("launchDDoS", function (shared, hooks) {
     var btns = document.getElementsByClassName("controls center")
     //btns[0].getElementsByTagName("input")[0].value = controllers.bot.ddos.target  
     if(btns.length > 1){
+        hooks.next()
         btns[0].getElementsByTagName("input")[0].value = shared.ddosTarget
         btns[1].getElementsByTagName("input")[0].click()
     }
     return null
 })
 
-ddos.procedure("goToIp", function (shared) {
+ddos.procedure("goToIp", function (shared, hooks) {
     //goToPage("/internet?ip=" + controllers.bot.ddos.target)
+    hooks.next()
     goToPage("/internet?ip=" + shared.ddosTarget)
     return null
 })
 
-ddos.procedure("goToOwnLogTab", function () {
+ddos.procedure("goToOwnLogTab", function (shared, hooks) {
+    hooks.next()
     goToPage("/log")
     return null
 })
 
-ddos.procedure("cleanTextAreaContent", function (data) {
+ddos.procedure("cleanTextAreaContent", function (data, hooks) {
     var textArea = getDOMElement("textarea", "class", "logarea", 0)
     if (textArea.value.length > 0) {
         data.isEmpty = false
         textArea.value = ""
+        hooks.next()
         getDOMElement("input", "class", "btn btn-inverse", 0).click()
     } else {
         data.isEmpty = true

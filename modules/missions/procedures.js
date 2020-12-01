@@ -80,23 +80,27 @@ foo.procedure("boo", function(){
 	return null
 })
 
-foo.procedure("goToMissionsTab", function(){
+foo.procedure("goToMissionsTab", function(shared, hooks){
+	hooks.next()
 	goToPage("/missions")
 	return null
 })
 
-foo.procedure("informBalance", function(shared){
+foo.procedure("informBalance", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "id", "amount-input", 0).value = shared.balance //Fill the balance field with the balance value
 	getDOMElement("span", "class", "btn btn-success mission-complete", 0).click() //Click on the Complete Mission Button
 	return null
 })
 
-foo.procedure("confirmMissionCompleteButton", function(){
+foo.procedure("confirmMissionCompleteButton", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "id", "modal-submit", 0).click()
 	return null
 })
 
-foo.procedure("goToAcceptMissionPage", function(shared){
+foo.procedure("goToAcceptMissionPage", function(shared, hooks){
+	hooks.next()
 	window.location.href = shared.urlMission
 	return null
 })
@@ -106,35 +110,41 @@ foo.procedure("abc", function(shared){
 	return null
 })
 
-foo.procedure("goToNextIp", function(shared){
+foo.procedure("goToNextIp", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?ip=" + shared.ips[shared.nextIp])
 	shared.nextIp++
 	return null
 })
 
-foo.procedure("goToBankAccountHacker", function(shared){
+foo.procedure("goToBankAccountHacker", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&type=bank")
 	return null
 })
 
-foo.procedure("goToBankAccountHacker", function(shared){
+foo.procedure("goToBankAccountHacker", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&type=bank")
 	return null
 })
 
-foo.procedure("hackAccount", function(shared){
+foo.procedure("hackAccount", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&acc=" + shared.accounts[0])
 	return null
 })
 
-foo.procedure("transferMoneyToTarget", function(shared){
+foo.procedure("transferMoneyToTarget", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "name", "acc", 0).value = shared.accounts[1]; //Fill the To field
 	getDOMElement("input", "name", "ip", 1).value = shared.ips[1]; //Fill the Bank IP field
 	getDOMElement("button", "class", "btn btn-success", 0).click(); //Click on the Transfer Money button
 	return null
 })
 
-foo.procedure("signInAccount", function(shared){
+foo.procedure("signInAccount", function(shared, hooks){
+	hooks.next()
 	if (getDOMElement("div", "class", "alert alert-error", 0)){
 		getDOMElement("input", "name", "acc", 0).value = shared.accounts[0]; //Fill the account field
 		getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue; //Fill the password field with the password on screen
@@ -148,12 +158,14 @@ foo.procedure("getAccountBalance", function(shared){
 	return null
 })
 
-foo.procedure("getOutFromAccount", function(shared){
+foo.procedure("getOutFromAccount", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?bAction=logout")
 	return null
 })
 
-foo.procedure("logout", function(){
+foo.procedure("logout", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?view=logout")
 	return null
 })
@@ -229,7 +241,8 @@ foo.procedure("test", function(shared, hooks){
 	})
 })
 
-foo.procedure("clickOnAbortMissionButton", function(shared){
+foo.procedure("clickOnAbortMissionButton", function(shared, hooks){
+	hooks.next()
 	getDOMElement("span", "class", "btn btn-danger mission-abort", 0).click()
 	return null
 })
@@ -243,7 +256,8 @@ foo.procedure("showMessage", function(shared){
 	return null
 })
 
-foo.procedure("clickOnConfirmAbortMissionButton", function(shared){
+foo.procedure("clickOnConfirmAbortMissionButton", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "type", "submit", 0).click()
 	return null
 })
@@ -303,17 +317,20 @@ foo.procedure("getDeleteSoftwareMissionInfo", function(shared){
 	return null
 })
 
-foo.procedure("forceToAccessTarget", function(){
+foo.procedure("forceToAccessTarget", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack")
 	return null
 })
 
-foo.procedure("signInKnownTarget", function(){
+foo.procedure("signInKnownTarget", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 	return null
 })
 
-foo.procedure("hackTargetBruteForce", function(){
+foo.procedure("hackTargetBruteForce", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
 	return null
 })
@@ -327,6 +344,7 @@ foo.procedure("init", function(shared, hooks){
 
 foo.procedure("cleanMyIpClues", function(data, hooks){
 	//getMyIp(true, (myip) => {
+	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea.value.length > 0){
 		data.isEmpty = false
@@ -345,11 +363,11 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 		data.isEmpty = true
 	}
 	if(data.cleanerCount != undefined) data.cleanerCount++
-	hooks.next()
 	//})
 })
 
-foo.procedure("cleanTextAreaContent", function(data){
+foo.procedure("cleanTextAreaContent", function(data, hooks){
+	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea.value.length > 0){
 		data.isEmpty = false
@@ -367,7 +385,8 @@ foo.procedure("informBadCracker", function(){
 	return null
 })
 
-foo.procedure("goToOwnLogTab", function(){
+foo.procedure("goToOwnLogTab", function(shared, hooks){
+	hooks.next()
 	goToPage("/log")
 	return null
 })
@@ -403,9 +422,10 @@ foo.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
 	return null
 })
 
-foo.procedure("clickOnFinishButton", function(){
-	 getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
-	 return null
+foo.procedure("clickOnFinishButton", function(shared, hooks){
+	hooks.next()
+	getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
+	return null
 })
 
 /*foo.procedure("checkProgressBar", function(shared, funcs){
@@ -441,13 +461,14 @@ foo.procedure("checkFunds", function(shared){
 	}
 })
 
-foo.procedure("transferRandomValueToTarget", function(shared){
+foo.procedure("transferRandomValueToTarget", function(shared, hooks){
 	if (shared.funds > 10){
 		shared.transferredValue = Math.floor(Math.random() * 10) + 1
 	} else {
 		shared.transferredValue = shared.funds
 	}
 	shared.rest = shared.funds - shared.transferredValue
+	hooks.next()
 	getDOMElement("input", "name", "acc", 0).value = shared.accounts[1]
 	getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
 	getDOMElement("input", "name", "money", 0).value = "$" + shared.transferredValue
@@ -455,9 +476,10 @@ foo.procedure("transferRandomValueToTarget", function(shared){
 	return null
 })
 
-foo.procedure("transferToMe", function(shared){
+foo.procedure("transferToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[0]]
 	if(myAccount){
+		hooks.next()
 		shared.destinationAccount = myAccount
 		getDOMElement("input", "name", "acc", 0).value = myAccount
 		getDOMElement("input", "name", "ip", 1).value = shared.ips[0]
@@ -466,9 +488,10 @@ foo.procedure("transferToMe", function(shared){
 	return null
 })
 
-foo.procedure("transferTheRestToMe", function(shared){
+foo.procedure("transferTheRestToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[1]]
 	if(myAccount){
+		hooks.next()
 		shared.destinationAccount = myAccount
 		getDOMElement("input", "name", "acc", 0).value = myAccount
 		getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
@@ -477,15 +500,19 @@ foo.procedure("transferTheRestToMe", function(shared){
 	return null
 })
 
-foo.procedure("goToLoginPage", function(){
-	if (location.href.indexOf("/internet?action=login") == -1)
-	goToPage("/internet?action=login")
+foo.procedure("goToLoginPage", function(shared, hooks){
+	if (location.href.indexOf("/internet?action=login") == -1){
+		hooks.next()
+		goToPage("/internet?action=login")
+	}
 	return null
 })
 
-foo.procedure("goToPageAccountLoginPage", function(shared){
-	if (location.href.indexOf("/internet?action=login&type=bank") == -1)
-	goToPage("/internet?action=hack&acc=" + shared.accounts[0])
+foo.procedure("goToPageAccountLoginPage", function(shared, hooks){
+	if (location.href.indexOf("/internet?action=login&type=bank") == -1){
+		hooks.next()
+		goToPage("/internet?action=hack&acc=" + shared.accounts[0])
+	}
 	return null
 })
 
@@ -537,9 +564,11 @@ foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){
 	}
 })
 
-foo.procedure("goToTargetLogs", function(){
-	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
-	goToPage("/internet?view=logs")
+foo.procedure("goToTargetLogs", function(shared, hooks){
+	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1)){
+		hooks.next()
+		goToPage("/internet?view=logs")
+	}
 	return null
 })
 
@@ -619,7 +648,8 @@ foo.procedure("getSoftwareId", function(shared, hooks){
 	//return shared.softwareId
 })
 
-foo.procedure("deleteSoftware", function(shared){
+foo.procedure("deleteSoftware", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?view=software&cmd=del&id=" + shared.softwareId)
 	return null
 })

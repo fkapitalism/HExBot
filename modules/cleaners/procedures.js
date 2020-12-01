@@ -72,7 +72,8 @@ cleanersMod.procedure("isThereProgressBar", function(){
 	}
 })
 
-cleanersMod.procedure("submitLogs", function(shared){
+cleanersMod.procedure("submitLogs", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 	return null
 }) 
@@ -103,7 +104,8 @@ cleanersMod.procedure("isAccessForbidden", function(){
 	return false
 })
 
-cleanersMod.procedure("signInTarget", function(){
+cleanersMod.procedure("signInTarget", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 	return null
 })
