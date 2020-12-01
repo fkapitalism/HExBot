@@ -2,10 +2,15 @@
 function extractIPsFromText(text, ignore = []){
 	
 	const ipsFound = text.match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/gm)
-	return [...new Set(
-		ipsFound.filter((ip) => {
-			return !ignore.includes(ip);
-		})
-	)]
+	if(ipsFound){
+		return [...new Set(
+			ipsFound.filter((ip) => {
+				return !ignore.includes(ip);
+			})
+		)]
+	} else {
+		return []
+	}
+	
 }
 	

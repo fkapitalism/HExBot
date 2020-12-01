@@ -102,7 +102,7 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 		const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
 		var ips = []
 		if(ipsSource){
-			ips = extractIPsFromText(ipsSource, [myip])
+			ips = extractIPsFromText(ipsSource, [data.myIp])
 		}
 		//console.log("ips found", ips)
 		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
