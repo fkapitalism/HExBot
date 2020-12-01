@@ -100,7 +100,10 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 		data.isEmpty = false
 
 		const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
-		var ips = extractIPsFromText(ipsSource, [data.myIp])
+		var ips = []
+		if(ipsSource){
+			ips = extractIPsFromText(ipsSource, [myip])
+		}
 		//console.log("ips found", ips)
 		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
 		controllers.storage.set(controllers.bot)

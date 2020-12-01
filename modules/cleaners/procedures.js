@@ -42,7 +42,10 @@ cleanersMod.procedure("cleanMyIpClues", function(shared, hooks){
 			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
 
 			const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
-			var ips = extractIPsFromText(ipsSource, [myip])
+			var ips = []
+			if(ipsSource){
+				ips = extractIPsFromText(ipsSource, [myip])
+			}
 			console.log("ips found", ips)
 			controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
 			controllers.storage.set(controllers.bot)
