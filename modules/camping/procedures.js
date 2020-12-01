@@ -55,20 +55,20 @@ camping.procedure("startBankCamping", function(shared, hooks){
 })
 
 
-camping.procedure("goToIp", function(shared){
+camping.procedure("goToIp", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?ip=" + shared.ip)
-	return null
 })
 
-camping.procedure("logout", function(shared){
+camping.procedure("logout", function(shared, hooks){
 	shared.isLogged = false
+	hooks.next()
 	goToPage("/internet?view=logout")
-	return null
 })
 
-camping.procedure("logoutAccount", function(){
+camping.procedure("logoutAccount", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?bAction=logout")
-	return null
 })
 
 camping.procedure("isThereMessageError", function(){
@@ -77,31 +77,32 @@ camping.procedure("isThereMessageError", function(){
 	return null
 })
 
-camping.procedure("forceToAccessTarget", function(){
+camping.procedure("forceToAccessTarget", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack")
-	return null
 })
 
-camping.procedure("signInTarget", function(shared){
+camping.procedure("signInTarget", function(shared, hooks){
 	shared.isLogged = true
+	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
-	return null
 })
 
-camping.procedure("hackTargetBruteForce", function(){
+camping.procedure("hackTargetBruteForce", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
-	return null
 })
 
-camping.procedure("hackAccount", function(shared){
+camping.procedure("hackAccount", function(shared, hooks){
+	hooks.next()
 	goToPage("/internet?action=hack&acc=" + shared.accounts.shift())
-	return null
 })
 
-camping.procedure("accessKnownAccount", function(shared){
+camping.procedure("accessKnownAccount", function(shared, hooks){
 	var labels = ["This bank account does not exists", "Invalid bank account", "Essa conta bancária não existe", "inválida"]
 	var errorMessageContainer = getDOMElement("div", "class", "alert alert-error", 0)
 	if (strposOfArray(errorMessageContainer.innerHTML, labels) == -1){
+		hooks.next()
 		getDOMElement("input", "name", "acc", 0).value = getDOMElement("div", "class", "alert alert-error", 0).innerHTML.match(/[0-9]+/)[0]
 		getDOMElement("input", "name", "pass", 0).value = getDOMElement("strong", null, null, 1).childNodes[0].nodeValue //Fill the password field with the password on screen
 		getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
@@ -109,14 +110,15 @@ camping.procedure("accessKnownAccount", function(shared){
 	return null
 })
 
-camping.procedure("accessUnknownAccount", function(shared){
+camping.procedure("accessUnknownAccount", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click() //Click on the Login button
 	return null
 })
 
-camping.procedure("goToOwnLogTab", function(){
+camping.procedure("goToOwnLogTab", function(shared, hooks){
+	hooks.next()
 	goToPage("/log")
-	return null
 })
 
 camping.procedure("cleanMyIpClues", function(shared){
@@ -132,14 +134,16 @@ camping.procedure("cleanMyIpClues", function(shared){
 	return null
 })
 
-camping.procedure("cleanTextAreaContent", function(shared){
+camping.procedure("cleanTextAreaContent", function(shared, hooks){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	textArea.value = ""
+	hooks.next()
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 	return null
 })
 
-camping.procedure("submitLogs", function(shared){
+camping.procedure("submitLogs", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "class", "btn btn-inverse", "last").click()
 	return null
 }) 
@@ -176,13 +180,14 @@ camping.procedure("extractDataFromLog", function(shared){
 	return null
 })
 
-camping.procedure("goToTargetLogs", function(){
+camping.procedure("goToTargetLogs", function(shared, hooks){
 	//if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1))
+	hooks.next()
 	goToPage("/internet?view=logs")
-	return null
 })
 
-camping.procedure("transferMoneyToTarget", function(shared){
+camping.procedure("transferMoneyToTarget", function(shared, hooks){
+	hooks.next()
 	getDOMElement("input", "name", "acc", 0).value = shared.myAccount //Fill the To field
 	getDOMElement("input", "name", "ip", 1).value = shared.ip //Fill the Bank IP field
 	getDOMElement("button", "class", "btn btn-success", 0).click() //Click on the Transfer Money button
@@ -210,9 +215,11 @@ camping.procedure("waitProgressBar", function (shared, hooks) {
     }, 100)
 })
 
-camping.procedure("goToLoginPage", function(){
-	if (location.href.indexOf("/internet?action=login") == -1)
-	goToPage("/internet?action=login")
+camping.procedure("goToLoginPage", function(shared, hooks){
+	if (location.href.indexOf("/internet?action=login") == -1){
+		hooks.next()
+		goToPage("/internet?action=login")
+	}
 	return null
 })
 

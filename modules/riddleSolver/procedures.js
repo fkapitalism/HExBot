@@ -351,7 +351,7 @@ foo.procedure("solvePuzzle", function(){
 		}
 		getDOMElement("div", "class", "widget-title", 1).innerHTML += '<button id="solvePuzzleButton" class="btn btn-danger mission-abort">' + button_content + '</button>';
 		document.getElementById("solvePuzzleButton").addEventListener("click", function(){
-				solvePuzzle(puzzle_id)
+			solvePuzzle(puzzle_id)
 		})
 	}
 	return null

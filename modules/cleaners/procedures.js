@@ -6,11 +6,12 @@ cleanersMod.procedure("goToOwnLogTab", function(shared, hooks){
 	goToPage("/log")
 })
 
-cleanersMod.procedure("cleanTextAreaContent", function(data){
+cleanersMod.procedure("cleanTextAreaContent", function(data, hooks){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea.value.length > 0){
 		data.isEmpty = false
 		textArea.value = ""
+		hooks.next()
 		getDOMElement("input", "class", "btn btn-inverse", 0).click()
 	} else {
 		data.isEmpty = true
