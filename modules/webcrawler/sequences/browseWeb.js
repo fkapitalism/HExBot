@@ -19,7 +19,7 @@ foo.instructions = [
 
 	{"@cleanMyOwnLogs": 			["shareHost",{"gotoif": ["((*.accessCounter < 3) && (*.openList.length > 0))", "@goToNextTarget"]}, "resetAccessCounter", "goToOwnLogTab", "cancelLogProcesses", "cleanTextAreaContent", "isThereMessageError", {"gotoif":["*.$", "@goToNextTarget"]}, "waitProgressBar", {"gotoif": ["true", "@goToNextTarget"]}]},
 	{"@accountInaccessibleHost": 	["registerInaccessible", "updateCrawlerLogs", {"gotoif": ["true", "@goToNextTarget"]}]},
-	{"@ignoreIp": 					{"gotoif": ["true", "@goToNextTarget"]}},
-	{"@abortUpload": 				["abortUpload", {"gotoif": ["true", "@manageCounter"]}]},
+	{"@ignoreIp": 					["shareHost",{"gotoif": ["true", "@goToNextTarget"]}]},
+	{"@abortUpload": 				["abortUpload",{"gotoif": ["true", "@manageCounter"]}]},
 	{"@finishProcess": 				"_exit"}
 ]

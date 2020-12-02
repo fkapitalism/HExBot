@@ -368,6 +368,7 @@ webcrawler.procedure("getShoppingLogs", function(shared){
 webcrawler.procedure("goToNextIp", function(shared, hooks){
 	shared.currentIp = shared.openList.shift()
 	shared.closedList.push(shared.currentIp)
+	shared.host.ip = shared.currentIp
 	hooks.next()
 	goToPage("/internet?ip=" + shared.currentIp)
 	return null
@@ -615,7 +616,7 @@ webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 	sandbox.run(controllers.bot.controlPanel.fieldsContent[WEBCRAWLER_SCRIPT], (result) => {
 
 		/* START capturing hosts for sharing with community */
-		shared.host.ip = shared.currentIp
+		//shared.host.ip = shared.currentIp
 		shared.host.softwares = result.softwares.target
 		shared.host.internet = result.target.internet
 		shared.host.freehd = result.target.freehd
