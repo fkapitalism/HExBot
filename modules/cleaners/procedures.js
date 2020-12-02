@@ -113,9 +113,8 @@ cleanersMod.procedure("signInTarget", function(shared, hooks){
 	return null
 })
 
-cleanersMod.procedure('waitProgressBar', function(shared, hooks){
+cleanersMod.procedure("waitProgressBar", function(shared, hooks){
 	var loop = setInterval(() => {
-		console.log("opa")
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
 		//var progressBar = getDOMElement("div", "role", "progressbar", 0)
@@ -132,6 +131,10 @@ cleanersMod.procedure('waitProgressBar', function(shared, hooks){
 			hooks.next()
 		}
 	}, 100)
+})
+
+cleanersMod.procedure("boi", function(shared, hooks){
+	console.log($jSpaghetti);
 })
 
 cleanersMod.procedure("goToLoginPage", function(shared, hooks){
