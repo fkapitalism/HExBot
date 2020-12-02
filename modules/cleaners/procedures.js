@@ -113,19 +113,9 @@ cleanersMod.procedure("signInTarget", function(shared, hooks){
 	return null
 })
 
-/*cleanersMod.procedure("checkProgressBar", function(shared, funcs){
-	var loop = setInterval(function(){
-		var progressBar = getDOMElement("div", "role", "progressbar", 0)
-		if(!progressBar){
-			clearInterval(loop)
-			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
-		}
-	}, 50)
-	return null
-})*/
-
-cleanersMod.procedure('waitProgressBar', (shared, hooks) => {
+cleanersMod.procedure('waitProgressBar', function(shared, hooks){
 	var loop = setInterval(() => {
+		console.log("opa")
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
 		//var progressBar = getDOMElement("div", "role", "progressbar", 0)

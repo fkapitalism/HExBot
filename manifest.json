@@ -56,10 +56,6 @@
 				"modules/missions/sequences/deleteSoftware.js",
 				"modules/missions/sequences/test.js",
 
-				"modules/adRemover/procedures.js",
-				"modules/adRemover/sequences/removeAds.js",
-				"modules/adRemover/sequences/test.js",
-
 				"modules/camping/procedures.js",
 				"modules/camping/sequences/bankCamping.js",
 				"modules/camping/sequences/test.js",
@@ -68,20 +64,11 @@
 				"modules/webcrawler/sequences/browseWeb.js",
 				"modules/webcrawler/sequences/test.js",
 
-
 				"modules/monitor/procedures.js",
 				"modules/monitor/sequences/checkMission.js",
 				"modules/monitor/sequences/checkMyOwnLogs.js",
 				"modules/monitor/sequences/delegateJobs.js",
 				"modules/monitor/sequences/test.js",
-
-				"modules/botkit/procedures.js",
-				"modules/botkit/sequences/run.js",
-				"modules/botkit/sequences/test.js",
-
-				"modules/assistant/procedures.js",
-				"modules/assistant/sequences/accessChat.js",
-				"modules/botkit/sequences/test.js",
 
 				"modules/ddos/procedures.js",
 				"modules/ddos/sequences/deleteRelatory.js",
