@@ -187,7 +187,7 @@ foo.procedure("removeOutdatedCracker", function(shared, hooks){
 	return null
 })*/
 
-foo.procedure("waitProgressBar", function (shared, hooks) {
+/*foo.procedure("waitProgressBar", function (shared, hooks) {
     var loop = setInterval(function () {
         var progressBar = getDOMElement("div", "role", "progressbar", 0)
         if (!progressBar) {
@@ -195,7 +195,29 @@ foo.procedure("waitProgressBar", function (shared, hooks) {
             hooks.next()
         }
     }, 100)
-})
+})*/
+
+
+foo.procedure('waitProgressBar', (shared, hooks) => {
+	var loop = setInterval(() => {
+		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
+		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+		//var progressBar = getDOMElement("div", "role", "progressbar", 0)
+		if (successContainer || errorContainer) {
+			clearInterval(loop)
+			shared.cleanLogs = void 0;
+			shared.isThereMessageError = false;
+			if(errorContainer){
+				shared.isThereMessageError = true;
+				console.warn('ERROR MESSAGE')
+			} else {
+				console.warn('SUCCESS MESSAGE')
+			}
+			hooks.next()
+		}
+	}, 100)
+});
+
 
 foo.procedure("installLocalCracker", function(shared, hooks){
 	hooks.next()
@@ -378,4 +400,86 @@ foo.procedure("isTooManySecretsNow", function(shared){
 		})
 	}
 	return isTooManySecretsNow
+})
+
+foo.procedure("cleanLogs", function(shared, hooks){
+	switch(shared.cleanLogs) {
+		case undefined:
+			shared.cleanLogs='on-logs'
+			goToPage("/internet?view=logs")
+			break
+		case 'on-logs':
+			var textArea = getDOMElement("textarea", "class", "logarea", 0)
+
+			if(!textArea){
+				console.warn('LOGS TEXT AREA NOT FOUND!')
+				hooks.next()
+			} else 
+			
+			if (textArea.value.length > 0){
+				shared.isEmpty = false
+
+				const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
+				var ips = []
+				if(ipsSource){
+					ips = extractIPsFromText(ipsSource, [shared.myIp])
+				}
+				//console.log("ips found", ips)
+				controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
+				controllers.storage.set(controllers.bot)
+
+				//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+				var pattern = new RegExp("^.*" + shared.myIp + ".*$")
+
+				const newLogs = removeLinesFromText(textArea.value, pattern)
+
+				if(newLogs !== textArea.value){
+					textArea.value = newLogs;
+					const button = getDOMElement("input", "class", "btn btn-inverse", "last")
+					if(button){
+						shared.cleanLogs = 'after-submit'
+						button.click()
+					} else {
+						console.warn('LOGS SUBMIT BUTTON NOT FOUND!')
+						shared.cleanLogs = void 0; //void 0 returns undefined
+						hooks.next()
+					}
+				} else {
+					console.warn('LOGS are the same')
+					hooks.next()
+				}
+			} else {
+				console.warn('LOGS ARE EMPTY!')
+				shared.isEmpty = true
+				shared.cleanLogs = void 0; //void 0 returns undefined
+				hooks.next()
+			}
+			if(shared.cleanerCount != undefined){
+				shared.cleanerCount++
+			}
+			break
+		case 'after-submit':
+			var loop = setInterval(() => {
+				const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
+				const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+				//var progressBar = getDOMElement("div", "role", "progressbar", 0)
+				if (successContainer || errorContainer) {
+					clearInterval(loop)
+					shared.cleanLogs = void 0;
+					shared.isThereMessageError = false;
+					if(errorContainer){
+						shared.isThereMessageError = true;
+						console.warn('ERROR MESSAGE')
+					} else {
+						console.warn('SUCCESS MESSAGE')
+					}
+					hooks.next()
+				}
+			}, 100)
+			break
+		default:
+			console.warn('UNKNOWN STATE')
+			shared.cleanLogs = void 0;
+			return null;
+	}
 })

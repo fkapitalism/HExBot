@@ -1,6 +1,6 @@
 var foo = $jSpaghetti.module("riddleSolver").sequence("test")
 
 foo.instructions = [
-	{"@init": 		["cleanMyIpClues"]},
+	{"@init": 		["cleanLogs"]},
 	{"@getout": 	"_exit"}
 ]

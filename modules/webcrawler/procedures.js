@@ -43,7 +43,9 @@ webcrawler.procedure("startSearching", function(shared, hooks){
 		shared.softwareList = []
 		shared.currentSoftware = 0
 		shared.mustLeaveSignature = controllers.bot.controlPanel.checkBoxes[SET_SIGNATURE]
-		shared.shouldShareHosts = controllers.bot.controlPanel.checkBoxes[SET_SHARE_WEBCRAWLER]
+		//shared.shouldShareHosts = controllers.bot.controlPanel.checkBoxes[SET_SHARE_WEBCRAWLER]
+
+		shared.shouldShareHosts = true
 		
 		shared.softwaresToUpload = []
 		shared.isUploadAborted = false
@@ -593,15 +595,25 @@ webcrawler.procedure("isThereMessageSuccess", function(){
 	return null
 })*/
 
-webcrawler.procedure("waitProgressBar", function (shared, hooks) {
-    var loop = setInterval(function () {
-        var progressBar = getDOMElement("div", "role", "progressbar", 0)
-        if (!progressBar) {
-            clearInterval(loop)
-            hooks.next()
-        }
-    }, 100)
-})
+webcrawler.procedure('waitProgressBar', (shared, hooks) => {
+	var loop = setInterval(() => {
+		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
+		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+		//var progressBar = getDOMElement("div", "role", "progressbar", 0)
+		if (successContainer || errorContainer) {
+			clearInterval(loop)
+			shared.cleanLogs = void 0;
+			shared.isThereMessageError = false;
+			if(errorContainer){
+				shared.isThereMessageError = true;
+				console.warn('ERROR MESSAGE')
+			} else {
+				console.warn('SUCCESS MESSAGE')
+			}
+			hooks.next()
+		}
+	}, 100)
+});
 
 webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 	sandbox = new Sandbox()
@@ -1342,15 +1354,17 @@ webcrawler.procedure("isHiddingRequired", function(shared, funcs){
 
 
 webcrawler.procedure("shareHost", function(shared, hooks){
-	if(shared.shouldShareHosts){
+	//if(shared.shouldShareHosts){
 		var request = new BGRequest('emit', 'webcrawl', {'message':shared.host})
+		console.warn("host shared", shared.host);
 		chrome.runtime.sendMessage(null, {message: request}, {}, function(responseMessage) {
 			hooks.next();
 			return true
 		});
-	} else {
-		return null
-	}
+	//} else {
+	//	console.warn("sharing hosts not allowed");
+	//	return null
+	//}
 })
 
 webcrawler.procedure("createNewHost", function(shared, hooks){

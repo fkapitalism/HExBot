@@ -124,14 +124,24 @@ cleanersMod.procedure("signInTarget", function(shared, hooks){
 	return null
 })*/
 
-cleanersMod.procedure("waitProgressBar", function (shared, hooks) {
-    var loop = setInterval(function () {
-        var progressBar = getDOMElement("div", "role", "progressbar", 0)
-        if (!progressBar) {
-            clearInterval(loop)
-            hooks.next()
-        }
-    }, 100)
+cleanersMod.procedure('waitProgressBar', (shared, hooks) => {
+	var loop = setInterval(() => {
+		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
+		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+		//var progressBar = getDOMElement("div", "role", "progressbar", 0)
+		if (successContainer || errorContainer) {
+			clearInterval(loop)
+			shared.cleanLogs = void 0;
+			shared.isThereMessageError = false;
+			if(errorContainer){
+				shared.isThereMessageError = true;
+				console.warn('ERROR MESSAGE')
+			} else {
+				console.warn('SUCCESS MESSAGE')
+			}
+			hooks.next()
+		}
+	}, 100)
 })
 
 cleanersMod.procedure("goToLoginPage", function(shared, hooks){
