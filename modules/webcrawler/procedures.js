@@ -1,4 +1,4 @@
-var webcrawler = $jSpaghetti.module("webcrawler")
+const webcrawler = $jSpaghetti.module("webcrawler")
 webcrawler.config.debugMode = true
 
 webcrawler.procedure("startSearching", function(shared, hooks){

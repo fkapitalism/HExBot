@@ -1,7 +1,7 @@
-var foo = $jSpaghetti.module("missions")
-foo.config.debugMode = true
+const missions = $jSpaghetti.module("missions")
+missions.config.debugMode = true
 
-foo.procedure("getURLMission", function(shared, hooks){
+missions.procedure("getURLMission", function(shared, hooks){
 
 	var labels = {
 				checkBalance: ["Verificar balanço bancário", "Check bank status"],
@@ -76,66 +76,66 @@ foo.procedure("getURLMission", function(shared, hooks){
 	}
 })
 
-foo.procedure("boo", function(){
+missions.procedure("boo", function(){
 	return null
 })
 
-foo.procedure("goToMissionsTab", function(shared, hooks){
+missions.procedure("goToMissionsTab", function(shared, hooks){
 	hooks.next()
 	goToPage("/missions")
 	return null
 })
 
-foo.procedure("informBalance", function(shared, hooks){
+missions.procedure("informBalance", function(shared, hooks){
 	hooks.next()
 	getDOMElement("input", "id", "amount-input", 0).value = shared.balance //Fill the balance field with the balance value
 	getDOMElement("span", "class", "btn btn-success mission-complete", 0).click() //Click on the Complete Mission Button
 	return null
 })
 
-foo.procedure("confirmMissionCompleteButton", function(shared, hooks){
+missions.procedure("confirmMissionCompleteButton", function(shared, hooks){
 	hooks.next()
 	getDOMElement("input", "id", "modal-submit", 0).click()
 	return null
 })
 
-foo.procedure("goToAcceptMissionPage", function(shared, hooks){
+missions.procedure("goToAcceptMissionPage", function(shared, hooks){
 	hooks.next()
 	window.location.href = shared.urlMission
 	return null
 })
 
-foo.procedure("abc", function(shared){
+missions.procedure("abc", function(shared){
 	console.log(shared)
 	return null
 })
 
-foo.procedure("goToNextIp", function(shared, hooks){
+missions.procedure("goToNextIp", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?ip=" + shared.ips[shared.nextIp])
 	shared.nextIp++
 	return null
 })
 
-foo.procedure("goToBankAccountHacker", function(shared, hooks){
+missions.procedure("goToBankAccountHacker", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?action=hack&type=bank")
 	return null
 })
 
-foo.procedure("goToBankAccountHacker", function(shared, hooks){
+missions.procedure("goToBankAccountHacker", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?action=hack&type=bank")
 	return null
 })
 
-foo.procedure("hackAccount", function(shared, hooks){
+missions.procedure("hackAccount", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?action=hack&acc=" + shared.accounts[0])
 	return null
 })
 
-foo.procedure("transferMoneyToTarget", function(shared, hooks){
+missions.procedure("transferMoneyToTarget", function(shared, hooks){
 	hooks.next()
 	getDOMElement("input", "name", "acc", 0).value = shared.accounts[1]; //Fill the To field
 	getDOMElement("input", "name", "ip", 1).value = shared.ips[1]; //Fill the Bank IP field
@@ -143,7 +143,7 @@ foo.procedure("transferMoneyToTarget", function(shared, hooks){
 	return null
 })
 
-foo.procedure("signInAccount", function(shared, hooks){
+missions.procedure("signInAccount", function(shared, hooks){
 	hooks.next()
 	if (getDOMElement("div", "class", "alert alert-error", 0)){
 		getDOMElement("input", "name", "acc", 0).value = shared.accounts[0]; //Fill the account field
@@ -153,24 +153,24 @@ foo.procedure("signInAccount", function(shared, hooks){
 	return null
 })
 
-foo.procedure("getAccountBalance", function(shared){
+missions.procedure("getAccountBalance", function(shared){
 	shared.balance = getDOMElement("strong", null, null, 0).childNodes[0].nodeValue; //Get the account balance
 	return null
 })
 
-foo.procedure("getOutFromAccount", function(shared, hooks){
+missions.procedure("getOutFromAccount", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?bAction=logout")
 	return null
 })
 
-foo.procedure("logout", function(shared, hooks){
+missions.procedure("logout", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?view=logout")
 	return null
 })
 
-foo.procedure("clickOnAcceptMissionButton", function(shared, hooks){
+missions.procedure("clickOnAcceptMissionButton", function(shared, hooks){
 	var loop = setInterval(function(){
 		clearInterval(loop)
 		const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
@@ -182,7 +182,7 @@ foo.procedure("clickOnAcceptMissionButton", function(shared, hooks){
 })
 
 //Click on the div float Accept mission button
-foo.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){	
+missions.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){	
 	var loop = setInterval(function(){
 		clearInterval(loop)
 		const button = getDOMElement("input", "type", "submit", 0)
@@ -193,7 +193,7 @@ foo.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){
 	}, 100)
 })
 
-foo.procedure("waitForSubmitButton", function(shared, hooks){
+missions.procedure("waitForSubmitButton", function(shared, hooks){
 	var loop = setInterval(function(){
 		var button = getDOMElement("input", "type", "submit", 0)
 		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
@@ -217,12 +217,12 @@ foo.procedure("waitForSubmitButton", function(shared, hooks){
 	}, 100)
 })
 
-foo.procedure("test0", function(shared, hooks){
+missions.procedure("test0", function(shared, hooks){
 	shared.destinationAccount = '794301403'
 	return null
 })
 
-foo.procedure("test", function(shared, hooks){
+missions.procedure("test", function(shared, hooks){
 	/*var accountBalance = */
 	getBankAccountsBalance((result) => {
 		var accountBalance = result[shared.destinationAccount]
@@ -241,13 +241,13 @@ foo.procedure("test", function(shared, hooks){
 	})
 })
 
-foo.procedure("clickOnAbortMissionButton", function(shared, hooks){
+missions.procedure("clickOnAbortMissionButton", function(shared, hooks){
 	hooks.next()
 	getDOMElement("span", "class", "btn btn-danger mission-abort", 0).click()
 	return null
 })
 
-foo.procedure("showMessage", function(shared){
+missions.procedure("showMessage", function(shared){
 	if(shared.missionType == DELETE_SOFTWARE){
 		if(!shared.softwareId){
 			window.alert(LANG.WEBCRAWLER_SOFTWARE_NOT_FOUND.replace('{CONTENT1}', shared.softwareInfo.name).replace('{CONTENT2}', shared.softwareInfo.version))
@@ -256,19 +256,19 @@ foo.procedure("showMessage", function(shared){
 	return null
 })
 
-foo.procedure("clickOnConfirmAbortMissionButton", function(shared, hooks){
+missions.procedure("clickOnConfirmAbortMissionButton", function(shared, hooks){
 	hooks.next()
 	getDOMElement("input", "type", "submit", 0).click()
 	return null
 })
 
-foo.procedure("isThereMessageError", function(){
+missions.procedure("isThereMessageError", function(){
 	if (getDOMElement("div", "class", "alert alert-error", 0))
 		return true
 	return null
 })
 
-foo.procedure("isCrackerStrongEnough", function(){
+missions.procedure("isCrackerStrongEnough", function(){
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
 	var labels = ["You do not have the needed software to perform this action", "Vocẽ não tem o software necessário para realizar essa ação", "your cracker is not good enough", "seu cracker não é bom o suficiente"]
 	if (errorContainer){
@@ -278,12 +278,12 @@ foo.procedure("isCrackerStrongEnough", function(){
 	return true
 })
 
-foo.procedure("askPermissionToAbort", function(shared){
+missions.procedure("askPermissionToAbort", function(shared){
 	shared.abortMissionAllowed = window.confirm(LANG.MISSIONS_PERMISSION_TO_ABORT)
 	return null
 })
 
-foo.procedure("getMissionInfo", function(shared){
+missions.procedure("getMissionInfo", function(shared){
 	//Get ips
 	try{
 		shared.ips.push(getDOMElement("a", "class", "small", 0).childNodes[0].nodeValue)
@@ -306,7 +306,7 @@ foo.procedure("getMissionInfo", function(shared){
 	return null
 })
 
-foo.procedure("getDeleteSoftwareMissionInfo", function(shared){
+missions.procedure("getDeleteSoftwareMissionInfo", function(shared){
 	var infoTable = document.getElementsByClassName("table table-cozy table-bordered table-striped")[0]
 	var softwareData = document.getElementsByTagName("TD")[3]
 	var targetIp = document.getElementsByTagName("TD")[1].innerText.match(/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/)[0]
@@ -317,32 +317,32 @@ foo.procedure("getDeleteSoftwareMissionInfo", function(shared){
 	return null
 })
 
-foo.procedure("forceToAccessTarget", function(shared, hooks){
+missions.procedure("forceToAccessTarget", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?action=hack")
 	return null
 })
 
-foo.procedure("signInKnownTarget", function(shared, hooks){
+missions.procedure("signInKnownTarget", function(shared, hooks){
 	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 	return null
 })
 
-foo.procedure("hackTargetBruteForce", function(shared, hooks){
+missions.procedure("hackTargetBruteForce", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
 	return null
 })
 
-foo.procedure("init", function(shared, hooks){
+missions.procedure("init", function(shared, hooks){
 	getMyIp(false, (myip) => {
 		shared.myIp = myip
 		hooks.next()
 	})
 })
 
-foo.procedure("cleanMyIpClues", function(data, hooks){
+missions.procedure("cleanMyIpClues", function(data, hooks){
 	//getMyIp(true, (myip) => {
 	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
@@ -368,7 +368,7 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 	//})
 })
 
-foo.procedure("cleanTextAreaContent", function(data, hooks){
+missions.procedure("cleanTextAreaContent", function(data, hooks){
 	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea.value.length > 0){
@@ -382,18 +382,18 @@ foo.procedure("cleanTextAreaContent", function(data, hooks){
 	return null
 })
 
-foo.procedure("informBadCracker", function(){
+missions.procedure("informBadCracker", function(){
 	window.alert(LANG.MISSIONS_WEAK_CRACKER)
 	return null
 })
 
-foo.procedure("goToOwnLogTab", function(shared, hooks){
+missions.procedure("goToOwnLogTab", function(shared, hooks){
 	hooks.next()
 	goToPage("/log")
 	return null
 })
 
-foo.procedure("checkSameTypeAcceptedMission", function(shared){
+missions.procedure("checkSameTypeAcceptedMission", function(shared){
 	var labels = {
 			checkBalance: ["balance", "balanço"],
 			transferMoney: ["transfer", "transferir"],
@@ -408,7 +408,7 @@ foo.procedure("checkSameTypeAcceptedMission", function(shared){
 	return null
 })
 
-foo.procedure("isAvailableMissionsPage", function(){
+missions.procedure("isAvailableMissionsPage", function(){
 	labels = ["Missões disponíveis", "Available missions"]
 	var titleElement = getDOMElement("h5", null, null, 0)
 	if (titleElement){
@@ -419,29 +419,19 @@ foo.procedure("isAvailableMissionsPage", function(){
 	return null
 })
 
-foo.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
+missions.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
 	window.alert(LANG.MISSION_ANOTHER_MISSION_KIND_ALREADY_ACCEPTED)
 	return null
 })
 
-foo.procedure("clickOnFinishButton", function(shared, hooks){
+missions.procedure("clickOnFinishButton", function(shared, hooks){
 	hooks.next()
 	getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
 	return null
 })
 
-/*foo.procedure("checkProgressBar", function(shared, funcs){
-	var loop = setInterval(function(){
-		var progressBar = getDOMElement("div", "role", "progressbar", 0)
-		if(!progressBar){
-			clearInterval(loop)
-			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
-		}
-	}, 50)
-	return null
-})*/
 
-foo.procedure('waitProgressBar', (shared, hooks) => {
+missions.procedure('waitProgressBar', (shared, hooks) => {
 	var loop = setInterval(() => {
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
@@ -462,7 +452,7 @@ foo.procedure('waitProgressBar', (shared, hooks) => {
 })
 
 
-foo.procedure("checkFunds", function(shared){
+missions.procedure("checkFunds", function(shared){
 	var fundsContainer = getDOMElement("ul", "class", "finance-box", 0)
 	var funds = fundsContainer.innerHTML.match(/\$[0-9,]+/)[0].replace(/[\$,]/gm, '')
 	shared.funds = Number(funds)
@@ -473,7 +463,7 @@ foo.procedure("checkFunds", function(shared){
 	}
 })
 
-foo.procedure("transferRandomValueToTarget", function(shared, hooks){
+missions.procedure("transferRandomValueToTarget", function(shared, hooks){
 	if (shared.funds > 10){
 		shared.transferredValue = Math.floor(Math.random() * 10) + 1
 	} else {
@@ -488,7 +478,7 @@ foo.procedure("transferRandomValueToTarget", function(shared, hooks){
 	return null
 })
 
-foo.procedure("transferToMe", function(shared, hooks){
+missions.procedure("transferToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[0]]
 	if(myAccount){
 		hooks.next()
@@ -500,7 +490,7 @@ foo.procedure("transferToMe", function(shared, hooks){
 	return null
 })
 
-foo.procedure("transferTheRestToMe", function(shared, hooks){
+missions.procedure("transferTheRestToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[1]]
 	if(myAccount){
 		hooks.next()
@@ -512,7 +502,7 @@ foo.procedure("transferTheRestToMe", function(shared, hooks){
 	return null
 })
 
-foo.procedure("goToLoginPage", function(shared, hooks){
+missions.procedure("goToLoginPage", function(shared, hooks){
 	if (location.href.indexOf("/internet?action=login") == -1){
 		hooks.next()
 		goToPage("/internet?action=login")
@@ -520,7 +510,7 @@ foo.procedure("goToLoginPage", function(shared, hooks){
 	return null
 })
 
-foo.procedure("goToPageAccountLoginPage", function(shared, hooks){
+missions.procedure("goToPageAccountLoginPage", function(shared, hooks){
 	if (location.href.indexOf("/internet?action=login&type=bank") == -1){
 		hooks.next()
 		goToPage("/internet?action=hack&acc=" + shared.accounts[0])
@@ -528,7 +518,7 @@ foo.procedure("goToPageAccountLoginPage", function(shared, hooks){
 	return null
 })
 
-/*foo.procedure("waitForSubmitButton", function(shared, funcs){
+/*missions.procedure("waitForSubmitButton", function(shared, funcs){
 	var loop = setInterval(function(){
 		var button = getDOMElement("input", "type", "submit", 0)
 		var labels = ["Accept", "Aceitar", "Complete Mission", "Completar Missão", "Abort", "Abortar"]
@@ -550,7 +540,7 @@ foo.procedure("goToPageAccountLoginPage", function(shared, hooks){
 	return null
 })*/
 
-foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){
+missions.procedure("sendMoneyToBTCWallet", function(shared, hooks){
 	if(shared.isBTCLogged){
 		/*var accountBalance = */
 		/*var accountBalance = */
@@ -576,7 +566,7 @@ foo.procedure("sendMoneyToBTCWallet", function(shared, hooks){
 	}
 })
 
-foo.procedure("goToTargetLogs", function(shared, hooks){
+missions.procedure("goToTargetLogs", function(shared, hooks){
 	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1)){
 		hooks.next()
 		goToPage("/internet?view=logs")
@@ -584,7 +574,7 @@ foo.procedure("goToTargetLogs", function(shared, hooks){
 	return null
 })
 
-foo.procedure("cancelLogProcesses", function(shared, hooks){
+missions.procedure("cancelLogProcesses", function(shared, hooks){
 	//var processesPage = 
 	sendXMLHttpRequest("/processes", "GET", "", false, (processesPage) => {
 
@@ -624,7 +614,7 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 		
 })
 
-foo.procedure("checkBTCWallet", function(shared, hooks){
+missions.procedure("checkBTCWallet", function(shared, hooks){
 	shared.transferToBTC = controllers.bot.controlPanel.checkBoxes[SET_TRANSFER_TO_BTC]
 
 	if(shared.transferToBTC){
@@ -651,7 +641,7 @@ foo.procedure("checkBTCWallet", function(shared, hooks){
 
 })
 
-foo.procedure("getSoftwareId", function(shared, hooks){
+missions.procedure("getSoftwareId", function(shared, hooks){
 	/*shared.softwareId = */
 	getSoftwareId(shared.softwareInfo.name, shared.softwareInfo.version, "/internet", "view=software", (result) => {
 		shared.softwareId = result
@@ -660,13 +650,13 @@ foo.procedure("getSoftwareId", function(shared, hooks){
 	//return shared.softwareId
 })
 
-foo.procedure("deleteSoftware", function(shared, hooks){
+missions.procedure("deleteSoftware", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?view=software&cmd=del&id=" + shared.softwareId)
 	return null
 })
 
-foo.procedure("startCheckBalance", function(shared, hooks){
+missions.procedure("startCheckBalance", function(shared, hooks){
 	/*shared.myAccountsInfo = */
 	getBankAccountAddr((info) => {
 		shared.myAccountsInfo = info
@@ -679,7 +669,7 @@ foo.procedure("startCheckBalance", function(shared, hooks){
 	})	
 })
 
-foo.procedure("startDeleteSoftware", function(shared, hooks){
+missions.procedure("startDeleteSoftware", function(shared, hooks){
 	/*shared.myAccountsInfo = */
 	getBankAccountAddr((info) => {
 		shared.myAccountsInfo = info
@@ -692,7 +682,7 @@ foo.procedure("startDeleteSoftware", function(shared, hooks){
 	})		
 })
 
-foo.procedure("startTransferMoney", function(shared, hooks){
+missions.procedure("startTransferMoney", function(shared, hooks){
 	/*shared.myAccountsInfo = */
 	getBankAccountAddr((info) => {
 		shared.myAccountsInfo = info

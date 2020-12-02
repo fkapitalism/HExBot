@@ -1,4 +1,4 @@
-var camping = $jSpaghetti.module("camping")
+const camping = $jSpaghetti.module("camping")
 camping.config.debugMode = true
 
 camping.procedure("startBankCamping", function(shared, hooks){

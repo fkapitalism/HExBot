@@ -1,4 +1,4 @@
-var cleanersMod = $jSpaghetti.module("cleaners")
+const cleanersMod = $jSpaghetti.module("cleaners")
 cleanersMod.config.debugMode = true
 
 cleanersMod.procedure("goToOwnLogTab", function(shared, hooks){

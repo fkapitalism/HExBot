@@ -1,4 +1,4 @@
-var ddos = $jSpaghetti.module("ddos")
+const ddos = $jSpaghetti.module("ddos")
 ddos.config.debugMode = true
 
 ddos.procedure("goToSoftwarePage", function (shared, hooks) {

@@ -1,4 +1,4 @@
-var monitor = $jSpaghetti.module("monitor")
+const monitor = $jSpaghetti.module("monitor")
 monitor.config.debugMode = false
 
 monitor.procedure("checkMyOwnLogs", function(shared){

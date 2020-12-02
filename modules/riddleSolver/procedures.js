@@ -1,7 +1,7 @@
-var foo = $jSpaghetti.module("riddleSolver")
-foo.config.debugMode = true
+const riddle = $jSpaghetti.module("riddleSolver")
+riddle.config.debugMode = true
 
-foo.procedure("init", function(shared, hooks){
+riddle.procedure("init", function(shared, hooks){
 	getMyIp(false, (myip) => {
 		//shared.myIp = getMyIp()
 		shared.myIp = myip
@@ -11,7 +11,7 @@ foo.procedure("init", function(shared, hooks){
 	})
 })
 
-foo.procedure("isThereRiddle", function(shared, hooks){
+riddle.procedure("isThereRiddle", function(shared, hooks){
 	/*var softwareList = */
 	getSoftwaresByPattern("(enigma.exe|riddle.exe)", "/internet", "view=software", false, (softwareList) => {
 		if(softwareList){
@@ -25,7 +25,7 @@ foo.procedure("isThereRiddle", function(shared, hooks){
 	})
 })
 
-foo.procedure("getNewCrackerId", function(shared, hooks){
+riddle.procedure("getNewCrackerId", function(shared, hooks){
 	/*var playerCrackers = */
 	getSoftwaresByPattern("\.crc", "/software", "", false, (playerCrackers) => {
 		if(playerCrackers){
@@ -39,12 +39,12 @@ foo.procedure("getNewCrackerId", function(shared, hooks){
 	})		
 })
 
-foo.procedure("goToPageRiddle", function(shared, hooks){
+riddle.procedure("goToPageRiddle", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?view=software&cmd=riddle")
 })
 
-foo.procedure("isThereLocalCracker", function(shared, hooks){
+riddle.procedure("isThereLocalCracker", function(shared, hooks){
 	/*var playerCrackers = */
 	getSoftwaresByPattern("\.crc$", "/software", "", false, (playerCrackers) => {
 		//console.log("player", playerCrackers)
@@ -64,12 +64,12 @@ foo.procedure("isThereLocalCracker", function(shared, hooks){
 	})
 })
 
-foo.procedure("goToTargetLogs", function(shared, hooks){
+riddle.procedure("goToTargetLogs", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?view=logs")
 })
 
-foo.procedure("submitLogs", function(shared, hooks){
+riddle.procedure("submitLogs", function(shared, hooks){
 	const interval = setInterval(() => {
 		const button = getDOMElement("input", "class", "btn btn-inverse", "last")
 		if(button){
@@ -83,7 +83,7 @@ foo.procedure("submitLogs", function(shared, hooks){
 	//return null
 }) 
 
-foo.procedure("test", function(){
+riddle.procedure("test", function(){
 	const text = `
 	fdsafd[12.3.45.45 3.4.2.1  3.4.2.1
 	192.368.0.53(
@@ -92,7 +92,7 @@ foo.procedure("test", function(){
 	console.log(ips)
 })
 		
-foo.procedure("cleanMyIpClues", function(data, hooks){
+riddle.procedure("cleanMyIpClues", function(data, hooks){
 		
 	//getMyIp(true, (myip) => {
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
@@ -130,7 +130,7 @@ foo.procedure("cleanMyIpClues", function(data, hooks){
 		
 })
 
-foo.procedure("isThereTargetCracker", function(shared, hooks){
+riddle.procedure("isThereTargetCracker", function(shared, hooks){
 	/*var targetCrackers = */
 	getSoftwaresByPattern("\.crc$", "/internet", "view=software", false, (targetCrackers) => {
 		//console.log("target", targetCrackers)
@@ -153,7 +153,7 @@ foo.procedure("isThereTargetCracker", function(shared, hooks){
 	})	
 })
 
-foo.procedure("goToTargetLogs", function(shared, hooks){
+riddle.procedure("goToTargetLogs", function(shared, hooks){
 	if (!getDOMElement("textarea", "class", "logarea", 0) || (location.href.indexOf("/internet") == -1)){
 		hooks.next()
 		goToPage("/internet?view=logs")
@@ -161,7 +161,7 @@ foo.procedure("goToTargetLogs", function(shared, hooks){
 	return null
 })
 
-foo.procedure("isCrackerStrongEnough", function(){
+riddle.procedure("isCrackerStrongEnough", function(){
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
 	var labels = ["You do not have the needed software to perform this action", "Vocẽ não tem o software necessário para realizar essa ação", "your cracker is not good enough", "seu cracker não é bom o suficiente"]
 	if (errorContainer){
@@ -171,12 +171,12 @@ foo.procedure("isCrackerStrongEnough", function(){
 	return true
 })
 
-foo.procedure("removeOutdatedCracker", function(shared, hooks){
+riddle.procedure("removeOutdatedCracker", function(shared, hooks){
 	hooks.next()
 	goToPage("/software?action=del&id=" + shared.playerCracker.id)
 })
 
-/*foo.procedure("checkProgressBar", function(shared, funcs){
+/*riddle.procedure("checkProgressBar", function(shared, funcs){
 	var loop = setInterval(function(){
 		var progressBar = getDOMElement("div", "role", "progressbar", 0)
 		if(!progressBar){
@@ -187,7 +187,7 @@ foo.procedure("removeOutdatedCracker", function(shared, hooks){
 	return null
 })*/
 
-/*foo.procedure("waitProgressBar", function (shared, hooks) {
+/*riddle.procedure("waitProgressBar", function (shared, hooks) {
     var loop = setInterval(function () {
         var progressBar = getDOMElement("div", "role", "progressbar", 0)
         if (!progressBar) {
@@ -198,7 +198,7 @@ foo.procedure("removeOutdatedCracker", function(shared, hooks){
 })*/
 
 
-foo.procedure('waitProgressBar', (shared, hooks) => {
+riddle.procedure('waitProgressBar', (shared, hooks) => {
 	var loop = setInterval(() => {
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
@@ -219,25 +219,25 @@ foo.procedure('waitProgressBar', (shared, hooks) => {
 });
 
 
-foo.procedure("installLocalCracker", function(shared, hooks){
+riddle.procedure("installLocalCracker", function(shared, hooks){
 	hooks.next()
 	goToPage("/software?action=install&id=" + shared.crackerToInstall.id)
 })
 
-foo.procedure("downloadCracker", function(shared, hooks){
+riddle.procedure("downloadCracker", function(shared, hooks){
 	shared.crackerToInstall = shared.targetCracker
 	//console.log("ata", shared.targetCracker)
 	hooks.next()
 	goToPage("/internet?view=software&cmd=dl&id=" + shared.targetCracker.id)
 })
 
-foo.procedure("isThereMessageError", function(){
+riddle.procedure("isThereMessageError", function(){
 	if (getDOMElement("div", "class", "alert alert-error", 0))
 		return true
 	return null
 })
 
-foo.procedure("isRiddleSolved", function(shared){
+riddle.procedure("isRiddleSolved", function(shared){
 	if(getNextPuzzleIP()){
 		return true
 	} else {
@@ -245,17 +245,17 @@ foo.procedure("isRiddleSolved", function(shared){
 	}
 })
 
-foo.procedure("forceToAccessTarget", function(shared, hooks){
+riddle.procedure("forceToAccessTarget", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?action=hack")
 })
 
-foo.procedure("hackTargetBruteForce", function(shared, hooks){
+riddle.procedure("hackTargetBruteForce", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?action=hack&method=bf")
 })
 
-foo.procedure("goToLoginPage", function(shared, hooks){
+riddle.procedure("goToLoginPage", function(shared, hooks){
 	if (location.href.indexOf("/internet?action=login") == -1){
 		hooks.next()
 		goToPage("/internet?action=login")
@@ -263,7 +263,7 @@ foo.procedure("goToLoginPage", function(shared, hooks){
 	return null
 })
 
-foo.procedure("cancelLogProcesses", function(shared, hooks){
+riddle.procedure("cancelLogProcesses", function(shared, hooks){
 	/*var processesPage = */
 	sendXMLHttpRequest("/processes", "GET", "", false, (processesPage) => {
 		var parser = new DOMParser()
@@ -302,38 +302,38 @@ foo.procedure("cancelLogProcesses", function(shared, hooks){
 		
 })
 
-foo.procedure("signInKnownTarget", function(shared, hooks){
+riddle.procedure("signInKnownTarget", function(shared, hooks){
 	hooks.next()
 	getDOMElement("input", "type", "submit", 1).click(); //Click on the Login button
 	return null
 })
 
-foo.procedure("getNextIP", function(shared){
+riddle.procedure("getNextIP", function(shared){
 	shared.nextPuzzleIP = getNextPuzzleIP()
 	return null
 })
 
-foo.procedure("getNextIPFake", function(shared){
+riddle.procedure("getNextIPFake", function(shared){
 	shared.nextPuzzleIP = '208.55.14.95'
 	return null
 })
 
-foo.procedure("goToNextPuzzle", function(shared, hooks){
+riddle.procedure("goToNextPuzzle", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?ip=" + shared.nextPuzzleIP)
 })
 
-foo.procedure("logout", function(shared, hooks){
+riddle.procedure("logout", function(shared, hooks){
 	hooks.next()
 	goToPage("/internet?view=logout")
 })
 
-foo.procedure("reload", function(shared, hooks){
+riddle.procedure("reload", function(shared, hooks){
 	hooks.next()
 	location.reload()
 })
 
-foo.procedure("solvePuzzleAuto", function(){
+riddle.procedure("solvePuzzleAuto", function(){
 	//Puzzle handler controller
 	var puzzle_id = null
 	puzzle_id = getPuzzleId()
@@ -357,7 +357,7 @@ foo.procedure("solvePuzzleAuto", function(){
 	}
 })
 
-foo.procedure("solvePuzzle", function(){
+riddle.procedure("solvePuzzle", function(){
 	//Puzzle handler controller
 	var puzzle_id = null
 	puzzle_id = getPuzzleId()
@@ -383,7 +383,7 @@ foo.procedure("solvePuzzle", function(){
 })
 
 
-foo.procedure("isTooManySecretsNow", function(shared){
+riddle.procedure("isTooManySecretsNow", function(shared){
 	var isTooManySecretsNow = false
 	const container = document.getElementsByClassName('whois')
 	if (container && container.length > 0 && container[0].nodeName == 'UL'){
@@ -402,7 +402,7 @@ foo.procedure("isTooManySecretsNow", function(shared){
 	return isTooManySecretsNow
 })
 
-foo.procedure("cleanLogs", function(shared, hooks){
+riddle.procedure("cleanLogs", function(shared, hooks){
 	switch(shared.cleanLogs) {
 		case undefined:
 			shared.cleanLogs='on-logs'
