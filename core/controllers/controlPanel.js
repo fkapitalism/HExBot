@@ -14,11 +14,11 @@ function controlPanel(){
 
 	views.appendControlPanel(controllers)
 
-	//Ativa o editor
-	if(typeof ace !== 'undefined'){
-		var editor = ace.edit(WEBCRAWLER_SCRIPT);
+
+	require(["ace/ace"], function (ace) {
+        var editor = ace.edit(WEBCRAWLER_SCRIPT);
 		enableEditor(editor, controllers)
-	}
+    });
 
 	if (controllers.bot.controlPanel.isHidden){
 		views.hideControlPanel()

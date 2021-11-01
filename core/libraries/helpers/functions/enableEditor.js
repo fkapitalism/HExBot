@@ -8,7 +8,10 @@ function enableEditor(editor, controllers) {
     editor.getSession().setUseWorker(false);
     editor.resize()
     editor.setOptions({
-        fontSize: "12pt"
+        fontSize: "12pt",
+        maxLines: 1000,
+        autoScrollEditorIntoView: true, 
+        showPrintMargin: false,
     });
     editor.setValue(controllers.bot.controlPanel.fieldsContent['web-crawl-script']);
     editor.getSession().selection.moveCursorFileStart();

@@ -83,7 +83,7 @@ var views = {
 				
 				'<i>' + LANG.WEBCRAWLER_SCRIPT_TITLE + '</i> <a href="https://github.com/HEScriptsPack/BetterHExBot/wiki" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href="#" id="' + PERFORM_RESET_WEBCRAWLER + '"><i class="fa fa-eraser" aria-hidden="true"></i></a>&nbsp;&nbsp;<a href="#" id="' + PERFORM_WEBCRAWLER_SCRIPT_RUNNING + '"><i class="fa fa-play-circle" aria-hidden="true"></i></a>&nbsp;<small style="visibility: hidden; color:green;" id="' + AREA_WARN_WEBCRAWLER + '">' + LANG.WARN_WEBCRAWLER_RESULT + '</small>' +
 				//'<center><textarea id="' + WEBCRAWLER_SCRIPT + '" class="controls fieldsContent" style="width: 95%; resize: vertical; color:#80f980; background-color:black; font-family:monospace"></textarea>' + 
-				'<center><div id="' + WEBCRAWLER_SCRIPT + '" style=" width: 510px; height: 50px;">console.log()</div>' + 
+				'<center><div id="' + WEBCRAWLER_SCRIPT + '" style=" width: 510px;"> </div>' + 
 
 
 				'<center><textarea id="' + WEBCRAWLER_SCRIPT_DEBUG + '" class="controls fieldsContent" style="width: 95%; resize: vertical; color:white; background-color:red; font-family:monospace"></textarea>' +
