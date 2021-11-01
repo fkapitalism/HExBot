@@ -120,7 +120,8 @@ webcrawler.procedure("manageUploadCounter", function(shared){
 webcrawler.procedure("isSoftwareAlreadyThere", function(){
 	var labels = ["O cliente remoto já tem esse software", "The remote client already have this software"]
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
-	if (errorContainer){
+	const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
+	if ((errorContainer)||(dangerContainer)){
 		if(strposOfArray(errorContainer.innerHTML, labels) >= 0)
 		return true
 	}
@@ -176,7 +177,8 @@ webcrawler.procedure("hideSoftware", function(shared, hooks){
 webcrawler.procedure("isIpInvalid", function(){
 	var labels = ["invalid", "inválido"]
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
-	if (errorContainer){
+	const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
+	if ((errorContainer)||(dangerContainer)){
 		if (strposOfArray(errorContainer.innerHTML, labels) >= 0)
 		return true
 	}
@@ -396,6 +398,8 @@ webcrawler.procedure("isThereMessageError", function(shared){
 	var result = false
 	if (getDOMElement("div", "class", "alert alert-error", 0)){
 		result = true
+	} else if (getDOMElement("div", "class", "alert alert-danger", 0)){
+		result = true
 	}
 	shared.isThereMError = result
 	return shared.isThereMError
@@ -595,12 +599,13 @@ webcrawler.procedure('waitProgressBar', (shared, hooks) => {
 	var loop = setInterval(() => {
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+		const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
 		//var progressBar = getDOMElement("div", "role", "progressbar", 0)
-		if (successContainer || errorContainer) {
+		if ((successContainer) || (errorContainer) || (dangerContainer)) {
 			clearInterval(loop)
 			shared.cleanLogs = void 0;
 			shared.isThereMessageError = false;
-			if(errorContainer){
+			if((errorContainer)||(dangerContainer)){
 				shared.isThereMessageError = true;
 				console.warn('ERROR MESSAGE')
 			} else {
@@ -617,6 +622,7 @@ webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 
 		/* START capturing hosts for sharing with community */
 		//shared.host.ip = shared.currentIp
+		if(!shared.host) shared.host = new Host()
 		shared.host.softwares = result.softwares.target
 		shared.host.internet = result.target.internet
 		shared.host.freehd = result.target.freehd

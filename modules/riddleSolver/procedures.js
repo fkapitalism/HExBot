@@ -163,9 +163,10 @@ riddle.procedure("goToTargetLogs", function(shared, hooks){
 
 riddle.procedure("isCrackerStrongEnough", function(){
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+	const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
 	var labels = ["You do not have the needed software to perform this action", "Vocẽ não tem o software necessário para realizar essa ação", "your cracker is not good enough", "seu cracker não é bom o suficiente"]
-	if (errorContainer){
-		if(strposOfArray(errorContainer.innerHTML, labels) >= 0)
+	if ((errorContainer)||(dangerContainer)){
+		if((strposOfArray(errorContainer.innerHTML, labels) >= 0) || (strposOfArray(dangerContainer.innerHTML, labels) >= 0))
 		return false
 	}
 	return true
@@ -202,12 +203,13 @@ riddle.procedure('waitProgressBar', (shared, hooks) => {
 	var loop = setInterval(() => {
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+		const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
 		//var progressBar = getDOMElement("div", "role", "progressbar", 0)
-		if (successContainer || errorContainer) {
+		if ((successContainer) || (errorContainer) || (dangerContainer)) {
 			clearInterval(loop)
 			shared.cleanLogs = void 0;
 			shared.isThereMessageError = false;
-			if(errorContainer){
+			if((errorContainer)||(dangerContainer)){
 				shared.isThereMessageError = true;
 				console.warn('ERROR MESSAGE')
 			} else {
@@ -232,7 +234,9 @@ riddle.procedure("downloadCracker", function(shared, hooks){
 })
 
 riddle.procedure("isThereMessageError", function(){
-	if (getDOMElement("div", "class", "alert alert-error", 0))
+	const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+	const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
+	if ((errorContainer)||(dangerContainer))
 		return true
 	return null
 })
@@ -462,12 +466,13 @@ riddle.procedure("cleanLogs", function(shared, hooks){
 			var loop = setInterval(() => {
 				const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 				const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+				const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
 				//var progressBar = getDOMElement("div", "role", "progressbar", 0)
-				if (successContainer || errorContainer) {
+				if ((successContainer) || (errorContainer) || (dangerContainer)) {
 					clearInterval(loop)
 					shared.cleanLogs = void 0;
 					shared.isThereMessageError = false;
-					if(errorContainer){
+					if((errorContainer) || (dangerContainer)){
 						shared.isThereMessageError = true;
 						console.warn('ERROR MESSAGE')
 					} else {
