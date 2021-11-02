@@ -3,11 +3,11 @@ var foo = $jSpaghetti.module("ddos").sequence("run")
 foo.instructions = [
     {"@init":       "getInfos"},
     
-    {"@startChain": ["checkTimes", {"gotoif":["!*.$", "@finish"]}]},
-    {"@sendDdos":   ["goToIp", "isThereMessageError", {"gotoif": ["*.$", "@finish"]}, "goToDDoSPage", "launchDDoS", "isThereMessageError", {"gotoif": ["*.$", "@finish"]}]},
-    {"@waitDdos":   ["goToDDoSPage", "isThereMessageError", {"gotoif":["!*.$", "@finish"]}, "waitProgressBar"]},
-    {"@cleanLogs":  ["goToOwnLogTab", "cleanTextAreaContent", {"gotoif": ["*.isEmpty == true", "@finish"]}, "waitProgressBar"]},
-    {"@finishDdos": ["goToSoftwarePage", "deleteRelatory", "decreaseTimes", "checkTimes", {"gotoif": ["*.$", "@startChain"]}]},
+    {"@startChain": ["checkTimes", {"jumpif":["!*.$", "@finish"]}]},
+    {"@sendDdos":   ["goToIp", "isThereMessageError", {"jumpif": ["*.$", "@finish"]}, "goToDDoSPage", "launchDDoS", "isThereMessageError", {"jumpif": ["*.$", "@finish"]}]},
+    {"@waitDdos":   ["goToDDoSPage", "isThereMessageError", {"jumpif":["!*.$", "@finish"]}, "waitProgressBar"]},
+    {"@cleanLogs":  ["goToOwnLogTab", "cleanTextAreaContent", {"jumpif": ["*.isEmpty == true", "@finish"]}, "waitProgressBar"]},
+    {"@finishDdos": ["goToSoftwarePage", "deleteRelatory", "decreaseTimes", "checkTimes", {"jumpif": ["*.$", "@startChain"]}]},
     
-    {"@finish":     "_exit"}
+    {"@finish":     {"exit": 1}}
 ]

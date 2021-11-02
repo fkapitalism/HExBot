@@ -66,14 +66,36 @@ cleanersMod.procedure("cleanMyIpClues", function(shared, hooks){
 
 })
 
-cleanersMod.procedure("isThereProgressBar", function(){
+/*cleanersMod.procedure("isThereProgressBar", function(){
 	var progressBar = getDOMElement("div", "role", "progressbar", 0)
 	if (progressBar){
 		return true
 	} else {
 		return false
 	}
-})
+})*/
+
+cleanersMod.procedure('waitProgressBar', (shared, hooks) => {
+	var loop = setInterval(() => {
+		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
+		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
+		const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
+		//var progressBar = getDOMElement("div", "role", "progressbar", 0)
+		//console.log(successContainer, errorContainer, dangerContainer)
+		if ((successContainer) || (errorContainer) || (dangerContainer)) {
+			clearInterval(loop)
+			shared.cleanLogs = void 0;
+			shared.isThereMessageError = false;
+			if((errorContainer)||(dangerContainer)){
+				shared.isThereMessageError = true;
+				console.warn('ERROR MESSAGE')
+			} else {
+				console.warn('SUCCESS MESSAGE')
+			}
+			hooks.next()
+		}
+	}, 100)
+});
 
 cleanersMod.procedure("submitLogs", function(shared, hooks){
 	hooks.next()
@@ -113,7 +135,7 @@ cleanersMod.procedure("signInTarget", function(shared, hooks){
 	return null
 })
 
-cleanersMod.procedure("waitProgressBar", function(shared, hooks){
+/*cleanersMod.procedure("waitProgressBar", function(shared, hooks){
 	var loop = setInterval(() => {
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
@@ -131,7 +153,7 @@ cleanersMod.procedure("waitProgressBar", function(shared, hooks){
 			hooks.next()
 		}
 	}, 100)
-})
+})*/
 
 cleanersMod.procedure("boi", function(shared, hooks){
 	console.log($jSpaghetti);

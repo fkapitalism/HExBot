@@ -2,19 +2,19 @@ var foo = $jSpaghetti.module("missions").sequence("deleteSoftware")
 
 foo.instructions = [
 	{"@askForPermission": 			["askPermissionToAbort", "init"]},
-	{"@init": 						["checkBTCWallet", {"gotoif":["!*.$", "_exit"]}, "startDeleteSoftware", {"gotoif":["!*.$", "_exit"]}]},
-	{"@tryToGetMission": 			["goToMissionsTab", "checkSameTypeAcceptedMission", {"gotoif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"gotoif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission", {"gotoif":["*.urlMission == null", "@init"]}]},
-	{"@tryToAcceptMission": 		["goToAcceptMissionPage", "isThereMessageError", {"gotoif": ["*.$", "@init"]}, "clickOnAcceptMissionButton", "waitForSubmitButton", "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"gotoif":["*.$", "@init"]}]},
+	{"@init": 						["checkBTCWallet", {"jumpif":["!*.$", {"exit": 1}]}, "startDeleteSoftware", {"jumpif":["!*.$", {"exit": 1}]}]},
+	{"@tryToGetMission": 			["goToMissionsTab", "checkSameTypeAcceptedMission", {"jumpif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"jumpif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission", {"jumpif":["*.urlMission == null", "@init"]}]},
+	{"@tryToAcceptMission": 		["goToAcceptMissionPage", "isThereMessageError", {"jumpif": ["*.$", "@init"]}, "clickOnAcceptMissionButton", "waitForSubmitButton", "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"jumpif":["*.$", "@init"]}]},
 	{"@startMissionExecution": 		["getDeleteSoftwareMissionInfo", "logout", "goToNextIp"]},
-	{"@tryHostConnection": 			["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isCrackerStrongEnough", {"gotoif":["!*.$", "@abortProcess"]}, "isThereMessageError", {"gotoif":["*.$", "@cleanOwnLogs"]}, "waitProgressBar"]},
-	{"@accessTarget": 				["goToLoginPage", "cancelLogProcesses", "signInKnownTarget", "isCrackerStrongEnough", {"gotoif":["!*.$", "@abortProcess"]}]},
-	{"@cleanTargetLogs": 			["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["*.isEmpty == true", "@cleanOwnLogs"]}, "waitProgressBar"]},
-	{"@tryToDeleteSoftware": 		["getSoftwareId", {"gotoif": ["!*.$", "@abortProcess"]}, "deleteSoftware", "isThereMessageError", {"gotoif":["*.$", "@abortProcess"]}, "waitProgressBar"]},
-	{"@cleanDeletingLogs": 			["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["*.isEmpty == true", "@cleanOwnLogs"]}, "waitProgressBar"]},
-	{"@cleanOwnLogs": 				["logout", "goToOwnLogTab", "cancelLogProcesses", "cleanTextAreaContent", {"gotoif": ["*.isEmpty == true", "@finishMission"]}, "waitProgressBar"]},
-	{"@finishMission": 				["goToMissionsTab", "clickOnFinishButton", "waitForSubmitButton", "confirmMissionCompleteButton", "sendMoneyToBTCWallet", {"gotoif": ["true", "@init"]}]},
-	{"@abortProcess": 				[{"gotoif":["*.abortMissionAllowed", "@abortMission"]}, "showMessage", "_exit"]},
-	{"@abortMission": 				["goToMissionsTab", "clickOnAbortMissionButton", "waitForSubmitButton", "clickOnConfirmAbortMissionButton", {"gotoif": ["true", "@init"]}]},
-	{"@alertUnknownMissionKind": 	["alertAnotherMissionKindAlreadyAccepted", "_exit"]}
+	{"@tryHostConnection": 			["forceToAccessTarget", "isThereMessageError", {"jumpif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isCrackerStrongEnough", {"jumpif":["!*.$", "@abortProcess"]}, "isThereMessageError", {"jumpif":["*.$", "@cleanOwnLogs"]}, "waitProgressBar"]},
+	{"@accessTarget": 				["goToLoginPage", "cancelLogProcesses", "signInKnownTarget", "isCrackerStrongEnough", {"jumpif":["!*.$", "@abortProcess"]}]},
+	{"@cleanTargetLogs": 			["goToTargetLogs", "cleanMyIpClues", {"jumpif": ["*.isEmpty == true", "@cleanOwnLogs"]}, "waitProgressBar"]},
+	{"@tryToDeleteSoftware": 		["getSoftwareId", {"jumpif": ["!*.$", "@abortProcess"]}, "deleteSoftware", "isThereMessageError", {"jumpif":["*.$", "@abortProcess"]}, "waitProgressBar"]},
+	{"@cleanDeletingLogs": 			["goToTargetLogs", "cleanMyIpClues", {"jumpif": ["*.isEmpty == true", "@cleanOwnLogs"]}, "waitProgressBar"]},
+	{"@cleanOwnLogs": 				["logout", "goToOwnLogTab", "cancelLogProcesses", "cleanTextAreaContent", {"jumpif": ["*.isEmpty == true", "@finishMission"]}, "waitProgressBar"]},
+	{"@finishMission": 				["goToMissionsTab", "clickOnFinishButton", "waitForSubmitButton", "confirmMissionCompleteButton", "sendMoneyToBTCWallet", {"jumpif": ["true", "@init"]}]},
+	{"@abortProcess": 				[{"jumpif":["*.abortMissionAllowed", "@abortMission"]}, "showMessage", {"exit": 1}]},
+	{"@abortMission": 				["goToMissionsTab", "clickOnAbortMissionButton", "waitForSubmitButton", "clickOnConfirmAbortMissionButton", {"jumpif": ["true", "@init"]}]},
+	{"@alertUnknownMissionKind": 	["alertAnotherMissionKindAlreadyAccepted", {"exit": 1}]}
 ]
 

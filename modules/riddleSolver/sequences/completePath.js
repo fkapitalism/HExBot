@@ -1,19 +1,19 @@
 var foo = $jSpaghetti.module("riddleSolver").sequence("completePath")
 
 foo.instructions = [
-	{"@basicCheck": 			["isThereRiddle", {"gotoif": ["*.$", "@start", "_exit"]}]},
+	{"@basicCheck": 			["isThereRiddle", {"jumpif": ["*.$", "@start", "@getout"]}]},
 	{"@start": 					["init"]},
-	{"@checkLocalCracker": 		["isThereLocalCracker", {"gotoif": ["!*.$", "@getout"]}, {"gotoif":["!*.crackerToInstall", "@analyseSoftwares"]}, "installLocalCracker"]},
-	{"@analyseSoftwares": 		["isThereTargetCracker", {"gotoif": ["!*.$", "@decideInstalling"]}, {"gotoif": ["*.isCrackerOutdated", "@upgrade", "@decideInstalling"]}]},
-	{"@upgrade": 				["downloadCracker", "isThereMessageError", {"gotoif":["*.$", "@getout"]}, "waitProgressBar", "cancelLogProcesses", "goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"gotoif":["*.$", "@suitup"]}, "waitProgressBar", {"gotoif": [1, "@suitup"]}]},
-	{"@decideInstalling": 		[{"gotoif": ["*.crackerToInstall", "@suitup", "@solvePuzzle"]}]},
-	{"@suitup" :   				["getNewCrackerId", {"gotoif": ["!*.$", "@getout"]}, "installLocalCracker", "isThereMessageError", {"gotoif":["*.$", "@solvePuzzle"]}, "waitProgressBar", {"gotoif": ["!*.isCrackerOutdated", "@solvePuzzle"]}, "removeOutdatedCracker", "isThereMessageError", {"gotoif":["*.$", "@solvePuzzle"]}, "waitProgressBar"]},
-	{"@solvePuzzle": 			["goToPageRiddle", "isRiddleSolved", {"gotoif": ["*.$", "@goToNextPuzzle"]}, "solvePuzzleAuto", {"gotoif":["!*.$", "@getout"]}, "reload"]},
-	{"@goToNextPuzzle": 		["getNextIP", "logout", "goToNextPuzzle", "isTooManySecretsNow", {"gotoif": ["!*.$","@tryHostConnection"]}, "goToNextPuzzle"]},
-	{"@tryHostConnection": 		["forceToAccessTarget", "isThereMessageError", {"gotoif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"gotoif":["*.$", "@getout"]}, "waitProgressBar"]},
-	{"@accessTarget": 			["goToLoginPage", "cancelLogProcesses", "signInKnownTarget", "isCrackerStrongEnough", {"gotoif":["!*.$", "@getout"]}]},
-	{"@cleanTargetLogs": 		["goToTargetLogs", "cleanMyIpClues", {"gotoif": ["*.isEmpty", "@repeat"]}, "waitProgressBar"]},
-	{"@repeat": 				[{"gotoif": [1, "@start"]}]},
-	{"@getout": 				["_exit"]}
+	{"@checkLocalCracker": 		["isThereLocalCracker", {"jumpif": ["!*.$", "@getout"]}, {"jumpif":["!*.crackerToInstall", "@analyseSoftwares"]}, "installLocalCracker"]},
+	{"@analyseSoftwares": 		["isThereTargetCracker", {"jumpif": ["!*.$", "@decideInstalling"]}, {"jumpif": ["*.isCrackerOutdated", "@upgrade", "@decideInstalling"]}]},
+	{"@upgrade": 				["downloadCracker", "isThereMessageError", {"jumpif":["*.$", "@getout"]}, "waitProgressBar", "cancelLogProcesses", "goToTargetLogs", "cleanMyIpClues", "isThereMessageError", {"jumpif":["*.$", "@suitup"]}, "waitProgressBar", {"jumpif": [1, "@suitup"]}]},
+	{"@decideInstalling": 		[{"jumpif": ["*.crackerToInstall", "@suitup", "@solvePuzzle"]}]},
+	{"@suitup" :   				["getNewCrackerId", {"jumpif": ["!*.$", "@getout"]}, "installLocalCracker", "isThereMessageError", {"jumpif":["*.$", "@solvePuzzle"]}, "waitProgressBar", {"jumpif": ["!*.isCrackerOutdated", "@solvePuzzle"]}, "removeOutdatedCracker", "isThereMessageError", {"jumpif":["*.$", "@solvePuzzle"]}, "waitProgressBar"]},
+	{"@solvePuzzle": 			["goToPageRiddle", "isRiddleSolved", {"jumpif": ["*.$", "@goToNextPuzzle"]}, "solvePuzzleAuto", {"jumpif":["!*.$", "@getout"]}, "reload"]},
+	{"@goToNextPuzzle": 		["getNextIP", "logout", "goToNextPuzzle", "isTooManySecretsNow", {"jumpif": ["!*.$","@tryHostConnection"]}, "goToNextPuzzle"]},
+	{"@tryHostConnection": 		["forceToAccessTarget", "isThereMessageError", {"jumpif":["*.$", "@accessTarget"]}, "hackTargetBruteForce", "isThereMessageError", {"jumpif":["*.$", "@getout"]}, "waitProgressBar"]},
+	{"@accessTarget": 			["goToLoginPage", "cancelLogProcesses", "signInKnownTarget", "isCrackerStrongEnough", {"jumpif":["!*.$", "@getout"]}]},
+	{"@cleanTargetLogs": 		["goToTargetLogs", "cleanMyIpClues", {"jumpif": ["*.isEmpty", "@repeat"]}, "waitProgressBar"]},
+	{"@repeat": 				[{"jumpif": [1, "@start"]}]},
+	{"@getout": 				[{"exit": 1}]}
 ]
 

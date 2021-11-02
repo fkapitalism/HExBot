@@ -1,11 +1,12 @@
 var accessTarget = $jSpaghetti.module("cleaners").sequence("accessTargetAndCleanLogs")
 
 accessTarget.instructions = [
-	{"@tryToInvadeTarget": 	["hackTargetBruteForce", "isThereMessageError", {"gotoif": ["*.$", "@checkMessage"]}, "isThereProgressBar", {"gotoif": ["!*.$", "@accessTargetLogs"]}, "waitProgressBar", {"gotoif": [1, "@accessTarget"]}]},
-	{"@checkMessage": 		["isAccessForbidden", {"gotoif": ["*.$", "@finish"]}]},
-	{"@accessTarget": 		["goToLoginPage", "signInTarget", {"gotoif": [1, "@cleanLogs"]}]},
+	//{"@tryToInvadeTarget": 	["hackTargetBruteForce", "isThereMessageError", {"jumpif": ["*.$", "@checkMessage"]}, "isThereProgressBar", {"jumpif": ["!*.$", "@accessTargetLogs"]}, "waitProgressBar", {"jumpif": [1, "@accessTarget"]}]},
+	{"@tryToInvadeTarget": 	["hackTargetBruteForce", "waitProgressBar", {"jumpif": ["*.isThereMessageError","@checkMessage"]}, {"jumpif": [1, "@accessTarget"]}]},
+	{"@checkMessage": 		["isAccessForbidden", {"jumpif": ["*.$", "@finish"]}]},
+	{"@accessTarget": 		["goToLoginPage", "signInTarget", {"jumpif": [1, "@cleanLogs"]}]},
 	{"@accessTargetLogs": 	"goToTargetLogs"},
-	{"@cleanLogs": 			["cleanMyIpClues", {"gotoif": ["(*.isEmpty) || (!*.$)", "@finish"]}, {"gotoif": ["!*.myCluesFound", "@finish"]}, "submitLogs", "waitProgressBar"]},
-	{"@finish": 			"_exit"}
+	{"@cleanLogs": 			["cleanMyIpClues", {"jumpif": ["(*.isEmpty) || (!*.$)", "@finish"]}, {"jumpif": ["!*.myCluesFound", "@finish"]}, "submitLogs", "waitProgressBar"]},
+	{"@finish": 			[{"exit": 1}]}
 ]
 
