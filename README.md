@@ -1,15 +1,21 @@
-# HExBot v0.2 - June 18 - 2021
+# HExBot v0.2 - November 2 - 2021
 
 Suite of scripts to automate some processes on Hacker Wars game website.
 
 Hotsite: http://hotsitehexbot.blogspot.com.br/p/index.html
 
-Wiki: https://hexbotwiki.000webhostapp.com
-
 Youtube video: https://www.youtube.com/watch?v=fEfSukfb3Pc
 
-## Last incident (important)
-Unfortunately our previous github account (https://github.com/perfilrobo/hexbot) was hacked and stolen by someone interested in injecting malicious code to track the bot users. That was enough for HE moderators to know who was using the bot. That's complete dirty game. Anyway WE ARE NOT GOING TO LEAVE THIS PROJECT. Welcome back guys. Enjoy it.
+## Privacy
+This extension DO NOT collect any personal or sensitive information about the users. Check out the code. Open an issue if you have any question.
+
+## Connection with the Internet
+
+This extension is connected to a webserver called using the technology socket.io. Currently this server notifies when a new version is available. New features comming soon.
+
+## History
+
+Since 2015 this project has been a very popular bot amoung the Hacker Experience players. Now the original project was adapted to work on Hacker Wars. Thanks for all contributors.
 
 ## Overview
 
@@ -35,6 +41,7 @@ Functionalities:
 4. Load the uncompressed directory
 
 ## Changelog
+* v0.2 Adapted to Hacker Wars after [gresendesa](https://github.com/gresendesa) updated [jSpaghetti](https://github.com/gresendesa/jSpaghetti). Now it works on newer browsers. Webcrawler script editor now uses [Ace editor](https://ace.c9.io/). Bot connected to server using [socket.io](https://socket.io/) technology.
 * v0.1.35.1
     * Webcrawler freehd error fixed
 * v0.1.35
