@@ -1,5 +1,5 @@
 var foo = $jSpaghetti.module("camping").sequence("test")
 
 foo.instructions = [
-	{"@init":"_exit"}
+	{"@init":{"exit": 1}}
 ]

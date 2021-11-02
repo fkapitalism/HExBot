@@ -200,7 +200,9 @@ riddle.procedure("removeOutdatedCracker", function(shared, hooks){
 
 
 riddle.procedure('waitProgressBar', (shared, hooks) => {
+	var counter = 0;
 	var loop = setInterval(() => {
+
 		const successContainer = getDOMElement("div", "class", "alert alert-success", 0)
 		const errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
 		const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
@@ -216,10 +218,22 @@ riddle.procedure('waitProgressBar', (shared, hooks) => {
 				console.warn('SUCCESS MESSAGE')
 			}
 			hooks.next()
+		} else {
+			var progressBar = getDOMElement("div", "role", "progressbar", 0)
+			if(!progressBar){
+				counter += 200;
+				if(counter > 5000){//It wait 5 seconds for the progress bar 
+					shared.isThereMessageError = false;
+					clearInterval(loop)
+					hooks.next()
+				}
+			} else {
+				counter = 0;
+				console.log("I see! Waiting progressbar!")
+			}
 		}
-	}, 100)
-});
-
+	}, 200)
+})
 
 riddle.procedure("installLocalCracker", function(shared, hooks){
 	hooks.next()

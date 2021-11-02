@@ -15,5 +15,5 @@ foo.instructions = [
 	{"@transferMoney": 				["isThereMessageError", {"jumpif":["*.$", "@startAccountAtack"]}, "checkFunds", {"jumpif": ["!*.$", "@cleanTransferLogs"]}, {"wait": 2000}, "transferMoneyToTarget", "sendMoneyToBTCWallet"]},
 	{"@cleanTransferLogs": 			["logoutAccount", "goToIp", "isThereMessageError", {"jumpif":["*.$", "@cleanMyOwnLogs"]}, "forceToAccessTarget", "cancelLogProcesses", "signInTarget", "cleanMyIpClues", "extractDataFromLog", "submitLogs", "isThereMessageError", {"jumpif":["*.$", "@cleanMyOwnLogs"]}, "waitProgressBar"]},
 	{"@cleanMyOwnLogs": 			[{"jumpif": ["*.accounts.length > 0", "@startAccountAtack"]}, "goToOwnLogTab", "cancelLogProcesses", "cleanTextAreaContent", "isThereMessageError", {"jumpif":["*.$", "@tryToInvadeTarget"]}, "waitProgressBar", {"jumpif": ["true", "@tryToInvadeTarget"]}]},
-	{"@finishProcess": 				"_exit"}
+	{"@finishProcess": 				{"exit": 1}}
 ]
