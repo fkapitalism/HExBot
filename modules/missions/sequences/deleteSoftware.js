@@ -2,7 +2,7 @@ var foo = $jSpaghetti.module("missions").sequence("deleteSoftware")
 
 foo.instructions = [
 	{"@askForPermission": 			["askPermissionToAbort", "init"]},
-	{"@init": 						["checkBTCWallet", {"jumpif":["!*.$", {"exit": 1}]}, "startDeleteSoftware", {"jumpif":["!*.$", {"exit": 1}]}]},
+	{"@init": 						["checkBTCWallet", {"jumpif":["!*.$", "@exit"]}, "startDeleteSoftware", {"jumpif":["!*.$", "@exit"]}]},
 	{"@tryToGetMission": 			["goToMissionsTab", "checkSameTypeAcceptedMission", {"jumpif":["*.$", "@startMissionExecution"]}, "isAvailableMissionsPage", {"jumpif":["!*.$", "@alertUnknownMissionKind"]}, "getURLMission", {"jumpif":["*.urlMission == null", "@init"]}]},
 	{"@tryToAcceptMission": 		["goToAcceptMissionPage", "isThereMessageError", {"jumpif": ["*.$", "@init"]}, "clickOnAcceptMissionButton", "waitForSubmitButton", "clickOnConfirmAcceptMissionButton", "isThereMessageError", {"jumpif":["*.$", "@init"]}]},
 	{"@startMissionExecution": 		["getDeleteSoftwareMissionInfo", "logout", "goToNextIp"]},
@@ -15,6 +15,7 @@ foo.instructions = [
 	{"@finishMission": 				["goToMissionsTab", "clickOnFinishButton", "waitForSubmitButton", "confirmMissionCompleteButton", "sendMoneyToBTCWallet", {"jumpif": ["true", "@init"]}]},
 	{"@abortProcess": 				[{"jumpif":["*.abortMissionAllowed", "@abortMission"]}, "showMessage", {"exit": 1}]},
 	{"@abortMission": 				["goToMissionsTab", "clickOnAbortMissionButton", "waitForSubmitButton", "clickOnConfirmAbortMissionButton", {"jumpif": ["true", "@init"]}]},
-	{"@alertUnknownMissionKind": 	["alertAnotherMissionKindAlreadyAccepted", {"exit": 1}]}
+	{"@alertUnknownMissionKind": 	["alertAnotherMissionKindAlreadyAccepted", {"exit": 1}]},
+	{"@exit": 						[{"exit": 1}]}
 ]
 
