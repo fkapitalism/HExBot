@@ -121,8 +121,12 @@ webcrawler.procedure("isSoftwareAlreadyThere", function(){
 	var labels = ["O cliente remoto já tem esse software", "The remote client already have this software"]
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
 	const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
-	if ((errorContainer)||(dangerContainer)){
+	if (errorContainer){
 		if(strposOfArray(errorContainer.innerHTML, labels) >= 0)
+		return true
+	} else 
+	if(dangerContainer){
+		if(strposOfArray(dangerContainer.innerHTML, labels) >= 0)
 		return true
 	}
 	return false
@@ -148,6 +152,7 @@ webcrawler.procedure("abortUpload", function(shared, hooks){
 webcrawler.procedure("runUploadSoftware", function(shared, hooks){
 	//console.log("currentSoftware", shared.currentSoftware)
 	hooks.next()
+	console.log('uploading software of pid ' + shared.softwaresToUpload[shared.currentSoftware].pid)
 	goToPage("/internet?view=software&cmd=up&id=" + shared.softwaresToUpload[shared.currentSoftware].pid)
 	return null
 })
