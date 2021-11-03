@@ -130,6 +130,9 @@ function solvePuzzle(puzzle_id){
 			case PUZZLE_PLUSTIMES: //Card games
 				text_answer = "1, 2, 3";
 				break;
+			case PUZZLE_MOSTPOPYTVID: //Most popular Youtube video
+				text_answer = "Despacito";
+				break;
 			default: 
 				return false;
 		}
