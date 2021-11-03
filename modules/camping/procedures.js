@@ -150,6 +150,8 @@ camping.procedure("submitLogs", function(shared, hooks){
 }) 
 
 camping.procedure("extractDataFromLog", function(shared){
+	console.log('entrei aki')
+	console.log(shared)
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	var lines = textArea.value.split(/[\n\r]/)
 	var outputLines = []
@@ -158,7 +160,9 @@ camping.procedure("extractDataFromLog", function(shared){
 	var myAccounttAccessPattern = new RegExp("^.* on account #" + shared.myAccount + ".*$")
 	for (var i = 0; i < lines.length; i++) {
 		if ((shared.listenForTransferActivities) &&
-			((/^.*transferred \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost$/.test(lines[i]))) &&
+			(
+				(/^.*transfer+ed \$[0-9]+ from #[0-9]+.*to #[0-9]+ at localhost$/.test(lines[i]))
+			) &&
 			(!myIpPattern.test(lines[i])) && (!myAccounttTransferPattern.test(lines[i]))) {
 			var result = lines[i].match(/#[0-9]+/g)
 			shared.accounts.push(result[1].replace("#", ""))
