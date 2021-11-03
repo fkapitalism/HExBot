@@ -351,6 +351,12 @@ riddle.procedure("reload", function(shared, hooks){
 	location.reload()
 })
 
+riddle.procedure("checkPuzzle", function(){
+	puzzle_id = getPuzzleId()
+	console.log(puzzle_id)
+	return true
+})
+
 riddle.procedure("solvePuzzleAuto", function(){
 	//Puzzle handler controller
 	var puzzle_id = null

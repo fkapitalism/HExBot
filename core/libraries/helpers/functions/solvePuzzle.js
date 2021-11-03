@@ -106,6 +106,9 @@ function solvePuzzle(puzzle_id){
 			case PUZZLE_LIGHTS: //Lights Out
 				fake_message = "func=lightsout";
 				break;
+			case PUZZLE_RENATOSDOG: //Renato's dog name
+				text_answer = "Phoebe";
+				break;
 			default: 
 				return false;
 		}

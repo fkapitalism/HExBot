@@ -41,6 +41,7 @@ Functionalities:
 4. Load the uncompressed directory
 
 ## Changelog
+* v0.2.3 new puzzle added. (Renato's dog 💔)
 * v0.2.2 intercept sequence fixed.
 * v0.2.1 missions sequence fixed.
 * v0.2 Adapted to Hacker Wars after [gresendesa](https://github.com/gresendesa) updated [jSpaghetti](https://github.com/gresendesa/jSpaghetti). Now it works on newer browsers. Webcrawler script editor now uses [Ace editor](https://ace.c9.io/). Bot connected to server using [socket.io](https://socket.io/) technology.

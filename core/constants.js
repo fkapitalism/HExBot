@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.2.2"
+const VERSION_BOT = "0.2.3"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -114,6 +114,7 @@ const PUZZLE_PREMIUM = 24;
 const PUZZLE_SHEEPS = 25;
 const PUZZLE_2BNOT2B = 26;
 const PUZZLE_LIGHTS = 27;
+const PUZZLE_RENATOSDOG = 28;
 
 /*
 	Puzzle descriptor
@@ -146,7 +147,8 @@ const PUZZLE_DESCRIPTOR = [
     {id:PUZZLE_PREMIUM, names:["∀x Player(x)", "∀x Jogador(x)"]},
     {id:PUZZLE_SHEEPS, names:["Sheeps and Chickens", "Ovelhas e Galinhas"]},
     {id:PUZZLE_2BNOT2B, names:["/bb|[^b]{2}/"]},
-    {id:PUZZLE_LIGHTS, names:["Lights Out"]}
+    {id:PUZZLE_LIGHTS, names:["Lights Out"]},
+    {id:PUZZLE_RENATOSDOG, names:["Renato's dog","perro de Renato"]}
 ]
 
 String.prototype.hashCode = function () {
