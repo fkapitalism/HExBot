@@ -97,8 +97,8 @@ missions.procedure("informBalance", function(shared, hooks){
 				hooks.next()
 				button.click()
 			}
-		}, 350)
-	},350)
+		}, 700)
+	},700)
 		
 })
 
@@ -187,7 +187,7 @@ missions.procedure("clickOnAcceptMissionButton", function(shared, hooks){
 			hooks.next()
 			button.click()
 		}
-	}, 350)
+	}, 700)
 })
 
 //Click on the div float Accept mission button
@@ -199,7 +199,7 @@ missions.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){
 			hooks.next()
 			button.click()
 		}
-	}, 350)
+	}, 700)
 })
 
 missions.procedure("waitForSubmitButton", function(shared, hooks){
@@ -223,7 +223,7 @@ missions.procedure("waitForSubmitButton", function(shared, hooks){
 				hooks.next("Button is ready!")
 			}
 		}
-	}, 350)
+	}, 700)
 })
 
 missions.procedure("test0", function(shared, hooks){
@@ -392,7 +392,7 @@ missions.procedure("cleanMyIpClues", function(data, hooks){
 				hooks.next()
 				button.click()
 			}
-		}, 350)
+		}, 700)
 
 	} else {
 		data.isEmpty = true
@@ -469,7 +469,7 @@ missions.procedure("clickOnFinishButton", function(shared, hooks){
 			hooks.next()
 			button.click()
 		}
-	}, 350)
+	}, 700)
 	//hooks.next()
 	//getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
 	//return null
