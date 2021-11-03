@@ -150,10 +150,11 @@ webcrawler.procedure("abortUpload", function(shared, hooks){
 })
 
 webcrawler.procedure("runUploadSoftware", function(shared, hooks){
+	//console.log("currentSoftware", shared.currentSoftware)
 	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
 		hooks.next()
 		goToPage("/internet?view=software&cmd=up&id=" + softwareId)
-	}
+	})
 })
 
 webcrawler.procedure("installSoftware", function(shared, hooks){
