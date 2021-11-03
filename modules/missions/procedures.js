@@ -87,10 +87,19 @@ missions.procedure("goToMissionsTab", function(shared, hooks){
 })
 
 missions.procedure("informBalance", function(shared, hooks){
-	hooks.next()
-	getDOMElement("input", "id", "amount-input", 0).value = shared.balance //Fill the balance field with the balance value
-	getDOMElement("span", "class", "btn btn-success mission-complete", 0).click() //Click on the Complete Mission Button
-	return null
+
+	setTimeout(() => {
+		getDOMElement("input", "id", "amount-input", 0).value = shared.balance //Fill the balance field with the balance value
+		var loop = setInterval(function(){
+			clearInterval(loop)
+			const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0) //Click on the Complete Mission Button
+			if (button){
+				hooks.next()
+				button.click()
+			}
+		}, 700)
+	},250)
+		
 })
 
 missions.procedure("confirmMissionCompleteButton", function(shared, hooks){
@@ -175,10 +184,10 @@ missions.procedure("clickOnAcceptMissionButton", function(shared, hooks){
 		clearInterval(loop)
 		const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
 		if (button){
-			button.click()
 			hooks.next()
+			button.click()
 		}
-	}, 100)
+	}, 700)
 })
 
 //Click on the div float Accept mission button
@@ -187,10 +196,10 @@ missions.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){
 		clearInterval(loop)
 		const button = getDOMElement("input", "type", "submit", 0)
 		if (button){
-			button.click()
 			hooks.next()
+			button.click()
 		}
-	}, 100)
+	}, 700)
 })
 
 missions.procedure("waitForSubmitButton", function(shared, hooks){
@@ -214,7 +223,7 @@ missions.procedure("waitForSubmitButton", function(shared, hooks){
 				hooks.next("Button is ready!")
 			}
 		}
-	}, 100)
+	}, 700)
 })
 
 missions.procedure("test0", function(shared, hooks){
@@ -282,8 +291,12 @@ missions.procedure("isCrackerStrongEnough", function(){
 	var errorContainer = getDOMElement("div", "class", "alert alert-error", 0)
 	const dangerContainer = getDOMElement("div", "class", "alert alert-danger", 0)
 	var labels = ["You do not have the needed software to perform this action", "Vocẽ não tem o software necessário para realizar essa ação", "your cracker is not good enough", "seu cracker não é bom o suficiente"]
-	if ((errorContainer)||(dangerContainer)){
-		if((strposOfArray(errorContainer.innerHTML, labels) >= 0) || (strposOfArray(dangerContainer.innerHTML, labels) >= 0))
+	if (errorContainer){
+		if(strposOfArray(errorContainer.innerHTML, labels) >= 0)
+		return false
+	} else 
+	if(dangerContainer){
+		if(strposOfArray(dangerContainer.innerHTML, labels) >= 0)
 		return false
 	}
 	return true
@@ -353,7 +366,7 @@ missions.procedure("init", function(shared, hooks){
 	})
 })
 
-missions.procedure("cleanMyIpClues", function(data, hooks){
+/*missions.procedure("cleanMyIpClues", function(data, hooks){
 	//getMyIp(true, (myip) => {
 	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
@@ -377,6 +390,39 @@ missions.procedure("cleanMyIpClues", function(data, hooks){
 	}
 	if(data.cleanerCount != undefined) data.cleanerCount++
 	//})
+})*/
+
+missions.procedure("cleanMyIpClues", function(shared, hooks){
+
+	getMyIp(true, (myip) => {
+		shared.myCluesFound = false
+		var textArea = getDOMElement("textarea", "class", "logarea", 0)
+		if (textArea){
+			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+
+			const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
+			var ips = []
+			if(ipsSource){
+				ips = extractIPsFromText(ipsSource, [myip])
+			}
+			console.log("ips found", ips)
+			controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
+			controllers.storage.set(controllers.bot)
+
+			var pattern = new RegExp("^.*" + myip + ".*$")
+			var textFiltered = removeLinesFromText(textArea.value, pattern)
+			if (textArea.value != textFiltered){
+				shared.myCluesFound = true
+				textArea.value = textFiltered
+			}
+			//return true
+			hooks.next(true)
+		} else {
+			//return false
+			hooks.next(false)
+		}
+	})
+
 })
 
 missions.procedure("cleanTextAreaContent", function(data, hooks){
@@ -436,9 +482,18 @@ missions.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
 })
 
 missions.procedure("clickOnFinishButton", function(shared, hooks){
-	hooks.next()
-	getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
-	return null
+
+	var loop = setInterval(function(){
+		clearInterval(loop)
+		const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0)
+		if (button){
+			hooks.next()
+			button.click()
+		}
+	}, 700)
+	//hooks.next()
+	//getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
+	//return null
 })
 
 
