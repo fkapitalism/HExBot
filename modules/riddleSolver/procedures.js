@@ -352,6 +352,25 @@ riddle.procedure("reload", function(shared, hooks){
 })
 
 riddle.procedure("checkPuzzle", function(){
+
+	var content = null;
+
+	var credits_widget_content = document.getElementsByClassName("widget-content padding center")[4];
+	var credits_icon = document.getElementsByClassName("he16-puzzle_credits")[0];
+	if ((credits_widget_content) && (credits_icon)){
+		content = credits_widget_content.textContent; //Gets the content from credits widget
+	} else {
+		var puzzle_main_content = document.getElementsByClassName("widget-content padding center")[0];
+		var puzzle_main_content_icon = document.getElementsByClassName("he16-puzzle")[0];
+		if ((puzzle_main_content) && (puzzle_main_content_icon)){
+			content = puzzle_main_content.childNodes[7].textContent; //Gets the content from puzzle question      
+		} else {
+			//Do nothing and keep content variable with null
+		}
+	}
+
+	console.log('content', content)
+
 	puzzle_id = getPuzzleId()
 	console.log(puzzle_id)
 	return true

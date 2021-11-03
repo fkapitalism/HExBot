@@ -109,6 +109,21 @@ function solvePuzzle(puzzle_id){
 			case PUZZLE_RENATOSDOG: //Renato's dog name
 				text_answer = "Phoebe";
 				break;
+			case PUZZLE_BROWN: //Puzzle brown
+				text_answer = "Penny";
+				break;
+			case PUZZLE_OLDHOTEL: //Old hotel
+				text_answer = "Nishiyama Onsen Keiunkan";
+				break;
+			case PUZZLE_SOMEONESNAME: //Someone's name
+				text_answer = "Hack The Planet";
+				break;
+			case PUZZLE_COMMONHASH: //Common hash
+				text_answer = "password123";
+				break;
+			case PUZZLE_THISGAME: //Card games
+				text_answer = "47";
+				break;
 			default: 
 				return false;
 		}

@@ -114,7 +114,15 @@ const PUZZLE_PREMIUM = 24;
 const PUZZLE_SHEEPS = 25;
 const PUZZLE_2BNOT2B = 26;
 const PUZZLE_LIGHTS = 27;
+
+/* New ones for Hacker Wars */
 const PUZZLE_RENATOSDOG = 28;
+const PUZZLE_BROWN = 29;
+const PUZZLE_OLDHOTEL = 30;
+const PUZZLE_SOMEONESNAME = 31;
+const PUZZLE_COMMONHASH = 32;
+const PUZZLE_THISGAME = 33;
+
 
 /*
 	Puzzle descriptor
@@ -148,7 +156,12 @@ const PUZZLE_DESCRIPTOR = [
     {id:PUZZLE_SHEEPS, names:["Sheeps and Chickens", "Ovelhas e Galinhas"]},
     {id:PUZZLE_2BNOT2B, names:["/bb|[^b]{2}/"]},
     {id:PUZZLE_LIGHTS, names:["Lights Out"]},
-    {id:PUZZLE_RENATOSDOG, names:["Renato's dog","perro de Renato"]}
+    {id:PUZZLE_RENATOSDOG, names:["Renato's dog","perro de Renato"]},
+    {id:PUZZLE_BROWN, names:["Brown puzzle","Quebra-cabeça marrom"]},
+    {id:PUZZLE_OLDHOTEL, names:["Old hotel","Hotel antigo"]},
+    {id:PUZZLE_SOMEONESNAME, names:["Someone's name","Nome de alguém"]},
+    {id:PUZZLE_COMMONHASH, names:["Common hash","Hash comum"]},
+    {id:PUZZLE_THISGAME, names:["This game was developed","Este jogo foi desenvolvido"]},
 ]
 
 String.prototype.hashCode = function () {
