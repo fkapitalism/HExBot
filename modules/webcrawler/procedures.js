@@ -161,12 +161,12 @@ webcrawler.procedure("runUploadSoftware", function(shared, hooks){
 
 webcrawler.procedure("installSoftware", function(shared, hooks){
 	/*var softwareId = */
-	const softwareId = shared.softwaresToUpload[shared.currentSoftware].id
-	//getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
+	//const softwareId = shared.softwaresToUpload[shared.currentSoftware].id
+	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
 		hooks.next()
 		goToPage("/internet?view=software&cmd=install&id=" + softwareId)
 		//return null
-	//})
+	})
 })
 
 webcrawler.procedure("testUploadsoftware", function(shared, hooks){
@@ -185,12 +185,12 @@ webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
 
 webcrawler.procedure("hideSoftware", function(shared, hooks){
 	/*var softwareId = */
-	const softwareId = shared.softwaresToUpload[shared.currentSoftware].id
-	//getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
+	//const softwareId = shared.softwaresToUpload[shared.currentSoftware].id
+	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
 		hooks.next()
 		goToPage("/internet?view=software&cmd=hide&id=" + softwareId)
 		//return null
-	//})
+	})
 })
 
 webcrawler.procedure("isIpInvalid", function(){
