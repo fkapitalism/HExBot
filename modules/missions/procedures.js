@@ -91,14 +91,14 @@ missions.procedure("informBalance", function(shared, hooks){
 	setTimeout(() => {
 		getDOMElement("input", "id", "amount-input", 0).value = shared.balance //Fill the balance field with the balance value
 		var loop = setInterval(function(){
-			clearInterval(loop)
 			const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0) //Click on the Complete Mission Button
 			if (button){
+				clearInterval(loop)
 				hooks.next()
 				button.click()
 			}
-		}, 700)
-	},250)
+		}, 350)
+	},350)
 		
 })
 
@@ -181,25 +181,25 @@ missions.procedure("logout", function(shared, hooks){
 
 missions.procedure("clickOnAcceptMissionButton", function(shared, hooks){
 	var loop = setInterval(function(){
-		clearInterval(loop)
 		const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
 		if (button){
+			clearInterval(loop)
 			hooks.next()
 			button.click()
 		}
-	}, 700)
+	}, 350)
 })
 
 //Click on the div float Accept mission button
 missions.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){	
 	var loop = setInterval(function(){
-		clearInterval(loop)
 		const button = getDOMElement("input", "type", "submit", 0)
 		if (button){
+			clearInterval(loop)
 			hooks.next()
 			button.click()
 		}
-	}, 700)
+	}, 350)
 })
 
 missions.procedure("waitForSubmitButton", function(shared, hooks){
@@ -223,7 +223,7 @@ missions.procedure("waitForSubmitButton", function(shared, hooks){
 				hooks.next("Button is ready!")
 			}
 		}
-	}, 700)
+	}, 350)
 })
 
 missions.procedure("test0", function(shared, hooks){
@@ -366,9 +366,8 @@ missions.procedure("init", function(shared, hooks){
 	})
 })
 
-/*missions.procedure("cleanMyIpClues", function(data, hooks){
+missions.procedure("cleanMyIpClues", function(data, hooks){
 	//getMyIp(true, (myip) => {
-	hooks.next()
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea.value.length > 0){
 		data.isEmpty = false
@@ -382,48 +381,28 @@ missions.procedure("init", function(shared, hooks){
 		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
 		controllers.storage.set(controllers.bot)
 
-		var pattern = new RegExp("^.*" + myip + ".*$")
+		var pattern = new RegExp("^.*" + data.myip + ".*$")
 		textArea.value = removeLinesFromText(textArea.value, pattern)
-		getDOMElement("input", "class", "btn btn-inverse", "last").click()
+		//getDOMElement("input", "class", "btn btn-inverse", "last").click()
+
+		var loop = setInterval(function(){
+			const button = getDOMElement("input", "class", "btn btn-inverse", "last")
+			if (button){
+				clearInterval(loop)
+				hooks.next()
+				button.click()
+			}
+		}, 350)
+
 	} else {
 		data.isEmpty = true
 	}
 	if(data.cleanerCount != undefined) data.cleanerCount++
+
+	//hooks.next()
 	//})
-})*/
-
-missions.procedure("cleanMyIpClues", function(shared, hooks){
-
-	getMyIp(true, (myip) => {
-		shared.myCluesFound = false
-		var textArea = getDOMElement("textarea", "class", "logarea", 0)
-		if (textArea){
-			//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
-
-			const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
-			var ips = []
-			if(ipsSource){
-				ips = extractIPsFromText(ipsSource, [myip])
-			}
-			console.log("ips found", ips)
-			controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
-			controllers.storage.set(controllers.bot)
-
-			var pattern = new RegExp("^.*" + myip + ".*$")
-			var textFiltered = removeLinesFromText(textArea.value, pattern)
-			if (textArea.value != textFiltered){
-				shared.myCluesFound = true
-				textArea.value = textFiltered
-			}
-			//return true
-			hooks.next(true)
-		} else {
-			//return false
-			hooks.next(false)
-		}
-	})
-
 })
+
 
 missions.procedure("cleanTextAreaContent", function(data, hooks){
 	hooks.next()
@@ -484,13 +463,13 @@ missions.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
 missions.procedure("clickOnFinishButton", function(shared, hooks){
 
 	var loop = setInterval(function(){
-		clearInterval(loop)
 		const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0)
 		if (button){
+			clearInterval(loop)
 			hooks.next()
 			button.click()
 		}
-	}, 700)
+	}, 350)
 	//hooks.next()
 	//getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
 	//return null
