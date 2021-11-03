@@ -150,11 +150,10 @@ webcrawler.procedure("abortUpload", function(shared, hooks){
 })
 
 webcrawler.procedure("runUploadSoftware", function(shared, hooks){
-	//console.log("currentSoftware", shared.currentSoftware)
-	hooks.next()
-	console.log('uploading software of pid ' + shared.softwaresToUpload[shared.currentSoftware].pid)
-	goToPage("/internet?view=software&cmd=up&id=" + shared.softwaresToUpload[shared.currentSoftware].pid)
-	return null
+	getSoftwareId(shared.softwaresToUpload[shared.currentSoftware].name, shared.softwaresToUpload[shared.currentSoftware].version, "/internet", "view=software", (softwareId) => {
+		hooks.next()
+		goToPage("/internet?view=software&cmd=up&id=" + softwareId)
+	}
 })
 
 webcrawler.procedure("installSoftware", function(shared, hooks){
@@ -165,6 +164,15 @@ webcrawler.procedure("installSoftware", function(shared, hooks){
 		//return null
 	})
 })
+
+webcrawler.procedure("testGettingSoftwareId", function(shared, hooks){
+	/*var softwareId = */
+	getSoftwareId("heartbleed.vspam", "1.0", "/internet", "view=software", (softwareId) => {
+		console.log(softwareId)
+		hooks.next()
+	})
+})
+
 
 webcrawler.procedure("isSkipHideAfterUploadEnabled", function(shared){
 	return shared.skipHideLogs

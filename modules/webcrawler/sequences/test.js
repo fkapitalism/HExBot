@@ -1,5 +1,5 @@
 var foo = $jSpaghetti.module("webcrawler").sequence("test")
 
 foo.instructions = [
-	{"@init":"shareHost"}
+	{"@init":"testGettingSoftwareId"}
 ]
