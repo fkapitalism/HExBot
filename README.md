@@ -1,4 +1,4 @@
-# HExBot v0.2.5 - November 3 - 2021
+# HExBot v0.2.6 - November 3 - 2021
 
 Suite of scripts to automate some processes on Hacker Wars game website.
 
@@ -42,6 +42,7 @@ Functionalities:
 
 ## Changelog
 
+* v0.2.6 more puzzles and cleaning logs fixed for missions.
 * v0.2.5 more puzzles and missions fixed a little bit.
 * v0.2.4 upload software fixed for webcrawler.
 * v0.2.3 new puzzle added. (Renato's dog 💔)

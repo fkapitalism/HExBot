@@ -124,6 +124,12 @@ function solvePuzzle(puzzle_id){
 			case PUZZLE_THISGAME: //Card games
 				text_answer = "47";
 				break;
+			case PUZZLE_BEEPBEEP: //Card games
+				text_answer = "SHOW NO REMORSE";
+				break;
+			case PUZZLE_PLUSTIMES: //Card games
+				text_answer = "1, 2, 3";
+				break;
 			default: 
 				return false;
 		}

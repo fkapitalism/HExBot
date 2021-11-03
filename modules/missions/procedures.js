@@ -94,18 +94,32 @@ missions.procedure("informBalance", function(shared, hooks){
 			const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0) //Click on the Complete Mission Button
 			if (button){
 				clearInterval(loop)
-				hooks.next()
-				button.click()
+				setTimeout(() => {
+					hooks.next()
+					button.click()
+				},450)
 			}
-		}, 700)
-	},700)
+		}, 450)
+	},450)
 		
 })
 
 missions.procedure("confirmMissionCompleteButton", function(shared, hooks){
-	hooks.next()
-	getDOMElement("input", "id", "modal-submit", 0).click()
-	return null
+
+	var loop = setInterval(function(){
+		const button = getDOMElement("input", "id", "modal-submit", 0) //Click on the Complete Mission Button
+		if (button){
+			clearInterval(loop)
+			setTimeout(() => {
+				hooks.next()
+				button.click()
+			},450)
+		}
+	}, 450)
+
+	//hooks.next()
+	//getDOMElement("input", "id", "modal-submit", 0).click()
+	//return null
 })
 
 missions.procedure("goToAcceptMissionPage", function(shared, hooks){
@@ -184,10 +198,12 @@ missions.procedure("clickOnAcceptMissionButton", function(shared, hooks){
 		const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
 		if (button){
 			clearInterval(loop)
-			hooks.next()
-			button.click()
+			setTimeout(() => {
+				hooks.next()
+				button.click()
+			}, 450)
 		}
-	}, 700)
+	}, 450)
 })
 
 //Click on the div float Accept mission button
@@ -196,10 +212,12 @@ missions.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){
 		const button = getDOMElement("input", "type", "submit", 0)
 		if (button){
 			clearInterval(loop)
-			hooks.next()
-			button.click()
+			setTimeout(() => {
+				hooks.next()
+				button.click()
+			}, 450)	
 		}
-	}, 700)
+	}, 450)
 })
 
 missions.procedure("waitForSubmitButton", function(shared, hooks){
@@ -251,9 +269,18 @@ missions.procedure("test", function(shared, hooks){
 })
 
 missions.procedure("clickOnAbortMissionButton", function(shared, hooks){
-	hooks.next()
-	getDOMElement("span", "class", "btn btn-danger mission-abort", 0).click()
-	return null
+
+	var loop = setInterval(function(){
+		const button = getDOMElement("span", "class", "btn btn-danger mission-abort", 0)
+		if (button){
+			clearInterval(loop)
+			setTimeout(() => {
+				hooks.next()
+				button.click()
+			}, 450)	
+		}
+	}, 450)
+
 })
 
 missions.procedure("showMessage", function(shared){
@@ -266,9 +293,21 @@ missions.procedure("showMessage", function(shared){
 })
 
 missions.procedure("clickOnConfirmAbortMissionButton", function(shared, hooks){
-	hooks.next()
-	getDOMElement("input", "type", "submit", 0).click()
-	return null
+
+	var loop = setInterval(function(){
+		const button = getDOMElement("input", "type", "submit", 0)
+		if (button){
+			clearInterval(loop)
+			setTimeout(() => {
+				hooks.next()
+				button.click()
+			}, 450)	
+		}
+	}, 450)
+
+	//hooks.next()
+	//getDOMElement("input", "type", "submit", 0).click()
+	//return null
 })
 
 missions.procedure("isThereMessageError", function(){
@@ -366,7 +405,43 @@ missions.procedure("init", function(shared, hooks){
 	})
 })
 
+
 missions.procedure("cleanMyIpClues", function(data, hooks){
+	var textArea = getDOMElement("textarea", "class", "logarea", 0)
+	if (textArea && textArea.value.length > 0){
+		data.isEmpty = false
+
+		const ipsSource = textArea.value + ' ' + controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING]
+		var ips = []
+		if(ipsSource){
+			ips = extractIPsFromText(ipsSource, [data.myIp])
+		}
+		//console.log("ips found", ips)
+		controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING] = ips.join()
+		controllers.storage.set(controllers.bot)
+
+		//var pattern = new RegExp("^.*" + getMyIp(true) + ".*$")
+		var pattern = new RegExp("^.*" + data.myIp + ".*$")
+		textArea.value = removeLinesFromText(textArea.value, pattern)
+		const button = getDOMElement("input", "class", "btn btn-inverse", "last")
+		hooks.next()
+		if(button){
+			button.click()
+		} else {
+			console.warn('BUTTON NOT FOUND!')
+		}
+	} else {
+		if(!textArea){
+			console.warn('TEXT AREA NOT FOUND!')
+		}
+		data.isEmpty = true
+		hooks.next()
+	}
+	if(data.cleanerCount != undefined) data.cleanerCount++
+})
+
+
+/*missions.procedure("cleanMyIpClues", function(data, hooks){
 	//getMyIp(true, (myip) => {
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea.value.length > 0){
@@ -402,7 +477,7 @@ missions.procedure("cleanMyIpClues", function(data, hooks){
 	//hooks.next()
 	//})
 })
-
+*/
 
 missions.procedure("cleanTextAreaContent", function(data, hooks){
 	hooks.next()
@@ -466,10 +541,12 @@ missions.procedure("clickOnFinishButton", function(shared, hooks){
 		const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0)
 		if (button){
 			clearInterval(loop)
-			hooks.next()
-			button.click()
+			setTimeout(() => {
+				hooks.next()
+				button.click()
+			}, 450)
 		}
-	}, 700)
+	}, 450)
 	//hooks.next()
 	//getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
 	//return null

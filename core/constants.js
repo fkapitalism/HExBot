@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.2.5"
+const VERSION_BOT = "0.2.6"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -122,6 +122,8 @@ const PUZZLE_OLDHOTEL = 30;
 const PUZZLE_SOMEONESNAME = 31;
 const PUZZLE_COMMONHASH = 32;
 const PUZZLE_THISGAME = 33;
+const PUZZLE_BEEPBEEP = 34;
+const PUZZLE_PLUSTIMES = 35;
 
 
 /*
@@ -162,6 +164,10 @@ const PUZZLE_DESCRIPTOR = [
     {id:PUZZLE_SOMEONESNAME, names:["Someone's name","Nome de alguém"]},
     {id:PUZZLE_COMMONHASH, names:["Common hash","Hash comum"]},
     {id:PUZZLE_THISGAME, names:["This game was developed","Este jogo foi desenvolvido"]},
+    {id:PUZZLE_BEEPBEEP, names:["Beep Beep Beep was developed","Beep Beep Beep foi desenvolvido"]},
+    {id:PUZZLE_PLUSTIMES, names:["Addition and multiplication was developed","Adição e multiplicação foi desenvolvido"]}
+
+
 ]
 
 String.prototype.hashCode = function () {

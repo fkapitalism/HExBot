@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016-2021)",
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"description": "A bot to automate things on Hacker Wars",
 	"browser_action": {
  		"default_popup": "core/popup.html"
