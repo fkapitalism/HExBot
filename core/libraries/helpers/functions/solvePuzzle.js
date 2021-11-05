@@ -133,6 +133,21 @@ function solvePuzzle(puzzle_id){
 			case PUZZLE_MOSTPOPYTVID: //Most popular Youtube video
 				text_answer = "Despacito";
 				break;
+			case PUZZLE_GEMWORD: //Gem word
+				var lang = detectLang()
+				switch(lang){
+					case LANG_EN:
+						text_answer = "diamond, ruby, sapphire";
+						break;
+					case LANG_BR:
+						text_answer = "diamante, rubi, safira";
+						break;
+					default: text_answer = "diamond, ruby, sapphire";
+				}
+				break;
+			case PUZZLE_HACKERMAN: //Hackerman movie origin
+				text_answer = "Kung Fury";
+				break;
 			default: 
 				return false;
 		}

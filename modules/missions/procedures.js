@@ -194,16 +194,17 @@ missions.procedure("logout", function(shared, hooks){
 })
 
 missions.procedure("clickOnAcceptMissionButton", function(shared, hooks){
-	var loop = setInterval(function(){
-		const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
-		if (button){
-			clearInterval(loop)
-			setTimeout(() => {
+	const button = getDOMElement("span", "class", "btn btn-success mission-accept", 0)
+	if (button){
+		const loop = setInterval(() => {
+			button.click()
+			const confirmButton = getDOMElement("input", "type", "submit", 0)
+			if(confirmButton){
+				clearInterval(loop)
 				hooks.next()
-				button.click()
-			}, 450)
-		}
-	}, 450)
+			}
+		},250)
+	}
 })
 
 //Click on the div float Accept mission button
@@ -215,9 +216,9 @@ missions.procedure("clickOnConfirmAcceptMissionButton", function(shared, hooks){
 			setTimeout(() => {
 				hooks.next()
 				button.click()
-			}, 450)	
+			}, 700)	
 		}
-	}, 450)
+	}, 700)
 })
 
 missions.procedure("waitForSubmitButton", function(shared, hooks){
@@ -537,16 +538,29 @@ missions.procedure("alertAnotherMissionKindAlreadyAccepted", function(){
 
 missions.procedure("clickOnFinishButton", function(shared, hooks){
 
-	var loop = setInterval(function(){
+	const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0)
+	if (button){
+		const loop = setInterval(() => {
+			button.click()
+			const confirmButton = getDOMElement("input", "id", "modal-submit", 0)
+			if(confirmButton){
+				clearInterval(loop)
+				hooks.next()
+			}
+		},700)
+	}
+
+
+	/*var loop = setInterval(function(){
 		const button = getDOMElement("span", "class", "btn btn-success mission-complete", 0)
 		if (button){
 			clearInterval(loop)
 			setTimeout(() => {
 				hooks.next()
 				button.click()
-			}, 450)
+			}, 700)
 		}
-	}, 450)
+	}, 700)*/
 	//hooks.next()
 	//getDOMElement("span", "class", "btn btn-success mission-complete", 0).click();
 	//return null
@@ -619,25 +633,34 @@ missions.procedure("transferRandomValueToTarget", function(shared, hooks){
 missions.procedure("transferToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[0]]
 	if(myAccount){
-		hooks.next()
-		shared.destinationAccount = myAccount
-		getDOMElement("input", "name", "acc", 0).value = myAccount
-		getDOMElement("input", "name", "ip", 1).value = shared.ips[0]
-		getDOMElement("button", "class", "btn btn-success", 0).click()
+		setTimeout(() => {
+			shared.destinationAccount = myAccount
+			getDOMElement("input", "name", "acc", 0).value = myAccount
+			getDOMElement("input", "name", "ip", 1).value = shared.ips[0]
+			hooks.next()
+			getDOMElement("button", "class", "btn btn-success", 0).click()
+		},450)
+	} else {
+		return null
 	}
-	return null
+	//return null
 })
 
 missions.procedure("transferTheRestToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[1]]
 	if(myAccount){
-		hooks.next()
-		shared.destinationAccount = myAccount
-		getDOMElement("input", "name", "acc", 0).value = myAccount
-		getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
-		getDOMElement("button", "class", "btn btn-success", 0).click()
+		setTimeout(() => {
+			shared.destinationAccount = myAccount
+			getDOMElement("input", "name", "acc", 0).value = myAccount
+			getDOMElement("input", "name", "ip", 1).value = shared.ips[1]
+			hooks.next()
+			getDOMElement("button", "class", "btn btn-success", 0).click()
+		},450)
+		
+	} else {
+		return null
 	}
-	return null
+	//
 })
 
 missions.procedure("goToLoginPage", function(shared, hooks){

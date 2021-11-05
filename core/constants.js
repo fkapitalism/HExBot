@@ -1,4 +1,4 @@
-const VERSION_BOT = "0.2.6"
+const VERSION_BOT = "0.2.7"
 const COMMAND_PANEL_STORAGE_NAME = "HExBot-ControlPanel"
 const BOT_STORAGE_NAME = "HExBot-State"
 
@@ -125,6 +125,9 @@ const PUZZLE_THISGAME = 33;
 const PUZZLE_BEEPBEEP = 34;
 const PUZZLE_PLUSTIMES = 35;
 const PUZZLE_MOSTPOPYTVID = 36;
+const PUZZLE_GEMWORD = 37;
+const PUZZLE_HACKERMAN = 38;
+
 
 
 /*
@@ -167,10 +170,13 @@ const PUZZLE_DESCRIPTOR = [
     {id:PUZZLE_THISGAME, names:["This game was developed","Este jogo foi desenvolvido"]},
     {id:PUZZLE_BEEPBEEP, names:["Beep Beep Beep was developed","Beep Beep Beep foi desenvolvido"]},
     {id:PUZZLE_PLUSTIMES, names:["Addition and multiplication was developed","Adição e multiplicação foi desenvolvido"]},
-    {id:PUZZLE_MOSTPOPYTVID, names:["Most popular Youtube video","Vídeo mais popular do Youtube"]}
-
-
+    {id:PUZZLE_MOSTPOPYTVID, names:["Most popular Youtube video","Vídeo mais popular do Youtube"]},
+    {id:PUZZLE_GEMWORD, names:["Gem Word Unscrambler was developed","Decifrador de Palavra Gema foi desenvolvido"]},
+    {id:PUZZLE_HACKERMAN, names:["Hackerman was developed","Hackerman foi desenvolvido"]}
 ]
+
+
+
 
 String.prototype.hashCode = function () {
     return sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(this));
