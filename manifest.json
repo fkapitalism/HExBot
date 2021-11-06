@@ -11,6 +11,11 @@
 		"https://hackerwars.io/*"
 	],
 	"icons": {"256": "icon.png"},
+	"web_accessible_resources": [
+		"sounds/ddos_comming.mp3",
+		"sounds/mission_completed.mp3",
+		"sounds/someone_invaded.mp3"
+	],
 	"content_scripts":[
 		{
 			"matches": ["https://hackerwars.io/*"],
@@ -78,6 +83,7 @@
 
 				"core/libraries/helpers/classes/Sandbox.js",
 
+				"core/libraries/helpers/functions/playSound.js",
 				"core/libraries/helpers/functions/strposOfArray.js",
 				"core/libraries/helpers/functions/getDOMElement.js",
 				"core/libraries/helpers/functions/goToPage.js",

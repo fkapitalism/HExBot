@@ -111,8 +111,11 @@ missions.procedure("confirmMissionCompleteButton", function(shared, hooks){
 		if (button){
 			clearInterval(loop)
 			setTimeout(() => {
-				hooks.next()
-				button.click()
+				playSound("mission_completed.mp3")
+				setTimeout(() => {
+					hooks.next()
+					button.click()
+				},2500)
 			},450)
 		}
 	}, 450)

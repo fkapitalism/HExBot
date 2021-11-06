@@ -19,6 +19,7 @@ monitor.procedure("checkMyOwnLogs", function(shared){
 								controllers.bot.showMissionAlert = true
 								controllers.storage.set(controllers.bot)
 								isActivityFound = true
+								playSound("someone_invaded.mp3")
 							}
 						}
 					}
@@ -84,6 +85,7 @@ monitor.procedure("readEmail", function(shared, hooks){
 							if((subject.match(/^DDoS Incom+ing.*?/)) && (danger < 3)){
 								danger = 3
 								element.style.color = "red"
+								playSound("ddos_comming.mp3")
 							} else 
 
 							if((subject.match(/^Suspeito do FBI.*?|^Sua recompensa aumentou.*?|^FBI suspect.*?|^Bounty increased.*?/)) && (danger < 2)){

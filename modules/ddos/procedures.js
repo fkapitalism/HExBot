@@ -4,13 +4,11 @@ ddos.config.debugMode = true
 ddos.procedure("goToSoftwarePage", function (shared, hooks) {
     hooks.next()
     goToPage("/software")
-    return null
 })
 
 ddos.procedure("goToDDoSPage", function (shared, hooks) {
     hooks.next()
     goToPage("/list?action=ddos")
-    return null
 })
 
 /*ddos.procedure("checkProgressBar", function(shared, funcs){
