@@ -6,7 +6,7 @@ monitor.procedure("checkMyOwnLogs", function(shared){
 		sendXMLHttpRequest("/log", "GET", "", true, function(data){
 			var parser = new DOMParser()
 			var requestContentDOM = parser.parseFromString(data, "text/html")
-			var container = requestContentDOM.getElementsByTagName("textarea")
+			var container = requestContentDOM.getElementsByClassName("logarea")
 			var isActivityFound = false
 			if ((container) && (container.length > 0)){
 				var logArea = container[0]
