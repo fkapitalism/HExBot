@@ -14,7 +14,9 @@
 	"web_accessible_resources": [
 		"sounds/ddos_comming.mp3",
 		"sounds/mission_completed.mp3",
-		"sounds/someone_invaded.mp3"
+		"sounds/someone_invaded.mp3",
+		"sounds/+malware_installed.mp3",
+		"sounds/money_collecting.mp3"
 	],
 	"content_scripts":[
 		{
