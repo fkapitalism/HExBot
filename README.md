@@ -1,4 +1,4 @@
-# HExBot v0.2.7 - November 4 - 2021
+# HExBot v0.2.8 - November 6 - 2021
 
 Suite of scripts to automate some processes on Hacker Wars game website.
 
@@ -42,6 +42,7 @@ Functionalities:
 
 ## Changelog
 
+* v0.2.8 email monitor added. Sounds added for important events.
 * v0.2.7 accept mission button fixed. More puzzles.
 * v0.2.6 more puzzles and cleaning logs fixed for missions.
 * v0.2.5 more puzzles and missions fixed a little bit.
