@@ -53,20 +53,26 @@ monitor.procedure("readEmail", function(shared, hooks){
 		sendXMLHttpRequest("/mail", "GET", "", true, function(response){
 			const parser = new DOMParser()
 			const requestContentDOM = parser.parseFromString(response, "text/html")
-			const as = requestContentDOM.getElementsByTagName("a")
+			const as = requestContentDOM.getElementsByTagName("strong")
 			const emails = []
 			for(let i = 0;i < as.length; i++){
-				const item = as[i]
-			    const href = item.getAttribute('href')
-			    if(typeof href === 'string'){
-			    	if(href.match(/^mail\?id=[0-9]+/)){
-			    		let emailParsed = parser.parseFromString(item.outerHTML, "text/html")
-			    		var boldItem = emailParsed.getElementsByTagName("b")
-			    		if(boldItem.length > 0){
-			    			emails.push(boldItem[0].innerHTML)
-			    		}
-			    	}
-			    }
+				const line = as[i]
+				const emailParsed = parser.parseFromString(line.outerHTML, "text/html")
+				const aElement = emailParsed.getElementsByTagName("a")
+
+				if(aElement.length>0){
+					item = aElement[0]
+					const href = item.getAttribute('href')
+				    if(typeof href === 'string'){
+				    	if(href.match(/^mail\?id=[0-9]+/)){
+				    		let emailParsed = parser.parseFromString(item.outerHTML, "text/html")
+				    		var boldItem = emailParsed.getElementsByTagName("a")
+				    		if(boldItem.length > 0){
+				    			emails.push(boldItem[0].innerHTML)
+				    		}
+				    	}
+				    }
+				}    
 			}
 			if(emails.length > 0){
 				const elements = document.getElementsByClassName('text')
