@@ -88,14 +88,18 @@ webcrawler.procedure("registerUploaded", function(shared){
 	return null
 })
 
-webcrawler.procedure("registerInstalled", function(shared){
+webcrawler.procedure("registerInstalled", function(shared, hooks){
 	var currentSoftware = shared.softwaresToUpload[shared.currentSoftware].name + ": " + shared.softwaresToUpload[shared.currentSoftware].version
 	if(shared.uploadRegister[currentSoftware] === undefined)
 		shared.uploadRegister[currentSoftware] = {}
 	if(shared.uploadRegister[currentSoftware][shared.currentIp] === undefined)
 		shared.uploadRegister[currentSoftware][shared.currentIp] = ""
 	shared.uploadRegister[currentSoftware][shared.currentIp] += "I"
-	return null
+	playSound('+malware_installed.mp3')
+	setTimeout(() => {
+		hooks.next()
+	},1000)
+	//return null
 })
 
 webcrawler.procedure("registerHidden", function(shared){

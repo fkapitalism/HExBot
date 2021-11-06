@@ -636,6 +636,7 @@ missions.procedure("transferRandomValueToTarget", function(shared, hooks){
 missions.procedure("transferToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[0]]
 	if(myAccount){
+		playSound("money_collecting.mp3")
 		setTimeout(() => {
 			shared.destinationAccount = myAccount
 			getDOMElement("input", "name", "acc", 0).value = myAccount
@@ -652,6 +653,7 @@ missions.procedure("transferToMe", function(shared, hooks){
 missions.procedure("transferTheRestToMe", function(shared, hooks){
 	var myAccount = shared.myAccountsInfo[shared.ips[1]]
 	if(myAccount){
+		playSound("money_collecting.mp3")
 		setTimeout(() => {
 			shared.destinationAccount = myAccount
 			getDOMElement("input", "name", "acc", 0).value = myAccount
