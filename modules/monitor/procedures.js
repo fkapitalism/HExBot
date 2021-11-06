@@ -50,9 +50,57 @@ monitor.procedure("checkMyOwnLogs", function(shared){
 
 monitor.procedure("readEmail", function(shared, hooks){
 	if (controllers.bot.controlPanel.checkBoxes[SET_MONITOR_EMAIL]){
-		console.log('yo active')
+		sendXMLHttpRequest("/mail", "GET", "", true, function(response){
+			const parser = new DOMParser()
+			const requestContentDOM = parser.parseFromString(response, "text/html")
+			const as = requestContentDOM.getElementsByTagName("a")
+			const emails = []
+			for(let i = 0;i < as.length; i++){
+				const item = as[i]
+			    const href = item.getAttribute('href')
+			    if(typeof href === 'string'){
+			    	if(href.match(/^mail\?id=[0-9]+/)){
+			    		let emailParsed = parser.parseFromString(item.outerHTML, "text/html")
+			    		var boldItem = emailParsed.getElementsByTagName("b")
+			    		if(boldItem.length > 0){
+			    			emails.push(boldItem[0].innerHTML)
+			    		}
+			    	}
+			    }
+			}
+			if(emails.length > 0){
+				const elements = document.getElementsByClassName('text')
+				for(let j = 0;j < elements.length; j++){
+					const element = elements[j]
+					if(element.innerHTML.includes('E-Mail')){
+						var danger = 0
+						emails.forEach(subject => {
+							if((subject.match(/^DDoS Incom+ing.*?/)) && (danger < 3)){
+								danger = 3
+								element.style.color = "red"
+							} else 
+
+							if((subject.match(/^Suspeito do FBI.*?|^Sua recompensa aumentou.*?|^FBI suspect.*?|^Bounty increased.*?/)) && (danger < 2)){
+								danger = 2
+								element.style.color = "yellow"
+							} else 
+
+							if((subject.match(/^Safenet está atrás de você.*?|^Safenet is tracking you.*?/)) && (danger < 1)){
+								danger = 1
+								element.style.color = "blue"
+							} else
+
+							if(subject.match(/^New friend.*?|^Você ganhou um novo emblema.*?|^You earned a new badge!.*?/)){
+								element.style.color = "green"
+							}
+						})
+						break
+					}
+				}
+			}
+				
+		})
 	}
-	console.log("yo")
 	return true
 })
 
