@@ -73,13 +73,13 @@ ddos.procedure("goToIp", function (shared, hooks) {
     //goToPage("/internet?ip=" + controllers.bot.ddos.target)
     hooks.next()
     goToPage("/internet?ip=" + shared.ddosTarget)
-    return null
+    //return null
 })
 
 ddos.procedure("goToOwnLogTab", function (shared, hooks) {
     hooks.next()
     goToPage("/log")
-    return null
+    //return null
 })
 
 ddos.procedure("cleanTextAreaContent", function (data, hooks) {
@@ -91,8 +91,8 @@ ddos.procedure("cleanTextAreaContent", function (data, hooks) {
         getDOMElement("input", "class", "btn btn-inverse", 0).click()
     } else {
         data.isEmpty = true
+        return null
     }
-    return null
 })
 
 ddos.procedure("getInfos", function (shared) {
