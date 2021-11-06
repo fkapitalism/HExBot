@@ -87,5 +87,7 @@ LANG_CONTENT[LANG_DE] = {
     DDOS_TIMES: "Anzahl: ",
 	NOTIFICATION_TITLE: "Thanks To Enable Notification!",
 	NOTIFICATION_BODY: "Now you Able to get Notified!",
-    WARN_WEBCRAWLER_RESULT: "Das Ergebnis finden Sie in der Browserkonsole"
+    WARN_WEBCRAWLER_RESULT: "Das Ergebnis finden Sie in der Browserkonsole",
+    EASY_BUTTON_CLEAN_TARGET_IPS: "remove my clues",
+    EASY_BUTTON_CLEAN_MYLOGS: "clean my own logs"
 }

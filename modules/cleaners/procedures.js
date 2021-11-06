@@ -6,6 +6,32 @@ cleanersMod.procedure("goToOwnLogTab", function(shared, hooks){
 	goToPage("/log")
 })
 
+cleanersMod.procedure("createButtons", function(shared, hooks){
+	const path = window.location.pathname
+	const vars = window.location.search
+	if(path === '/internet'){
+		const logareas = document.getElementsByClassName('logarea')
+		if(logareas.length > 0){
+			getDOMElement("ul", "class", "nav nav-tabs", 0).innerHTML += '<button id="removeClues" class="btn btn-success">' + LANG.EASY_BUTTON_CLEAN_TARGET_IPS + '</button>';
+			document.getElementById("removeClues").addEventListener("click", e => {
+				controllers.functions.executeSequence("cleaners", "cleanTargetLogs")
+			})
+		}
+
+	} else 
+	if(path === '/log'){
+		const logareas = document.getElementsByClassName('logarea')
+		if(logareas.length > 0){
+			getDOMElement("ul", "class", "nav nav-tabs", 0).innerHTML += '<button id="cleanLogs" class="btn btn-success">' + LANG.EASY_BUTTON_CLEAN_MYLOGS + '</button>';
+			document.getElementById("cleanLogs").addEventListener("click", e => {
+				controllers.functions.executeSequence("cleaners", "cleanOwnLogs")
+			})
+		}
+
+	}
+	return true
+})
+
 cleanersMod.procedure("cleanTextAreaContent", function(data, hooks){
 	var textArea = getDOMElement("textarea", "class", "logarea", 0)
 	if (textArea.value.length > 0){

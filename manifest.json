@@ -50,6 +50,7 @@
 				"modules/riddleSolver/sequences/test.js",
 
 				"modules/cleaners/procedures.js",
+				"modules/cleaners/sequences/createEasyAccesses.js",
 				"modules/cleaners/sequences/cleanOwnLogs.js",
 				"modules/cleaners/sequences/cleanTargetLogs.js",
 				"modules/cleaners/sequences/accessTargetAndCleanLogs.js",

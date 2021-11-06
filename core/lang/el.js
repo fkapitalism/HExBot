@@ -90,5 +90,7 @@ LANG_CONTENT[LANG_EL] = {
     DDOS_TIMES: "Αριθμός φορών: ",
     NOTIFICATION_TITLE: "Σς ευχαριστούμε που ενεργοποιήσατε τις ενημερώσεις!",
     NOTIFICATION_BODY: "Τώρα μπορείτε να ενημερώνεστε!",
-    WARN_WEBCRAWLER_RESULT: "δείτε το αποτέλεσμα στην κονσόλα του προγράμματος περιήγησης"
+    WARN_WEBCRAWLER_RESULT: "δείτε το αποτέλεσμα στην κονσόλα του προγράμματος περιήγησης",
+    EASY_BUTTON_CLEAN_TARGET_IPS: "remove my clues",
+    EASY_BUTTON_CLEAN_MYLOGS: "clean my own logs"
 }

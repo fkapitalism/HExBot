@@ -47,6 +47,11 @@ function sequences(){
 		sequence.run()
 	})*/
 	
+	let easyAccesses = $jSpaghetti.module("cleaners").sequence("createEasyAccesses")
+	easyAccesses.reset(function(sequence){
+		sequence.run()
+	})
+
 	if(controllers.bot.controlPanel.checkBoxes[SET_MISSIONS_MONITOR]){
 		var missionMonitor = $jSpaghetti.module("monitor").sequence("checkMission")
 		missionMonitor.reset(function(sequence){
