@@ -8,6 +8,7 @@ LANG_CONTENT[LANG_EN] = {
     PERFORM_HARD_MISSIONS: "Hard missions",
     PERFORM_DELETE_SOFTWARE: "Very easy missions",
     NOTIFY_MISSIONS: "Notify me about new missions",
+    NOTIFY_EMAIL: "Notify me when I receive something important on email",
     NOTIFY_NAME: "Notify name of Who Hacks me",
     AUTO_CHANGE_IP: "Auto IP change",
     DDOS_DELETE: "Delete DDoS Reports",

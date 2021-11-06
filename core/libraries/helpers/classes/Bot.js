@@ -36,6 +36,7 @@ function Bot(){
 	lists[FIELD_SUSPECT_LOGS] = []
 
 	var checkBoxes = {}
+	checkBoxes[SET_MONITOR_EMAIL] = false
 	checkBoxes[SET_MISSIONS_MONITOR] = false
 	checkBoxes[SET_LOGS_MONITOR] = false
 	checkBoxes[SET_SHARE_WEBCRAWLER] = true	

@@ -48,6 +48,14 @@ monitor.procedure("checkMyOwnLogs", function(shared){
 	}, 1000)	
 })
 
+monitor.procedure("readEmail", function(shared, hooks){
+	if (controllers.bot.controlPanel.checkBoxes[SET_MONITOR_EMAIL]){
+		console.log('yo active')
+	}
+	console.log("yo")
+	return true
+})
+
 monitor.procedure("queryMissionPage", function(shared, hooks){
 	shared.isMissionPageGot = false
 	/*var requestContent = */

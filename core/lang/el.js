@@ -8,6 +8,7 @@ LANG_CONTENT[LANG_EL] = {
     PERFORM_HARD_MISSIONS: "Δύσκολες αποστολές",
     PERFORM_DELETE_SOFTWARE: "Πολύ εύκολες αποστολές",
     NOTIFY_MISSIONS: "Ενημέρωσέ με για νέες αποστολές.",
+    NOTIFY_EMAIL: "Notify me when I receive something important on email",
     NOTIFY_NAME: "Ενημέρωσέ με για το ποιος με χάκαρε",
     AUTO_CHANGE_IP: "Αυτόματη αλλαγή διεύθυνσης IP",
     DDOS_DELETE: "Διαγραφή των αναφορών επιθέσεων DDOS (Κατανεμημένη Επίθεση Άρνησης Υπηρεσίας)",

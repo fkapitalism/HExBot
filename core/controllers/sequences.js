@@ -54,6 +54,13 @@ function sequences(){
 		})
 	}
 
+	if(controllers.bot.controlPanel.checkBoxes[SET_MONITOR_EMAIL]){
+		var emailMonitor = $jSpaghetti.module("monitor").sequence("checkEmail")
+		emailMonitor.reset(function(sequence){
+			sequence.run()
+		})
+	}
+
 	if(controllers.bot.controlPanel.checkBoxes[SET_LOGS_MONITOR]){
 		var logsMonitor = $jSpaghetti.module("monitor").sequence("checkMyOwnLogs")
 		logsMonitor.reset(function(sequence){

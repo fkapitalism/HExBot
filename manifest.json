@@ -66,6 +66,7 @@
 
 				"modules/monitor/procedures.js",
 				"modules/monitor/sequences/checkMission.js",
+				"modules/monitor/sequences/checkEmail.js",
 				"modules/monitor/sequences/checkMyOwnLogs.js",
 				"modules/monitor/sequences/delegateJobs.js",
 				"modules/monitor/sequences/test.js",

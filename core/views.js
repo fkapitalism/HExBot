@@ -125,6 +125,7 @@ var views = {
 					'<div class="divider">'+
 						'<label><input class="checkBoxes" type="checkbox" style="margin:0;" id=' + SET_MISSIONS_MONITOR + '><span style="margin-left:4px;">' + LANG.NOTIFY_MISSIONS + '</span></label>' +
 						'<label><input class="checkBoxes" type="checkbox" style="margin:0;" id=' + SET_LOGS_MONITOR + '><span style="margin-left:4px;">' + LANG.NOTIFY_LOGS + '</span></label>' +
+						'<label><input class="checkBoxes" type="checkbox" style="margin:0;" id=' + SET_MONITOR_EMAIL + '><span style="margin-left:4px;">' + LANG.NOTIFY_EMAIL + '</span></label>' +
 					'</div>'+
 					//'<hr />' +
 					'<h4>' + LANG.CONFIG_WEBCRAWL_TITLE + '</h4>'+

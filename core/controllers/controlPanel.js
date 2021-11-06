@@ -105,6 +105,10 @@ function controlPanel(){
 						$jSpaghetti.module("monitor").sequence("checkMission").run()
 						console.log("HExBot: Missions monitor is started")
 						break
+					case SET_MONITOR_EMAIL:
+						$jSpaghetti.module("monitor").sequence("checkEmail").run()
+						console.log("HExBot: Email monitor is started")
+						break
 					default: break
 				}
 			} else {

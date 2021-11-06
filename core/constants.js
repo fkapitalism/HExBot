@@ -31,6 +31,7 @@ const USEEXPLOIT = "use-exploit"
 const AUTO_CHANGE_IP = "auto-change-ip"
 const AUTO_DELETE_DDOS = "auto-delete-ddos"
 
+const SET_MONITOR_EMAIL = 'set-monitor-email'
 const SET_MISSIONS_MONITOR = 'set-missions-monitor'
 const SET_LOGS_MONITOR = 'set-logs-monitor'
 const SET_NAME_NOTIFICATION = 'set-name-notification'
