@@ -6,6 +6,8 @@ var views = {
 		divMain.tabindex = 7
 		divMain['aria-hidden'] = false
 		divMain.style.display = "none"
+		divMain.style.backgroundColor = "#BEBEBE"
+
 		//divMain.style.fontSize = "70%"
 
 		var bankInfo = []
@@ -49,7 +51,7 @@ var views = {
 				'<div id="' + MESSAGE_CONTAINER + '"></div>' +
 				'<table class="table">' +
 				'<tbody>' +
-				'<tr class="info"><td>' + 
+				'<tr class="secondary"><td>' + 
 				'<button id="' + PERFORM_DELETE_SOFTWARE_ID + '" class="btn-xs btn-success">' + LANG.PERFORM_DELETE_SOFTWARE + '</button> '+
 				'<button id="' + PERFORM_CHECK_BALANCE_ID + '" class="btn-xs btn-warning">' + LANG.PERFORM_MEDIUM_MISSIONS + '</button> ' +
 				'<button id="' + PERFORM_TRANSFER_MONEY_ID + '" class="btn-xs btn-danger">' + LANG.PERFORM_HARD_MISSIONS + '</button>'+
@@ -60,13 +62,13 @@ var views = {
 				'<label style="margin:0; margin-top: 10px;"><input class="checkBoxes" id="' + SET_TRANSFER_TO_BTC + '"type="checkbox" style="margin:0;"><span style="margin-left:4px;">' + LANG.TRANSFER_TO_BTC + '</span></label>' +
 				'</td></tr>' +
 
-				'<tr class="warning"><td style="padding-bottom:0;">' + 
+				'<tr class="secondary"><td style="padding-bottom:0;">' + 
 				'<button id="' + SET_CLEAN_OWN_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.CLEAN_OWN_LOGS + '</button> ' +
 				'<button id="' + SET_CLEAN_TARGET_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.CLEAN_VICTIM_LOGS + '</button> ' +
 				'<button id="' + SET_ACCESS_TARGET_CLEAN_LOGS_DOM_ID + '" class="btn-xs btn-secondary" style="margin-bottom:10px;"">' + LANG.ACCESS_CLEAR + '</button> ' +
 				'</td></tr>' +
 				
-				'<tr class="info"><td>' + 
+				'<tr class="secondary"><td>' + 
 				'<button id="' + PERFORM_UPDATE_CRACKER + '" class="btn-xs btn-info">' + LANG.UPDATE_CRACKER + '</button> ' +
 				'</td></tr>' +
 
@@ -76,7 +78,7 @@ var views = {
 	            '</td></tr>' +*/
 
 
-	            '<tr class="warning"><td>' + 
+	            '<tr class="secondary"><td>' + 
 				'<button id="' + SET_SEARCH_FOR_IPS + '" class="btn-xs btn-info">' + LANG.RUN_WEBCRAWLER + '</button> ' + LANG.WEBCRAWLER_INITIAL_HOSTS + '<input id="' + FIELD_IPS_START_SEARCHING + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + 
 				'<label style="margin:0;"><input type="checkbox" class="checkBoxes" id="' + SET_IGNORE_LIST + '" style="margin:0;"><span style="margin-left:4px;">' + LANG.WEBCRAWLER_IGNORE_HOSTS + '</span><input id="' + FIELD_HOSTS_TO_IGNORE + '" class="controls fieldsContent" placeholder="' + LANG.PASTE_IPS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:25%"></label>' +
 				//'<label><input class="checkBoxes" type="checkbox" id=' + SET_UPLOAD_MODE + '><span>' + LANG.WEBCRAWLER_UPLOAD_SOFTWARES + '</span><input id="' + FIELD_SOFTWARES_TO_INSTALL + '" class="controls fieldsContent" placeholder="' + LANG.WEBCRAWLER_UPLOAD_SOFTWARE_MODEL + '" type="text" style="vertical-align: top; margin-left: 10px; margin-right: 10px; width:25%"">' + LANG.WEBCRAWLER_UPLOAD_WAIT + '<input id="' + SET_TIME_LIMIT + '" class="controls fieldsContent" placeholder="' + LANG.SECONDS + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width:12%"></label>' +

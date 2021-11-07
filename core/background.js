@@ -48,7 +48,30 @@ function sendXMLHttpRequestMod(script_target, method, parameters, isAsynchronous
 	return {response: synchronousResponse, xmlhttp: xmlhttp}
 }
 
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:3333/hexbot', { transports: ['websocket', 'polling', 'flashsocket'] });
+//const socket = io('https://macrosoftio.herokuapp.com/hexbot', { transports: ['websocket', 'polling', 'flashsocket'] });
+
+
+socket.on('connect', s => {
+	console.log('Connected to server. Don\'t worry. We DO NOT collect sensitive or personal data! You will not be identified!')
+	socket.emit('introducingClient', {
+		version: VERSION_BOT,
+	})
+	socket.on('clientOutdated', data => {
+		console.log('Este cliente está desatualizado', data)
+		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+			var currTab = tabs[0];
+			if (currTab) {
+				const request = new BGRequest('notifyOutdated', '', data, '')
+				chrome.tabs.sendMessage(currTab.id, {message: request, status: true}, {}, function(response) {
+					if(response){
+						console.log(response.backMessage)
+					}
+				})
+			}
+		});
+	})
+})
 
 var storage = []
 

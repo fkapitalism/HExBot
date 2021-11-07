@@ -130,6 +130,7 @@
 	"background":{
 
 		"scripts":[
+			"core/libraries/helpers/classes/BGRequest.js",
 			"core/libraries/vendor/socket.io/socket.io.min.js",
 			"core/constants.js",
 			"core/libraries/helpers/functions/strposOfArray.js",
