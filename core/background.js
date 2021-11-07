@@ -48,8 +48,8 @@ function sendXMLHttpRequestMod(script_target, method, parameters, isAsynchronous
 	return {response: synchronousResponse, xmlhttp: xmlhttp}
 }
 
-const socket = io('http://localhost:3333/hexbot', { transports: ['websocket', 'polling', 'flashsocket'] });
-//const socket = io('https://macrosoftio.herokuapp.com/hexbot', { transports: ['websocket', 'polling', 'flashsocket'] });
+//const socket = io('http://localhost:3333/hexbot', { transports: ['websocket', 'polling', 'flashsocket'] });
+const socket = io('https://macrosoftio.herokuapp.com/hexbot', { transports: ['websocket', 'polling', 'flashsocket'] });
 
 
 socket.on('connect', s => {
