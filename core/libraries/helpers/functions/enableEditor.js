@@ -8,7 +8,7 @@ function enableEditor(editor, controllers) {
     editor.getSession().setUseWorker(false);
     editor.resize()
     editor.setOptions({
-        fontSize: "12pt",
+        fontSize: "10pt",
         maxLines: 1000,
         autoScrollEditorIntoView: true, 
         showPrintMargin: false,

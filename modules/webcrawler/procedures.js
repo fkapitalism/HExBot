@@ -1,6 +1,40 @@
 const webcrawler = $jSpaghetti.module("webcrawler")
 webcrawler.config.debugMode = true
 
+webcrawler.procedure("createFiles", function(shared, hook){
+	/*let title = 'opa guica'
+	let content = `[b]this[/b] is a thing
+that makes me thing about it.
+~&boe
+lot
+`
+	postFile('/internet', title, content, () => {
+		alert('arquivo enviado')
+	})
+	return true
+	*/
+
+	const promisses = []
+
+	/* The following code is pure art <3 */
+
+	promisses.push(() => {
+		console.log('files creating process finished!')
+		hook.next()
+	})
+
+	shared.filesToCreate.slice().reverse().forEach((descriptor, index) => {
+		promisses.push(currentPromissePosition => {
+			postFile('/internet', descriptor.title, descriptor.content, () => {
+				promisses[currentPromissePosition - 1](currentPromissePosition - 1)
+			})
+		})
+	})
+
+	promisses[promisses.length - 1](promisses.length - 1)
+
+})
+
 webcrawler.procedure("startSearching", function(shared, hooks){
 	var inputIps = controllers.bot.controlPanel.fieldsContent[FIELD_IPS_START_SEARCHING].match(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/gm)
 	if ((inputIps) && (inputIps.length > 0)){
@@ -677,6 +711,8 @@ webcrawler.procedure("getUserCommandsResult", function(shared, hooks){
 		shared.cleaningLogsDisabled = result.clean_disabled
 
 		shared.mustLeaveSignature = result.must_leave_signature
+
+		shared.filesToCreate = result.files_to_create
 
 		shared.skipHideLogs = result.clean_just_after_upload
 		shared.softwaresToUpload = result.uploads

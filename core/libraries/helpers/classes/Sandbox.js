@@ -16,6 +16,7 @@
  	var warnings = []
  	var clean_just_after_upload = false
  	var clean_disabled = false
+ 	var filesToCreate = []
  	var must_leave_signature = controllers.bot.controlPanel.checkBoxes[SET_SIGNATURE]
  	var target = {
  		internet: null,
@@ -75,6 +76,10 @@
 
  	function seconds_limit(seconds){
  		seconds_max = seconds
+ 	}
+
+ 	function create_file(title, content){
+ 		filesToCreate.push({title, content})
  	}
 
  	function MB(input){
@@ -179,7 +184,8 @@
 			 			clean_just_after_upload: clean_just_after_upload,
 			 			clean_disabled: clean_disabled,
 			 			must_leave_signature: must_leave_signature,
-			 			softwares: environment.softwares
+			 			softwares: environment.softwares,
+			 			files_to_create: filesToCreate
 			 		});
  				})
  			})

@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016-2021)",
-	"version": "0.2.9",
+	"version": "0.2.10",
 	"description": "A bot to automate things on Hacker Wars",
 	"browser_action": {
  		"default_popup": "core/popup.html"
@@ -86,6 +86,7 @@
 
 				"core/libraries/helpers/classes/Sandbox.js",
 
+				"core/libraries/helpers/functions/postFile.js",
 				"core/libraries/helpers/functions/playSound.js",
 				"core/libraries/helpers/functions/strposOfArray.js",
 				"core/libraries/helpers/functions/getDOMElement.js",
