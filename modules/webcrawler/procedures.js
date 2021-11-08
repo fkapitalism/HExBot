@@ -20,7 +20,7 @@ lot
 
 	promisses.push(() => {
 		console.log('files creating process finished!')
-		hook.next()
+		hook.next(promisses.length)
 	})
 
 	shared.filesToCreate.slice().reverse().forEach((descriptor, index) => {
