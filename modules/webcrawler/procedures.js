@@ -20,7 +20,8 @@ lot
 
 	promisses.push(() => {
 		console.log('files creating process finished!')
-		hook.next(promisses.length)
+		hook.next(shared.filesToCreate.length)
+		goToPage("/internet?view=logs")
 	})
 
 	shared.filesToCreate.slice().reverse().forEach((descriptor, index) => {
