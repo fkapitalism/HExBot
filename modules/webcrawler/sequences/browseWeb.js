@@ -8,7 +8,7 @@ foo.instructions = [
 	{"@analyseTargetIps": 			["getUserCommandsResult", {"jumpif": ["*.cleaningLogsDisabled", "@getSoftwares"]}, "cancelLogProcesses", "goToTargetLogs", "isThereLogs", {"jumpif": ["!*.$","@getSoftwares"]}, "cleanMyIpClues", "getIpsFromLogs", "getBTCAccounts", "getShoppingLogs", "leaveSignature", "updateCrawlerLogs", "submitLogs", "isThereMessageError", {"jumpif":["*.$", "@getSoftwares"]}, "waitProgressBar"]},
 	{"@getSoftwares": 				[{"jumpif":["!*.getSoftwareMode", "@cleanMyOwnLogs"]}, "goToTargetSoftwares", "getSoftwares", "updateCrawlerLogs"]},
 	
-	{"@fileCreating": 				["createFiles",{"jumpif": ["Number(*.$)>0", "@uploadSoftware"]}]},
+	{"@fileCreating": 				["createFiles",{"jumpif": ["!*.$", "@uploadSoftware"]}]},
 	{"@cleanMyUploadClues": 		[{"jumpif": ["*.cleaningLogsDisabled", "@uploadSoftware"]}, "goToTargetLogs", "isThereLogs", {"jumpif": ["!*.$", "@uploadSoftware"]}, "cleanMyIpClues", "submitLogs", "isThereMessageError", {"jumpif":["*.$", "@uploadSoftware"]}, "waitProgressBar"]},
 
 	{"@uploadSoftware": 			[{"jumpif": ["!*.uploadMode", "@cleanMyOwnLogs"]}, "cancelLogProcesses", "runUploadSoftware", "isSoftwareAlreadyThere", {"jumpif":["*.$", "@installSoftware"]}, "isThereMessageError", {"jumpif":["*.$", "@manageCounter"]}, "isThereMessageSuccess", {"jumpif": ["*.$", "@cleanMyUploadClues"]}, "isWithinTimeLimit", {"jumpif": ["!*.$", "@abortUpload"]}, "waitProgressBar"]},
