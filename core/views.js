@@ -73,9 +73,9 @@ var views = {
 				'</td></tr>' +
 
 
-				/*'<tr class="warning"><td>' +
+				'<tr class="secondary"><td>' +
 					'<button id="' + SET_START_DDOSES + '" class="btn-xs btn-info">' + LANG.RUN_DDOSER + '</button> ' + '<input id="' + FIELD_DDOS_IP + '" class="controls fieldsContent" placeholder="' + LANG.DDOS_IP  + '" type="text" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 25%">' + LANG.DDOS_TIMES + '<input class="controls fieldsContent" type="number" min="0" max="50" step="1" value="0" size="6" id="' + FIELD_DDOS_TIMES+ '" style="vertical-align: initial; margin-left: 10px; margin-right: 10px; width: 7%">' +
-	            '</td></tr>' +*/
+	            '</td></tr>' +
 
 
 	            '<tr class="secondary"><td>' + 

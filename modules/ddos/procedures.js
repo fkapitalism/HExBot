@@ -11,17 +11,6 @@ ddos.procedure("goToDDoSPage", function (shared, hooks) {
     goToPage("/list?action=ddos")
 })
 
-/*ddos.procedure("checkProgressBar", function(shared, funcs){
-	var loop = setInterval(function(){
-		var progressBar = getDOMElement("div", "role", "progressbar", 0)
-		if(!progressBar){
-			clearInterval(loop)
-			funcs.sendSignal("Mishchap, go ahead. It'll never crash anymore ;)")
-		}
-	}, 50)
-    return null
-})*/
-
 ddos.procedure('waitProgressBar', (shared, hooks) => {
     var counter = 0;
     var loop = setInterval(() => {

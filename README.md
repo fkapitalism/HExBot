@@ -1,4 +1,4 @@
-# HExBot v0.2.10 - November 7 - 2021
+# HExBot v0.2.11 - December 16 - 2021
 
 Suite of scripts to automate some processes on Hacker Wars game website.
 
@@ -42,6 +42,7 @@ Functionalities:
 
 ## Changelog
 
+* v0.2.11 DDoS function is back.
 * v0.2.10 `create_file(name, content)` created for webcrawler.
 * v0.2.9 Hexbot connected to version notify server.
 * v0.2.8 email monitor added. Sounds added for important events.
