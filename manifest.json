@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "HEx BOT (2016-2021)",
-	"version": "0.2.11",
+	"version": "0.2.10.1",
 	"description": "A bot to automate things on Hacker Wars",
 	"browser_action": {
  		"default_popup": "core/popup.html"
@@ -16,7 +16,8 @@
 		"sounds/mission_completed.mp3",
 		"sounds/someone_invaded.mp3",
 		"sounds/+malware_installed.mp3",
-		"sounds/money_collecting.mp3"
+		"sounds/money_collecting.mp3",
+		"sounds/bad_page_reloaded.mp3"
 	],
 	"content_scripts":[
 		{
@@ -83,6 +84,10 @@
 				"modules/ddos/sequences/deleteRelatory.js",
 				"modules/ddos/sequences/run.js",
 				"modules/ddos/sequences/test.js",
+
+				"modules/botkit/procedures.js",
+				"modules/botkit/sequences/run.js",
+				"modules/botkit/sequences/test.js",
 
 				"core/libraries/helpers/classes/Sandbox.js",
 

@@ -11,6 +11,12 @@ ddos.procedure("goToDDoSPage", function (shared, hooks) {
     goToPage("/list?action=ddos")
 })
 
+ddos.procedure("goToTasksPage", function (shared, hooks) {
+    hooks.next()
+    goToPage("/processes")
+})
+
+
 ddos.procedure('waitProgressBar', (shared, hooks) => {
     var counter = 0;
     var loop = setInterval(() => {
@@ -99,7 +105,8 @@ ddos.procedure("decreaseTimes", function (shared) {
 })
 
 ddos.procedure("checkTimes", function (shared) {
-    if(shared.ddosTimes > 0)
+    //window.alert(Number(shared.ddosTimes))
+    if(Number(shared.ddosTimes) > 0)
         return true
     return false
 })
